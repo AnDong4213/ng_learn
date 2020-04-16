@@ -1,90 +1,85 @@
 import { Component } from '@angular/core';
-
-interface TopMenu {
-  title: string
-  link: string
-}
+import { TopMenu } from './components';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'pdd';
-  selectedIndex = -1;
-  menus: TopMenu[] = [
+  topMenus: TopMenu[] = [
     {
       title: '热门',
-      link: ''
+      link: '',
     },
     {
       title: '男装',
-      link: ''
+      link: '',
     },
     {
       title: '百货',
-      link: ''
+      link: '',
     },
     {
       title: '运动',
-      link: ''
+      link: '',
     },
     {
       title: '手机',
-      link: ''
+      link: '',
     },
     {
       title: '家纺',
-      link: ''
+      link: '',
     },
     {
       title: '食品',
-      link: ''
+      link: '',
     },
     {
       title: '电器',
-      link: ''
+      link: '',
     },
     {
       title: '鞋包',
-      link: ''
+      link: '',
     },
     {
       title: '汽车',
-      link: ''
+      link: '',
     },
     {
       title: '水果',
-      link: ''
+      link: '',
     },
     {
       title: '电脑',
-      link: ''
+      link: '',
     },
     {
       title: '内衣',
-      link: ''
+      link: '',
     },
     {
       title: '家装',
-      link: ''
+      link: '',
     },
     {
       title: '母婴',
-      link: ''
+      link: '',
     },
     {
       title: '美妆',
-      link: ''
+      link: '',
     },
     {
       title: '家具',
-      link: ''
-    }
+      link: '',
+    },
   ];
-  handleSelection(index: number) {
-    console.log(index)
-    this.selectedIndex = index
+
+  handleTabSelected(tab: TopMenu) {
+    console.log(tab);
   }
 }
