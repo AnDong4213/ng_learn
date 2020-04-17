@@ -29,3 +29,20 @@ ng serve --host 0.0.0.0 --port 4201
   </ng-template>
 </ul>
 
+<ul [ngStyle]="{ 'background-color': backgroundColor }">
+  <li *ngFor="let menu of menus; let i = index; let even = even; let odd = odd"
+      [ngClass]="{ even: even, odd: odd }">
+    <a href="#"
+       [ngStyle]="{ color: i === selectedIndex ? tilteActiveColor : titleColor }"
+       (click)="handleSelection(i)">
+      {{ menu.title }}
+    </a>
+    <span class="indicator"
+          [ngStyle]="{ 'background-color': indicatorColor }"
+          *ngIf="i === selectedIndex"></span>
+  </li>
+</ul>
+
+*ngIf="scrollableTabBgColor === 'red'"
+
+
