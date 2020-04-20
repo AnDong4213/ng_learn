@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TopMenu, ImageSlider } from './components';
+import { TopMenu, ImageSlider } from './shared/components';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,6 @@ import { TopMenu, ImageSlider } from './components';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'pdd';
-  scrollableTabBgColor = 'red';
   topMenus: TopMenu[] = [
     {
       title: '热门',
@@ -79,6 +77,7 @@ export class AppComponent {
       link: '',
     },
   ];
+
   imageSliders: ImageSlider[] = [
     {
       imgUrl:
@@ -111,11 +110,9 @@ export class AppComponent {
       caption: '',
     },
   ];
+  username = '';
 
-  handleTabSelected(tab: TopMenu) {
-    const colors = ['red', 'blue', 'black'];
-    const idx = Math.floor(Math.random() * 3);
-    this.scrollableTabBgColor = colors[idx];
-    console.log(tab);
+  handleTabSelected(topMenu: TopMenu) {
+    console.log(topMenu);
   }
 }

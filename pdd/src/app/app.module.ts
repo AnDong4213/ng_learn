@@ -1,20 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ScrollableTabComponent, ImageSliderComponent } from './components';
+import { SharedModule } from './shared/shared.module';
+console.log(new SharedModule());
 
 @NgModule({
-  declarations: [
-    // 我这个组件有哪些模块
-    AppComponent,
-    ScrollableTabComponent,
-    ImageSliderComponent,
-  ],
-  imports: [BrowserModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule, SharedModule],
   providers: [],
-  bootstrap: [AppComponent], // 根模块
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-  name = 'ng';
-}
+export class AppModule {}
