@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TopMenu, ImageSlider, Channel } from './shared/components';
 
 @Component({
   selector: 'app-root',

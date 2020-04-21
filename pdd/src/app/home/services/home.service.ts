@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ImageSlider, Channel, TopMenu } from 'src/app/shared/components';
+import { environment } from 'src/environments/environment';
 
 /**
  * 如果采用 `providedIn` ，
@@ -9,10 +11,11 @@ import { ImageSlider, Channel, TopMenu } from 'src/app/shared/components';
  * 对于引入第三方类库较多的应用可以有效减小 js 大小
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeService {
-  imageSliders: ImageSlider[] = [
+  constructor(private http: HttpClient) {}
+  /* imageSliders: ImageSlider[] = [
     {
       imgUrl:
         'https://media.istockphoto.com/photos/morning-jogging-picture-id497687118',
@@ -244,14 +247,17 @@ export class HomeService {
       title: '家具',
       link: 'furnitures'
     }
-  ];
+  ]; */
   getBanners() {
-    return this.imageSliders;
+    // return this.imageSliders;
+    return this.http.get<ImageSlider[]>(`${environment.baseUrl}/banners`);
   }
   getChannels() {
-    return this.channels;
+    // return this.channels;
+    return this.http.get<Channel[]>(`${environment.baseUrl}/channels`);
   }
   getTabs() {
-    return this.topMenus;
+    // return this.topMenus;
+    return this.http.get<TopMenu[]>(`${environment.baseUrl}/tabs`);
   }
 }

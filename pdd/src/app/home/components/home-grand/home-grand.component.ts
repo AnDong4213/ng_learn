@@ -2,18 +2,19 @@ import {
   Component,
   OnInit,
   Injector,
+  Inject,
   Injectable,
-  InjectionToken
+  InjectionToken,
 } from '@angular/core';
 
 @Injectable()
 class Product {
   constructor(
-    private name: string,
-    private model: string,
-    private color: string,
-    private price: number,
-    private type: string
+    @Inject(String) private name: string,
+    @Inject(String) private model: string,
+    @Inject(String) private color: string,
+    @Inject(Number) private price: number,
+    @Inject(String) private type: string
   ) {}
 }
 
@@ -21,8 +22,8 @@ class Product {
 class PurchaseOrder {
   constructor(
     private product: Product,
-    private amount: number,
-    private buyer: string
+    @Inject(Number) private amount: number,
+    @Inject(String) private buyer: string
   ) {}
 
   public get getProduct(): Product {
@@ -33,7 +34,7 @@ class PurchaseOrder {
 @Component({
   selector: 'app-home-grand',
   templateUrl: './home-grand.component.html',
-  styleUrls: ['./home-grand.component.css']
+  styleUrls: ['./home-grand.component.css'],
 })
 export class HomeGrandComponent implements OnInit {
   date: Date;
@@ -55,17 +56,17 @@ export class HomeGrandComponent implements OnInit {
           useFactory: () => {
             return new Product('大米手机', 'DM-9', '黑色', 2999, '全网通');
           },
-          deps: []
+          deps: [],
         },
         {
           provide: PurchaseOrder,
-          deps: [Product]
+          deps: [Product],
         },
         {
           provide: token,
-          useValue: { baseUrl: 'http://local.dev' }
-        }
-      ]
+          useValue: { baseUrl: 'http://local.dev' },
+        },
+      ],
     });
     console.log(injector.get(PurchaseOrder).getProduct);
     console.log(injector.get(token));

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -6,7 +6,9 @@ import {
   HomeContainerComponent,
   HomeDetailComponent,
   HomeGrandComponent,
-  HomeAuxComponent
+  HomeAuxComponent,
+  ParentComponent,
+  ChildComponent
 } from './components';
 import { HomeService, token } from './services';
 
@@ -15,7 +17,9 @@ import { HomeService, token } from './services';
     HomeContainerComponent,
     HomeDetailComponent,
     HomeGrandComponent,
-    HomeAuxComponent
+    HomeAuxComponent,
+    ParentComponent,
+    ChildComponent
   ],
   // 传统写法，如果采用这种写法，就不能在 service 中写 `providedIn`
   providers: [{ provide: token, useValue: 'http://localhost' }],

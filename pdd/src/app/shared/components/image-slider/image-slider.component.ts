@@ -6,10 +6,12 @@ import {
   ElementRef,
   Renderer2,
   AfterViewInit,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 export interface ImageSlider {
+  id: number;
   imgUrl: string;
   link: string;
   caption: string;
@@ -18,12 +20,14 @@ export interface ImageSlider {
 @Component({
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',
-  styleUrls: ['./image-slider.component.css']
+  styleUrls: ['./image-slider.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() sliders: ImageSlider[] = [];
   @Input() sliderHeight = '160px';
-  @ViewChild('imageSlider', { static: true }) imgSlider: ElementRef;
+  @ViewChild('imageSlider', { static: false })
+  imgSlider: ElementRef;
   @Input() intervalBySeconds = 2;
   selectedIndex = 0;
   constructor(private rd2: Renderer2) {}

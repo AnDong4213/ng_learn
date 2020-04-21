@@ -6,7 +6,7 @@ import { HomeService, token } from '../../services';
 @Component({
   selector: 'app-home-container',
   templateUrl: './home-container.component.html',
-  styleUrls: ['./home-container.component.css']
+  styleUrls: ['./home-container.component.css'],
 })
 export class HomeContainerComponent implements OnInit {
   constructor(
@@ -18,7 +18,11 @@ export class HomeContainerComponent implements OnInit {
   ) {}
   topMenus: TopMenu[] = [];
   ngOnInit(): void {
-    this.topMenus = this.service.getTabs();
+    // this.topMenus = this.service.getTabs();
+    this.service.getTabs().subscribe((tabs) => {
+      console.log(tabs);
+      this.topMenus = tabs;
+    });
     console.log(this.baseUrl);
   }
 
