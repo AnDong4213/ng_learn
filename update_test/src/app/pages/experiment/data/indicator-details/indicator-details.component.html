@@ -1,0 +1,99 @@
+<!-- 指标详情 -->
+<div class="ab-table" id="data-details">
+  <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+      <ul>
+        <li>{{ 'detail.pp1' | translate }}</li>
+        <li>{{ 'detail.pp2' | translate }}</li>
+        <li>{{ 'detail.pp3' | translate }}</li>
+        <li>{{ 'detail.pp4' | translate }}</li>
+        <li>{{ 'detail.pp5' | translate }}</li>
+      </ul>
+  </popover-content>
+  <div class="ab-table-head ab-flex-between">
+    <div class="ab-flex-start ab-h3">
+      {{ 'detail.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="myPopover"></i>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <div class="ab-select-big ab-select-border" *ngIf="statKeys.length >= 1">
+        <ng-select
+                [items]="statKeys"
+                [active]="selectObj"
+                (selected)="selected($event)"
+                placeholder="{{ 'detail.searchHolder' |  translate }}">
+          </ng-select>
+      </div>
+
+    </div>
+    <div class="ab-flex-end">
+      <div class="ab-btn-group-line ab-space-big">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType ==  STAT_TYPE_MEAN }" (click)="styp = STAT_TYPE_MEAN">{{ 'detail.avg' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_SUM }" (click)="styp = STAT_TYPE_SUM">{{ 'detail.sum' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV }" (click)="styp = STAT_TYPE_UV">{{ 'detail.convertNum' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV_MEAN }" (click)="styp = STAT_TYPE_UV_MEAN">{{ 'detail.convert' | translate }}</button>
+      </div>
+      <div class="ab-btn-group-line ab-space-big">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': by == hour}" (click)="byDateType = hour">{{ 'detail.hour' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': by == day}" (click)="byDateType = day">{{ 'detail.day' | translate }}</button>
+      </div>
+       <!--<my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"-->
+      <!--[(ngModel)]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)"  ></my-date-range-picker>-->
+      <app-date-range  [options]="myDateRangePickerOptions" [exp]="exp"
+        [model]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)">
+      </app-date-range>
+    </div>
+  </div>
+  <div class="ab-table-body">
+    <app-dimensions [appid]="appid" [exp]="exp" [curStat]="curStat" *ngIf="dimensionsStatus" [endDate]="endTime" [startDate]="startTime"
+            (queryTable)="dimensionTable($event)"
+            (queryCharts)="dimensionCharts($event)"
+            (cancel)="cancelDimension()"
+      ></app-dimensions>
+    <div echarts [options]="statChartData" style="width: 99%; height: 300px;"></div>
+    <table class="indicator-table">
+      <tr>
+        <th>{{ 'detail.version' | translate }}</th>
+        <th>{{ 'detail.total' | translate }}</th>
+        <th *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">{{ 'detail.sum' | translate }}</th>
+        <th *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">{{ 'detail.avg' | translate }}</th>
+
+        <th *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN">{{ 'detail.convertNum' | translate }}</th>
+        <th *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN">{{ 'detail.convertRate' | translate }}</th>
+        <th class="analysis-table-head-lg">{{ 'detail.change' | translate }}[{{ 'detail.95' | translate }}]</th>
+      </tr>
+      <tr *ngFor="let v of versions; let i = index">
+        <td class="ab-ellipsis">
+          <p *ngIf="v.description" popover="{{v.description}}" placement="bottom" [popoverOnHover]="true">
+            <app-color-dot num={{i}}></app-color-dot>{{ v.isControl ? ( 'detail.originversion' | translate ) : v.name }}（{{v.traffic}}%）
+          </p>
+          <p *ngIf="!v.description">
+            <app-color-dot num={{i}}></app-color-dot>{{ v.isControl ? ( 'detail.originversion' | translate ) : v.name }}（{{v.traffic}}%）
+          </p>
+        </td>
+        <td>{{ statTable[v.id]?.pv }}</td>
+<!--   <td *ngIf="isShowdimensionUv">{{ statTable[v.id]?.dimensionUv}}</td> -->
+        <td *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">{{ statTable[v.id]?.statSum | number: '1.0-2'}}</td>
+        <td *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">{{ statTable[v.id]?.statMean | number: '1.0-3'}}</td>
+        <td *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN">{{ statTable[v.id]?.stat }}</td>
+        <td *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN">{{ statTable[v.id]?.statRate*100 | number: '1.0-2'}} %</td>
+
+        <td *ngIf="v.isControl">--</td>
+        <td *ngIf="!v.isControl">
+          <app-variant [num]="statTable[v.id]?.statVariance" *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN"></app-variant>
+          <app-ci-range [ci]="statTable[v.id]?.statCi" *ngIf="(statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN) && !isPolynomial" (click)="openPowerDialog(v)"></app-ci-range>
+          <app-variant [num]="statTable[v.id]?.statVarianceRate" *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN"></app-variant>
+          <app-ci-range [ci]="statTable[v.id]?.statCiRate"  *ngIf="(statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN)  && !isPolynomial" (click)="openPowerDialog(v)"></app-ci-range>
+          <app-power *ngIf="v.powerDialog" [versions]="versions"
+            [indexStat]="indexStatResult"
+            [indexClientStat]="indexClientResult"
+            [allTableDatas]="allTableDatas"
+            [statName]="curStat"
+            [exp]="exp"
+            [v]="v"
+            [statType]="statType"
+            (isClose)="closePowerDialog(v)"></app-power>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>

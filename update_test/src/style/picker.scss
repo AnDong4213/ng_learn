@@ -1,0 +1,99 @@
+// 重新日期组件 样式
+
+.btnclearenabled {
+  display: none;
+}
+
+.mydrp .headerokbtn {
+  display: none;
+}
+
+.mydrp .selector {
+  border: none !important;
+  border-right: 1px solid #e1e1e1 !important;
+}
+
+.mydrp .currmonth {
+  background-color: transparent !important;
+}
+
+.mydrp .selectorarrow {
+  border: none !important;
+
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mydrp .selectorarrow:after {
+  margin-left: -11px !important;
+  border-width: 11px !important;
+}
+
+.mydrp .range {
+  background-color: rgb(235, 244, 248) !important;
+}
+
+.mydrp .selecteddaybegin,
+.mydrp .selecteddayend,
+.mydrp .selectedmonth .monthvalue,
+.mydrp .selectedyear .yearvalue {
+  color: #fff !important;
+  background-color: #3bafda !important;
+}
+
+.mydrp .weekdaytitle {
+  font-weight: 600 !important;
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+.mydrp .nextmonth,
+.mydrp .prevmonth {
+  color: #aab2bd !important;
+}
+
+.mydrp .sunday {
+  color: #e9573f !important;
+}
+
+.mydrp .icon-mydrpdown,
+.mydrp .icon-mydrpleft,
+.mydrp .icon-mydrpright,
+.mydrp .icon-mydrpup {
+  color: #434a54 !important;
+}
+
+.mydrp .caltable,
+.mydrp .daycell,
+.mydrp .monthcell,
+.mydrp .monthtable,
+.mydrp .weekdaytitle,
+.mydrp .yearcell,
+.mydrp .yeartable {
+  color: #434a54 !important;
+}
+
+.mydrp {
+  // height: 30px !important;
+  height: 34px !important;
+  // border: 1px solid #f5f7fa !important;
+  border: 1px solid #e5e5e5 !important;
+  // background: #f5f7fa !important;
+  background: #fff !important;
+}
+
+.mydrp .selection {
+  height: 32px !important;
+  // height: 30px !important;
+  // background-color: #f5f7fa !important;
+  background-color: #fff !important;
+}
+
+.mydrp .btnpicker {
+  // background: #f5f7fa !important;
+  background: #fff !important;
+}
+
+.mydrp .selectiongroup .selbtngroup {
+  // height: 30px !important;
+  height: 32px !important;
+}

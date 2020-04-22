@@ -1,0 +1,205 @@
+.ab-popover-container {
+  position: relative;
+
+  display: inline-block;
+}
+
+.ab-popover {
+  position: absolute;
+
+  display: inline-block;
+  max-width: 480px;
+  padding: 9px 12px;
+  border: 1px solid #bcbcbc;
+  border-radius: $radius;
+
+  font-size: $font-size;
+  line-height: $line-height-large;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.ab-popover-big {
+  padding: 14px 16px;
+}
+
+.ab-popover-primary {
+  border: 1px solid $blue-01;
+
+  color: #fff;
+  background: $blue-01;
+  box-shadow: $shadow-primary;
+}
+
+.ab-popover-success {
+  border: 1px solid $green-01;
+
+  color: #fff;
+  background: $green-01;
+  box-shadow: $shadow-success;
+}
+
+.ab-popover-warning {
+  border: 1px solid $yellow-01;
+
+  color: #fff;
+  background: $yellow-01;
+  box-shadow: $shadow-warning;
+}
+
+.ab-popover-danger {
+  border: 1px solid $red-01;
+
+  color: #fff;
+  background: $red-01;
+  box-shadow: $shadow-danger;
+}
+
+.ab-popover-top {
+  top: -60px;
+  left: 0;
+}
+
+.ab-popover-bottom {
+  bottom: -60px;
+  left: 50%;
+
+  margin-left: -30px;
+}
+
+.ab-popover-left {
+  top: 50%;
+  left: -80px;
+
+  margin-top: -24px;
+}
+
+.ab-popover-right {
+  top: 50%;
+  right: -80px;
+
+  margin-top: -24px;
+}
+
+.ab-popover-top:before {
+  content: '';
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+
+  display: inline-block;
+  margin-left: -12px;
+  border: 12px solid transparent;
+  border-top: 12px solid #bcbcbc;
+}
+
+.ab-popover-left:before {
+  content: '';
+  position: absolute;
+  right: -24px;
+
+  display: inline-block;
+  margin-left: -12px;
+  border: 12px solid transparent;
+}
+
+.ab-popover-right:before {
+  content: '';
+  position: absolute;
+  left: -12px;
+
+  display: inline-block;
+  margin-left: -12px;
+  border: 12px solid transparent;
+}
+
+.ab-popover-bottom:before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: 50%;
+
+  display: inline-block;
+  margin-left: -12px;
+  border: 12px solid transparent;
+}
+
+.ab-popover.ab-popover-top:before {
+  border-top: 12px solid #bcbcbc;
+}
+
+.ab-popover.ab-popover-bottom:before {
+  border-bottom: 12px solid #bcbcbc;
+}
+
+.ab-popover.ab-popover-left:before {
+  border-left: 12px solid #bcbcbc;
+}
+
+.ab-popover.ab-popover-right:before {
+  border-right: 12px solid #bcbcbc;
+}
+
+.ab-popover-primary.ab-popover-top:before {
+  border-top: 12px solid $blue-01;
+}
+
+.ab-popover-primary.ab-popover-bottom:before {
+  border-bottom: 12px solid $blue-01;
+}
+
+.ab-popover-primary.ab-popover-left:before {
+  border-left: 12px solid $blue-01;
+}
+
+.ab-popover-primary.ab-popover-right:before {
+  border-right: 12px solid $blue-01;
+}
+
+.ab-popover-success.ab-popover-top:before {
+  border-top: 12px solid $green-01;
+}
+
+.ab-popover-success.ab-popover-bottom:before {
+  border-bottom: 12px solid $green-01;
+}
+
+.ab-popover-success.ab-popover-left:before {
+  border-left: 12px solid $green-01;
+}
+
+.ab-popover-success.ab-popover-right:before {
+  border-right: 12px solid $green-01;
+}
+
+.ab-popover-warning.ab-popover-top:before {
+  border-top: 12px solid $yellow-01;
+}
+
+.ab-popover-warning.ab-popover-bottom:before {
+  border-bottom: 12px solid $yellow-01;
+}
+
+.ab-popover-warning.ab-popover-left:before {
+  border-left: 12px solid $yellow-01;
+}
+
+.ab-popover-warning.ab-popover-right:before {
+  border-right: 12px solid $yellow-01;
+}
+
+.ab-popover-danger.ab-popover-top:before {
+  border-top: 12px solid $red-01;
+}
+
+.ab-popover-danger.ab-popover-bottom:before {
+  border-bottom: 12px solid $red-01;
+}
+
+.ab-popover-danger.ab-popover-left:before {
+  border-left: 12px solid $red-01;
+}
+
+.ab-popover-danger.ab-popover-right:before {
+  border-right: 12px solid $red-01;
+}

@@ -1,0 +1,42 @@
+.ab-modal {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ab-modal-dialog {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+
+  width: 480px;
+  padding: 30px 60px;
+  border-radius: 4px;
+
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  transform: translate(-50%, -50%);
+}
+
+.ab-modal-dialog-primary {
+  border-top: 4px solid $blue-01;
+}
+
+.ab-modal-dialog-success {
+  border-top: 4px solid $green-01;
+}
+
+.ab-modal-dialog-warning {
+  border-top: 4px solid $yellow-01;
+}
+
+.ab-modal-dialog-danger {
+  border-top: 4px solid $red-01;
+}

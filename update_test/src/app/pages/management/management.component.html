@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="ab-table abp-container">
+		<div class="ab-table-head">
+			<div class="manage-container-header">
+        <span>{{ 'management.groupMember' | translate }}</span>
+				<span>
+          <button class="ab-btn ab-btn-primary ab-btn-sm" (click)="invite()"><i class="iconfont icon-add ab-icon-left"></i>{{ 'management.inviteMember' | translate }}</button>
+				</span>
+			</div>
+		</div>
+
+		<div class="ab-table-body">
+			<table>
+		    <tbody>
+					<tr>
+            <th>{{ 'management.account' | translate }}</th>
+            <th>{{ 'management.description' | translate }}</th>
+            <th>{{ 'management.accountLevel' | translate }}</th>
+            <th>{{ 'management.involvedApp' | translate }}</th>
+            <th>{{ 'management.blacklist' | translate }}</th>
+            <th></th>
+			    </tr>
+					<tr *ngFor="let item of members">
+            <td>{{ item.email }}</td>
+            <td>{{ item.owner_comment }}</td>
+            <td>{{ getRole(item.role) | async }}</td>
+						<td>  <span *ngFor="let i of getAppNames(item.apps)">{{i}}</span> </td>
+						<td>
+							<a (click)="unban(item)" *ngIf="item.blocked"><i class="iconfont icon-ghost"></i></a>
+						</td>
+            <td>
+							<div class="ab-btn-group">
+								<button class="ab-btn ab-btn-default ab-btn-exsm" type="button" (click)="edit(item)"><i class="iconfont icon-edit ab-icon-gray"></i></button>
+								<button class="ab-btn ab-btn-default ab-btn-exsm" type="button" (click)="ban(item)" *ngIf="!item.blocked"><i class="iconfont icon-ghost ab-icon-gray"></i></button>
+							</div>
+            </td>
+			    </tr>
+				</tbody>
+			</table>
+      <div class="ab-text-center ab-text-muted" *ngIf="!isLoading && members.length == 0"><br><br>{{ 'management.no' | translate }}</div>
+			<app-loading *ngIf="isLoading" [loadingPartial]="true"></app-loading>
+		</div>
+
+	</div>
+

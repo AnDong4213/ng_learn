@@ -1,0 +1,48 @@
+.abp-bg-green {
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(#58c584, #76cf9a);
+}
+
+.abp-container {
+  overflow: auto;
+  width: 1152px;
+  height: 100%;
+  margin: 0 auto;
+
+  text-align: center;
+  background: #fff;
+}
+
+.login-logo {
+  width: 164px;
+  height: 30px;
+  margin-top: 48px;
+}
+
+.login-title {
+  padding-top: 48px;
+  padding-bottom: 60px;
+}
+
+.login-input-container {
+  width: 300px;
+}
+
+.login-error {
+  position: absolute;
+}
+
+.login-tip {
+  padding-top: 24px;
+}
+
+.login-check-container {
+  width: 300px;
+  margin: 0 auto;
+
+  text-align: left;
+}

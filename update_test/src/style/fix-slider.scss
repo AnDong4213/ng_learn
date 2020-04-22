@@ -1,0 +1,47 @@
+$color-list: (#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89,#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89);
+
+.mat-slider-horizontal .mat-slider-track-wrapper {
+  height: 4px !important;
+  border-radius: 4px;
+}
+
+.mat-slider-horizontal .mat-slider-wrapper {
+  height: 4px !important;
+}
+
+.mat-slider-horizontal .mat-slider-ticks-container {
+  height: 4px !important;
+}
+
+.mat-slider-horizontal .mat-slider-ticks {
+  height: 4px !important;
+
+  background-image: none !important;
+}
+
+.mat-slider-horizontal .mat-slider-track-background {
+  height: 4px !important;
+
+  background: #f6f4f4 !important;
+}
+
+.mat-slider-horizontal .mat-slider-track-fill {
+  height: 4px !important;
+}
+
+.mat-slider-thumb {
+  background-color: white !important;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+@for $i from 1 to length($color-list) {
+  .my-slider-#{$i} {
+    .mat-slider-track-fill {
+      background-color: nth($color-list, $i) !important;
+    }
+
+    .mat-slider-thumb-label {
+      background-color: nth($color-list, $i) !important;
+    }
+  }
+}

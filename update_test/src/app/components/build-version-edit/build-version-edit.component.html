@@ -1,0 +1,41 @@
+<popover-content #buildPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+  <p>{{ 'buildversionedit.p1' | translate }}</p>
+  <p>{{ 'buildversionedit.p2' | translate }}</p>
+  <p>{{ 'buildversionedit.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/ver.html" target="_blank">{{ 'buildversionedit.p4' | translate }}</a>{{ 'buildversionedit.p5' | translate }}</p>
+</popover-content>
+<div class="ab-panel-head ab-h3" id="versions">
+  {{ 'buildversionedit.p6' | translate }}&nbsp;&nbsp;
+  <i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="buildPopover"></i>
+</div>
+
+<div class="ab-panel-body">
+  <div class="build-head">
+    <p class="ab-text-muted" >
+      <span *ngIf="app.typ === appType.H5">
+        {{ 'buildversionedit.p7' | translate }}[
+        <span *ngIf="buildInfo?.mode == 'equal'">
+          <span >{{ 'buildversionedit.p8' | translate }} ]</span> ： {{ buildInfo?.url }}
+        </span>
+        <span *ngIf="buildInfo?.mode == 'regex'">
+          <span> {{ 'buildversionedit.p9' | translate }}</span>] ： {{ buildInfo?.url }}
+          <span>{{ 'buildversionedit.p10' | translate }}: {{ buildInfo?.regexp}}</span>
+        </span>
+
+        <span *ngIf="buildInfo?.mode == 'jsregexp'">
+          <span>{{ 'buildversionedit.p12' | translate }}</span>] ： {{ buildInfo?.url }}
+          <span>{{ 'buildversionedit.p10' | translate }}: {{ buildInfo?.regexp }}</span>
+        </span>
+      </span>
+    </p>
+    <button class="ab-btn ab-btn-default ab-btn-icon-gray" *ngIf="isType('h5')" (click)="goH5Edit()">
+      <i class="iconfont icon-input ab-icon-left ab-icon-gray"></i>{{ 'buildversionedit.p11' | translate }}</button>
+    <button class="ab-btn ab-btn-default ab-btn-icon-gray" *ngIf="isType('android')" (click)="goAndroidEdit()">
+      <i class="iconfont icon-input ab-icon-left ab-icon-gray"></i>{{ 'buildversionedit.p11' | translate }}</button>
+    <button class="ab-btn ab-btn-default ab-btn-icon-gray" *ngIf="isType('ios')" (click)="goiOSEdit()">
+      <i class="iconfont icon-input ab-icon-left ab-icon-gray"></i>{{ 'buildversionedit.p11' | translate }}</button>
+  </div>
+
+  <div class="build-version-container ab-scroll-bg">
+    <app-build-version-item [version]="v" (ok)="saveItem($event)" *ngFor="let v of versions; let index = index" [exp]="exp" class="version-color-{{index + 1}}"></app-build-version-item>
+  </div>
+</div>

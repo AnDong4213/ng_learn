@@ -1,0 +1,44 @@
+.manage-create-container {
+  text-align: center;
+}
+
+.manage-create-title {
+  padding: 36px 0 24px;
+}
+
+.manage-icons {
+  padding: 80px 0;
+
+  .iconfont {
+    font-size: 30px;
+  }
+}
+
+.manage-create-btn {
+  margin-bottom: 24px;
+}
+
+.manage-charge {
+  margin-top: 30px;
+}
+
+.manage-table {
+  tr {
+    cursor: pointer;
+  }
+}
+
+.manage-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.manage-table-name {
+  max-width: 440px;
+}
+
+.manage-table-key {
+  max-width: 500px;
+}

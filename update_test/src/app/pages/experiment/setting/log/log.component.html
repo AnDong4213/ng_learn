@@ -1,0 +1,21 @@
+<div class="log-container">
+	<div class="log-header">
+    <span class="ab-text-white">{{ 'log.title' | translate }}</span>
+		<a (click)="closeLog()"><i class="iconfont icon-close ab-icon-white"></i></a>
+	</div>
+	<div class="ab-table-body ab-scroll log-table-body">
+		<table>
+			<tr *ngFor="let log of logs">
+				<td>
+					<div class="ab-text-muted log-para">
+            <span>{{ log.person }}</span>
+						<span>{{ log.time }}</span>
+					</div>
+					<div class="log-list log-option-title">{{ log.option }}</div>
+					<div class="log-list ab-scroll" *ngFor="let d of log.detail">{{ d }}</div>
+				</td>
+			</tr>
+		</table>
+		<app-loading *ngIf="logs.length < 1 " [loadingPartial]="true"></app-loading>
+	</div>
+</div>

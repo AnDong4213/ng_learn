@@ -1,0 +1,76 @@
+<div class="group-dialog ab-scroll">
+  <p class="ab-text-primary ab-h1 ab-text-center">{{ 'userfilteredit.name' | translate }}</p>
+    <form novalidate [formGroup]='audienceForm' (ngSubmit)="onSubmit(audienceForm)">
+      <mat-form-field class="group-input-container">
+        <input matInput type="text"  formControlName="name"  placeholder="{{ 'userfiltercreate.name' | translate }}" >
+        <mat-error *ngIf="(audienceForm.get('name').touched || submitted ) && audienceForm.get('name').hasError('required')">
+           {{ 'userfiltercreate.nameempty' | translate }}
+        </mat-error>
+        <mat-error *ngIf="(audienceForm.get('name').touched || submitted ) && audienceForm.get('name').hasError('checkrepeat')">
+           {{ 'userfiltercreate.namerepeat' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="group-input-container">
+        <input matInput type="text" formControlName="description" placeholder="{{ 'userfiltercreate.comment' | translate }}" >
+      </mat-form-field>
+
+      <br><br>
+      <p>{{ 'userfiltercreate.condition' | translate }}</p>
+      <br>
+      <div class="groud-condition-container" *ngFor="let bracket of brackets; let num = index;" >
+        <i class="iconfont icon-code group-brackets"></i>
+        <div class="group-bracket-link" *ngIf="num > 0">
+          <select (change)="selectBracketLink(num,$event.target.value)">
+            <option [value]="j" *ngFor="let l of link;let j = index">{{ l.label }}</option>
+          </select>
+        </div>  
+
+        <div *ngFor="let item of bracket.data; let i = index;">
+
+          <select class="group-link" (change)="selectLink(num,i,$event.target.value)" *ngIf="i > 0">
+            <option [value]="j" *ngFor="let l of link;let j = index">{{ l.label }}</option>
+          </select>
+
+          <select class="ab-width-175" (change)="selectName(num,i,$event.target.value)" *ngIf="!item.isNameInput">
+            <option [value]="condition.name" *ngFor="let condition of conditions">{{ condition.name }}</option>
+          </select>
+          <input class="ab-input ab-input-sm" *ngIf="item.isNameInput" formControlName="itemKey{{num}}{{i}}"  (blur)="addInputKey(num, i, $event.target.value)" type="text" placeholder="{{ 'userfiltercreate.inputname' | translate }}">
+
+          <select (change)="selectOp(num,i,$event.target.value)">
+            <option [value]="op.val" *ngFor="let op of item.ops">{{ op.label }}</option>
+          </select>
+
+          <select (change)="selectValue(num,i,$event.target.value)"  *ngIf="!item.isValueInput">
+            <option [value]="option" *ngFor="let option of item.data">{{ option }}</option>
+          </select>
+          <input class="ab-input ab-input-sm" *ngIf="item.isValueInput" formControlName="itemValue{{num}}{{i}}"  (blur)="addInputValue(num, i, $event.target.value)" type="text" placeholder="{{ 'userfiltercreate.inputval' | translate }}">
+          
+          <a class="ab-icon-gray group-del" (click)="delItem(num,i)">
+            <i class="iconfont icon-delete"></i>
+          </a>
+          <br>
+          <span class="ab-text-danger" *ngIf="item.isNameInput && (audienceForm.get('itemKey'+num+i).touched || submitted ) && audienceForm.get('itemKey'+num+i).hasError('required')">{{
+            'userfiltercreate.checkname' | translate }}</span>
+          <span class="ab-text-danger group-error" *ngIf="item.isValueInput && (audienceForm.get('itemValue'+num+i).touched || submitted ) && audienceForm.get('itemValue'+num+i).hasError('required')">
+             {{ 'userfiltercreate.checkval' | translate }}
+          </span>
+          <span class="ab-text-danger group-error" *ngIf="item.isValueInput && (audienceForm.get('itemValue'+num+i).touched || submitted ) && audienceForm.get('itemValue'+num+i).hasError('checkblank')">
+              {{ 'userfiltercreate.checkval' | translate }}
+           </span>
+
+        </div>
+        <button class="ab-btn ab-btn-default ab-btn-sm ab-btn-icon-gray group-add-item" type="button" (click)="addItem(num)"><i class="iconfont icon-add ab-icon-left ab-icon-gray"></i>{{
+          'userfiltercreate.addcondition' | translate }}</button>
+
+      </div>
+      <button class="ab-btn ab-btn-default ab-btn-sm ab-btn-icon-gray" type="button" (click)="addBracket()"><i class="iconfont icon-add ab-icon-left ab-icon-gray"></i>{{ 'userfiltercreate.bracket' | translate }}</button>
+      <br><br>
+      <p>{{ 'userfiltercreate.formula' | translate }}</p>
+      <br>
+      <div class="group-formula-container ab-scroll">{{ conditionFormula }}</div>
+      <p class="group-btns">
+        <button class="ab-btn ab-btn-default abp-btn-fix-big" type="button" (click)="close()">{{ 'modal.cancel' | translate }}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="ab-btn ab-btn-primary abp-btn-fix-big" type="submit">{{ 'modal.ok' | translate }}</button>
+      </p>
+    </form>
+  </div>

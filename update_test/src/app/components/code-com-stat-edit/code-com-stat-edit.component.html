@@ -1,0 +1,29 @@
+
+<div class="ab-table new-part-three-table">
+  <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'comstat.p1' | translate }}</p>
+    <p>{{ 'comstat.p2' | translate }}</p>
+    <p>{{ 'comstat.p3' | translate }}</p>
+    <p>{{ 'comstat.p4' | translate }}</p>
+    <p>{{ 'comstat.p5' | translate }}<a href="http://help.appadhoc.com/expFlow/stat.html" target="_blank">{{ 'comstat.p6' | translate }}</a>{{ 'comstat.p7' | translate }}</p>
+  </popover-content>
+  <div class="ab-table-head new-part-three-table-title">
+    <p class="ab-h3">{{ 'comstat.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i></p>
+    <button class="ab-btn ab-btn-default ab-btn-icon-gray" type="button" (click)="newComStat()" [disabled]="exp?.status === versionStatus.Run ||  exp?.status === versionStatus.Stop || exp?.status === versionStatus.Publish" [ngClass]="{'ab-btn-disabled': exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop}"><i class="iconfont icon-add ab-icon-gray"></i>&nbsp;&nbsp;{{ 'comstat.add' | translate }}</button>
+  </div>
+ <div class="ab-table-body">
+   <table>
+     <tbody>
+       <tr>
+         <th width="17.2%">{{ 'comstat.name' | translate }}</th>
+         <th width="29.1%">{{ 'comstat.desc' | translate }}</th>
+         <th colspan="2">{{ 'comstat.formula' | translate }}</th>
+       </tr>
+       <tr app-code-comstat-item [stat]="i" [comStat]="allComStats" [exp]="exp" *ngFor="let i of curComStats" (del$)="delItem($event)" (save$)="saveItem($event)" [validStat]="validStats" [stats]="stats"></tr>
+       <tr *ngIf="!curComStats || curComStats.length == 0">
+         <td span="4"> {{ 'comstat.null' | translate }}</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+</div>

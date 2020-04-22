@@ -1,0 +1,224 @@
+<app-navbar></app-navbar>
+
+<div class="ab-panel abp-container">
+	<div class="ab-panel-head">
+    {{ 'codenew.p1' | translate  }}：
+		<span *ngIf="app.typ == appType.H5">H5</span>
+		<span *ngIf="app.typ == appType.ANDROID">Android</span>
+		<span *ngIf="app.typ == appType.IOS">iOS</span>
+    &nbsp;{{ 'codenew.p2' | translate }}
+	</div>
+	<div class="ab-panel-body ab-panel-nopadding">
+		<mat-horizontal-stepper linear>
+      <mat-step [stepControl]="stepOneForm" [editable]="false">
+				<form class="create-bg" [formGroup]="stepOneForm" (ngSubmit)="stepOneSubmit(stepOneForm)">
+          <ng-template matStepLabel>{{ 'codenew.step1' | translate }}</ng-template>
+
+					<mat-form-field class="create-item ab-row">
+            <input matInput type="text" autocomplete="foo" placeholder="{{ 'codenew.expname' | translate }}" formControlName="name" required>
+						<mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('required')">
+                {{ 'codenew.p3' | translate }}
+						</mat-error>
+						<mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('expname')">
+               {{ 'codenew.p4' | translate }}
+						</mat-error>
+						<mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('checkrepeat')">
+                {{ 'codenew.p5' | translate }}
+						</mat-error>
+						<mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('maxlength')">
+               {{ 'codenew.p6' | translate }}
+						</mat-error>
+					</mat-form-field>
+					<br>
+
+					<mat-form-field class="create-item ab-row">
+            <input matInput type="text" autocomplete="foo" placeholder="{{ 'codenew.desc' | translate }}" formControlName="description">
+					</mat-form-field>
+					<br>
+
+					<div class="ab-input-group ab-input-group-right create-layer ab-row" *appRole="layerRole;else stpl">
+						<div class="ab-input">{{ activeLayer.text }}</div>
+						<button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+						<i class="iconfont icon-help ab-icon-left ab-icon-gray create-help" [popover]="layerPopover"></i>
+						<popover-content #layerPopover placement="left" [animation]="true" [closeOnClickOutside]="true">
+              <p>{{ 'codenew.p8' | translate }}</p><br>
+              <p>{{ 'codenew.p9' | translate }}</p><br>
+              <p>{{ 'codenew.p10' | translate }}<a href="http://help.appadhoc.com/expFlow/stratifiedFlow.html" target="_blank">{{ 'codenew.p11' | translate }}</a>{{'codenew.p12' | translate }}</p>
+						</popover-content>
+            <p class="ab-text-danger ab-text-left ab-line-height" *ngIf="activeLayer.id !== 'default' && layerItems">{{ 'codenew.p13' | translate }}</p>
+						<mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+							<button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of layerItems">{{l.text}}</button>
+						</mat-menu>
+					</div>
+
+					<ng-template #stpl>
+						<div class="ab-input-group ab-input-group-right create-layer ab-row">
+							<div class="ab-input">{{ activeLayer.text }}</div>
+							<button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+							<i class="iconfont icon-help ab-icon-left ab-icon-gray create-help" [popover]="layerPopover"></i>
+							<popover-content #layerPopover placement="left" [animation]="true" [closeOnClickOutside]="true">
+                <p>{{ 'codenew.p8' | translate }}</p><br>
+                <p>{{ 'codenew.p9' | translate }}</p><br>
+                <p>{{ 'codenew.p10' | translate }}<a href="http://help.appadhoc.com/expFlow/stratifiedFlow.html" target="_blank">{{ 'codenew.p11' | translate }}</a>{{ 'codenew.p12' | translate }}</p>
+							</popover-content>
+							<mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+								<button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of [activeLayer]">{{l.text}}</button>
+								<button mat-menu-item style="height:60px;line-height:30px;" disabled>
+                  {{ 'codenew.newlayer' | translate }}<br>
+                  <span class="ab-text-muted">{{ 'codenew.p14' | translate }}</span>
+								</button>
+							</mat-menu>
+						</div>
+					</ng-template>
+
+					<br><br><br>
+					<popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+            <p>{{ 'codenew.p15' | translate }}</p>
+            <p>{{ 'codenew.p16' | translate }}</p>
+            <p>{{ 'codenew.p17' | translate }}</p>
+						<br/>
+            <p>{{ 'codenew.p10' | translate }}
+              <a *ngIf="app.typ == appType.H5" href="http://help.appadhoc.com/H5exp/" target="_blank">{{ 'codenew.p11' | translate }}</a>
+              <a *ngIf="app.typ != appType.H5" href="http://help.appadhoc.com/mobileexp/" target="_blank">{{ 'codenew.p11' | translate }}</a>
+              {{ 'codenew.p12' | translate }}
+						</p>
+					</popover-content>
+
+          <div class="create-item ab-text-left">{{ 'codenew.setflagname' | translate }}&nbsp;&nbsp;
+						<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i>
+            <span>({{ 'codenew.advdesc' | translate }})</span>
+					</div>
+					<br>
+					<mat-form-field class="create-item" *ngIf="!isAdvFlag">
+            <input matInput type="text" autocomplete="foo" placeholder="{{ 'codenew.flagname' | translate }}" formControlName="flagname" required [matAutocomplete]="flagsauto" (blur)="getFlags()">
+						<mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('required')">
+              {{ 'codenew.p18' | translate }}
+						</mat-error>
+						<mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('flagName')">
+              {{ 'codenew.p19' | translate }}
+						</mat-error>
+						<mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('maxlength')">
+              {{ 'codenew.p20' | translate }}
+						</mat-error>
+            <mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('flagLayer')">
+              {{ 'codenew.checklayer' | translate }}
+            </mat-error>
+
+						<mat-autocomplete #flagsauto="matAutocomplete">
+							<mat-option *ngFor="let name of $autoComplete | async" [value]="name">
+                {{ name }}&nbsp;&nbsp; <span class="create-flag-sub">{{ getFlagTyp(name) }}</span>
+							</mat-option>
+						</mat-autocomplete>
+
+					</mat-form-field>
+          <div class="create-item" *ngIf="isAdvFlag">
+            <table>
+              <tr>
+                  <td>
+                     <mat-form-field >
+                      <input matInput type="text" placeholder="{{ 'codenew.flagname' | translate }}" autocomplete="off" formControlName="flagname" required  (blur)="getFlags()" [matAutocomplete]="flagsauto" >
+                      <mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('required')">
+                        {{ 'codenew.p18' | translate }}
+                      </mat-error>
+                      <mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('flagName')">
+                        {{ 'codenew.p19' | translate }}
+                      </mat-error>
+                      <mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('maxlength')">
+                        {{ 'codenew.p20' | translate }}
+                      </mat-error>
+                      <mat-error *ngIf="(stepOneForm.get('flagname').touched || stepsubmit) && stepOneForm.get('flagname').hasError('flagLayer')">
+                        {{ 'codenew.checklayer' | translate }}
+                      </mat-error>
+
+
+						<mat-autocomplete #flagsauto="matAutocomplete">
+							<mat-option *ngFor="let name of $autoComplete | async" [value]="name">
+                {{ name }}&nbsp;&nbsp; <span class="create-flag-sub">{{ getFlagTyp(name) }}</span>
+							</mat-option>
+						</mat-autocomplete>
+
+                    </mat-form-field> 
+                  </td>
+                  <td>
+                    <mat-form-field>
+                       <mat-select [(value)]="selected" [disabled]="isSelectExistFlag">
+                          <mat-option value="string" selected="true">String</mat-option>
+                          <mat-option value="number">Number</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field *ngIf="selected === 'string'">
+                      <input matInput placeholder="{{ 'codenew.advStringInput' | translate }}" type="string" formControlName="flagvalue" required >
+                      <mat-hint>{{ 'codenew.advControlDesc' | translate }}</mat-hint>
+                      <mat-error *ngIf="(stepOneForm.get('flagvalue').touched || stepsubmit) && stepOneForm.get('flagvalue').hasError('required')">
+                        {{ 'codenew.advnull' | translate }}
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="selected === 'number'">
+                      <input matInput placeholder="{{ 'codenew.advNumberInput' | translate }}"  type="number" formControlName="flagvalue" required >
+                      <mat-hint>{{ 'codenew.advControlDesc' | translate }}</mat-hint>
+                      <mat-error *ngIf="(stepOneForm.get('flagvalue').touched || stepsubmit) && stepOneForm.get('flagvalue').hasError('required')">
+                        {{ 'codenew.advnull' | translate }}
+                      </mat-error>
+                    </mat-form-field>
+
+                  </td>
+              </tr>  
+            </table>
+
+          </div>
+					<br>
+          <div class="ab-text-danger ab-text-left create-item ab-row" *ngIf="isErrorFlags">{{ 'codenew.p21' | translate }}</div>
+          <div class="ab-text-muted ab-text-left create-item ab-row">{{ 'codenew.p7' | translate }}</div>
+					
+					<app-h5-desc *ngIf="app.typ == appType.H5" [app]="app"></app-h5-desc>
+					<app-android-desc *ngIf="app.typ == appType.ANDROID" [app]="app"></app-android-desc>
+					<app-ios-desc *ngIf="app.typ == appType.IOS" [app]="app"></app-ios-desc>
+					<app-applet-desc *ngIf="app.typ == appType.WX" [app]="app"></app-applet-desc>
+
+					<div class="create-footer ab-flex-between">
+            <button class="ab-btn ab-btn-default abp-btn-fix-large" [routerLink]="['/']" type="button"><i class="iconfont icon-left"></i>&nbsp;&nbsp;{{ 'codenew.previous'| translate }}</button>
+            <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext [disabled]="isErrorFlags || !stepOneForm.valid">{{ 'codenew.next' | translate }}&nbsp;&nbsp; <i class="iconfont icon-right"></i> </button>
+					</div>
+					<div class="create-bg-icon">
+						<i class="iconfont icon-h" [ngClass]="{'icon-h':app.typ == appType.H5,'icon-android':app.typ == appType.ANDROID,'icon-apple':app.typ == appType.IOS }"></i>
+					</div>
+				</form>
+
+			</mat-step>
+
+
+			<mat-step [stepControl]="stepSecondForm" [editable]="false">
+				<form [formGroup]="stepSecondForm" (ngSubmit)="stepTwoSubmit($event)">
+          <ng-template matStepLabel>{{ 'codenew.step2' | translate }}</ng-template>
+					<app-code-version-edit [exp$]="exp$"></app-code-version-edit>
+
+					<div class="create-footer ab-flex-end">
+						<!--<button class="ab-btn ab-btn-default abp-btn-fix-large" matStepperPrevious type="button">-->
+							<!--<i class="iconfont icon-left"></i>&nbsp;&nbsp;上一步</button>-->
+              <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext>{{ 'codenew.next' | translate }}&nbsp;&nbsp;
+							<i class="iconfont icon-right"></i>
+						</button>
+					</div>
+
+				</form>
+			</mat-step>
+
+
+			<mat-step [stepControl]="stepThirdForm">
+				<form [formGroup]="stepThirdForm" (ngSubmit)="complete()">
+          <ng-template matStepLabel>{{ 'codenew.step3' | translate }}</ng-template>
+					<app-code-stat-edit [exp$]="exp$"></app-code-stat-edit>
+					<app-code-com-stat-edit [exp$]="exp$"></app-code-com-stat-edit>
+					<div class="create-footer ab-flex-end">
+            <!--<button class="ab-btn ab-btn-default abp-btn-fix-large" matStepperPrevious type="button">-->
+              <!--<i class="iconfont icon-left"></i>&nbsp;&nbsp;上一步</button>-->
+              <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext>{{ 'codenew.complete' | translate }}</button>
+					</div>
+				</form>
+			</mat-step>
+		</mat-horizontal-stepper>
+	</div>
+</div>

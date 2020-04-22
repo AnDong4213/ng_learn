@@ -1,0 +1,97 @@
+<!-- 数据概览 -->
+<div class="ab-table" id="overview">
+  <popover-content #myPopover placement="bottom" [animation]="true" [closeOnClickOutside]="true">
+      <p>{{ 'overview.pp5' | translate }}</p>
+      <br/>
+      <ul>
+        <li> {{ 'overview.pp1' | translate }} </li>
+        <li> {{ 'overview.pp2' | translate }}</li>
+        <li>{{ 'overview.pp3' | translate }} </li>
+        <li> {{ 'overview.pp4' | translate }} </li>
+      </ul>
+  </popover-content>
+  <div class="ab-table-head ab-flex-between">
+    <div class="ab-h3">{{ 'overview.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="myPopover"></i></div>
+    <div class="data-over-handbox-right">
+      <div class="ab-btn-group-line ab-space-big">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_MEAN }" (click)="styp = STAT_TYPE_MEAN ">{{ 'overview.mean' |   translate }}</button>
+          <!--<button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_SUM }" (click)="styp = STAT_TYPE_SUM">总值</button>-->
+          <!--<button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV }" (click)="styp = STAT_TYPE_UV">转化人数</button>-->
+          <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV_MEAN }" (click)="styp = STAT_TYPE_UV_MEAN">{{ 'overview.convert' | translate }}</button>
+      </div>
+      <button class="ab-btn ab-btn-default" (click)="exportData()" *ngIf="exp?.control?.status == vs.Stop || exp?.control?.status == vs.Run">{{ 'overview.export' | translate }}</button>
+    </div>
+  </div>
+  <div class="ab-table-body">
+    <div class="data-over-chart ab-scroll-bg" *ngIf="chartData.length;else chartsdefault;">
+      <div echarts [options]="itemchart" style="width: 280px;height: 150px;flex-shrink: 0;margin-right: 24px;display: inline-block;"  *ngFor="let itemchart of chartData;"></div>
+
+      <popover-content #domeSumPopover placement="top" [animation]="true" >
+        <p>{{ 'overview.pp6' | translate }}</p>
+      </popover-content>
+      <div class="data-versions-uv" [popover]="domeSumPopover" [popoverOnHover]="true">
+        <!--{{ 'overview.pp7' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;-->
+        <span *ngFor="let v of tableData; let i = index" [popover]="domeSumPopover">
+          &nbsp;&nbsp;<app-color-dot num={{i}}></app-color-dot>
+          {{v.displayVersionName}}
+          <span class="ab-text-muted">{{ getTotalByVersion(v) }}</span>
+        </span>
+      </div>
+    </div>
+    <ng-template #chartsdefault>
+      <div >
+        {{ 'overview.empty' | translate }}
+      </div>
+    </ng-template>
+
+    <div class="ab-scroll-bg data-over-table"  *ngIf="!isLoading">
+      <table>
+        <tr>
+          <th>{{ 'overview.version' | translate }}</th>
+          <ng-container *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">
+            <th *ngFor="let s of comStats">
+              <a popover="【复合】{{s.description}} ({{ getComStatFormula(s.name) }}) " placement="top" [popoverOnHover]="true" *ngIf="s.description">{{s.name}}</a>
+                <span *ngIf="!s.description"> {{s.name}}  </span>
+            </th>
+          </ng-container>
+          <th *ngFor="let s of stats">
+            <a popover="{{s.description}}" placement="top" [popoverOnHover]="true" *ngIf="s.description">{{s.name}}</a>
+            <span *ngIf="!s.description"> {{s.name}}  </span>
+          </th>
+        </tr>
+        <tr *ngFor="let v of tableData; let i = index">
+          <td>
+            <app-color-dot num={{i}}></app-color-dot>
+            <span popover={{v.des}} [popoverOnHover]="true" popoverPlacement="top" *ngIf="v.des">{{ v.displayVersionName}} ({{v.traffic}}%）</span>
+            <span *ngIf="!v.des">{{ v.displayVersionName}} ({{v.traffic}}%）</span>
+          </td>
+          <ng-container *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN">
+            <td *ngFor="let s of comStats" >
+              <span *ngIf="statType != STAT_TYPE_UV && statType != STAT_TYPE_UV_MEAN">{{ v[s.name].num }}</span>
+              <span *ngIf="statType == STAT_TYPE_UV">{{ v[s.name].num  | number: 0}}</span><br>
+              <span *ngIf="!v.isControl">
+                <app-variant [num]="v[s.name]?.variant" ></app-variant>
+                <app-ci-range [ci]="v[s.name]?.ci" *ngIf="!isFirstDay() && (statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN)"></app-ci-range>
+              </span>
+            </td>
+          </ng-container>
+
+          <td *ngFor="let s of stats">
+            <span *ngIf="statType != STAT_TYPE_UV && statType != STAT_TYPE_UV_MEAN">{{ v[s.name].num }}</span>
+            <span *ngIf="statType == STAT_TYPE_UV">{{ v[s.name].num  | number: 0}}</span>
+            <span *ngIf="statType == STAT_TYPE_UV_MEAN">{{ (v[s.name].num  * 100) | number: '1.0-3' }}%</span><br>
+            <span *ngIf="!v.isControl">
+              <app-variant [num]="v[s.name]?.variant" *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN"></app-variant>
+              <app-ci-range [ci]="v[s.name]?.ci" *ngIf="statType == STAT_TYPE_SUM || statType == STAT_TYPE_MEAN"></app-ci-range>
+              <app-variant [num]="v[s.name]?.variantRate" *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN"></app-variant>
+              <app-ci-range [ci]="v[s.name]?.ciRate"  *ngIf="statType == STAT_TYPE_UV || statType == STAT_TYPE_UV_MEAN"></app-ci-range>
+            </span>
+          </td>
+        </tr>
+      </table>
+     </div>
+
+     <app-loading *ngIf="isLoading" [loadingPartial]="true"></app-loading>
+
+  </div>
+</div>

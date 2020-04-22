@@ -1,0 +1,47 @@
+<div class="url-container" [ngClass]="{'url-blank': version.isControl == false}" *ngIf="!isDel">
+  <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'urlversionitem.p1' | translate }}</p>
+    <p>{{ 'urlversionitem.p2' | translate }}&nbsp;<a href="http://help.appadhoc.com/H5exp/" target="_blank">{{ 'urlversionitem.p3' | translate }}</a>&nbsp;{{ 'urlversionitem.p4' | translate }}</p>
+  </popover-content>
+
+  <popover-content #vname placement="top" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{version?.name}}</p>
+  </popover-content>
+  
+  <div class="url-item">
+      
+    <div class="url-item-left">
+      <span *ngIf="!isEditName" class="url-version-name ab-ellipsis" [popover]="vname">{{ version?.name }}&nbsp;&nbsp;</span>
+      <a (click)="editName()" *ngIf="!version.isControl && !isEditName"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+
+      <i class="iconfont icon-help ab-icon-left ab-icon-gray" *ngIf="version.isControl" [popover]="myPopover"></i>&nbsp;&nbsp;
+      <span *ngIf="version.isControl && isRegExpMode()" style="display: inline-block;">[<span *ngIf="getRegExpMode() === 'regex'" style="word-break: keep-all;">{{'urlversionitem.p5' | translate }}</span>
+      <span *ngIf="getRegExpMode() === 'jsregexp'">{{'urlversionitem.p51' | translate }}</span>]</span>  
+
+      <form [formGroup]="versionNameForm" *ngIf="isEditName"> 
+        <input type="text" class="ab-input ab-input-sm" formControlName="versionName" [(ngModel)]="version.name" (focusout)="saveName($event,versionNameForm)"  required appFocus >
+      </form>
+
+      &nbsp;&nbsp;<span *ngIf="!isUrlEdit && !version?.isEdit" style="word-break:break-all;">{{ url }}</span>&nbsp;&nbsp;
+      <br>
+      <span *ngIf="version.isControl && isRegExpMode()" style="word-break:break-all;"> &nbsp;&nbsp; [{{ 'urlversionitem.p6' | translate }}]  {{getRegExpURL()}} </span>
+
+      <form [formGroup]="urlForm" *ngIf="isUrlEdit || version?.isEdit"> 
+        <input type="text" class="ab-input ab-input-md" style="width:750px;" [(ngModel)]="url" (focusout)="save($event,urlForm)" formControlName="url" required appFocus placeholder="{{ 'urlversionitem.p7' | translate }}">
+        <p class="ab-text-danger url-alert" *ngIf="urlForm.get('url').hasError('url')">{{ 'urlversionitem.p8' | translate }}</p>
+      </form>
+      <button class="ab-btn ab-btn-default ab-btn-exsm" *ngIf="!version.isControl && url && !version.description" (click)="editDes()" type="button">{{ 'urlversionitem.p9' | translate }}</button>
+    </div>
+    <div class="ab-btn-group" *ngIf="version.status != versionStatus.Run && version.status != versionStatus.Stop">
+      <button class="ab-btn ab-btn-default ab-btn-exsm" *ngIf="!version.isControl" (click)="editUrl()" type="button"><i class="iconfont icon-edit ab-icon-gray"></i></button>
+      <button class="ab-btn ab-btn-default ab-btn-exsm" *ngIf="!version.isControl" (click)="delete()" type="button"><i class="iconfont icon-delete ab-icon-gray"></i></button>
+    </div>
+  </div>
+  <div class="url-des">
+    <p *ngIf="!isDesEdit" >{{ version.description }}</p>
+      <form [formGroup]="desForm" *ngIf="isDesEdit"> 
+        <input type="text" class="ab-input ab-input-sm" style="width:500px;" [(ngModel)]="version.description" (focusout)="saveDes($event,desForm)" formControlName="des" required appFocus placeholder="{{ 'urlversionitem.p10' | translate }}"> 
+      </form>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a class="ab-icon-gray" *ngIf="!version.isControl && !isDesEdit && version.description" (click)="editDes()"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+  </div>
+</div>

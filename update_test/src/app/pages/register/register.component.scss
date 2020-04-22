@@ -1,0 +1,50 @@
+.abp-bg-green {
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(#58c584, #76cf9a);
+}
+
+.abp-container {
+  overflow: auto;
+  width: 1152px;
+  height: 100%;
+  margin: 0 auto;
+
+  text-align: center;
+  background: #fff;
+}
+
+.register-logo {
+  width: 164px;
+  height: 30px;
+  margin-top: 48px;
+}
+
+.register-title {
+  padding-top: 48px;
+  padding-bottom: 60px;
+}
+
+.register-input-container {
+  width: 300px;
+}
+
+.register-terms {
+  position: relative;
+
+  width: 300px;
+  margin: 0 auto;
+
+  text-align: left;
+}
+
+.register-error {
+  position: absolute;
+  top: 30px;
+
+  font-size: 12px;
+  color: #f44336;
+}

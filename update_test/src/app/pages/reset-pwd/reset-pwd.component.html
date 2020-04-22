@@ -1,0 +1,49 @@
+ <div class="abp-bg-yellow">
+ 	<div class="abp-container ab-text-center ab-scroll">
+		<img class="reset-logo" src="/assets/images/LOGO_gray@2x.png" alt="">
+ 	  <form (ngSubmit)="submit(userForm)" [formGroup]="userForm" novalidate *ngIf="!isSuccess">
+      <p class="ab-h1 ab-text-warning reset-title">{{ 'resetpwd.title' | translate }}</p>
+ 			<!-- <div class="ab-form-material reset-input-container">
+				<input class="ab-form-control" type="password" name="password" formControlName="password" [(ngModel)]="password" placeholder="" autofocus="autofocus" maxlength="20"/><br>
+				<label>密码</label><br>
+				<span class="ab-text-danger abp-error" *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('required')">密码不能为空</span>
+				<span class="ab-text-danger abp-error" *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('pattern')">密码格式不符合</span>
+				<br>
+				<app-check-pwd [pwd]="password"></app-check-pwd>
+ 			</div><br>
+			<div class="ab-form-material reset-input-container">
+				<input class="ab-form-control" type="password" name="repassword" [(ngModel)]="repassword" formControlName="repassword" placeholder="" maxlength="20"/><br>
+				<label>重复密码</label><br>
+				<span class="ab-text-danger abp-error" *ngIf="(userForm.get('repassword').touched || submitted ) && userForm.get('repassword').hasError('required')">确认密码不能为空</span>
+        <span class="ab-text-danger abp-error" *ngIf="(userForm.get('repassword').touched || submitted ) && userForm.hasError('pwdmatch')">请输入相同的密码</span>
+ 			</div><br> -->
+			<mat-form-field class="reset-input-container">
+        <input matInput type="password" name="password" formControlName="password" [(ngModel)]="password" placeholder="{{ 'resetpwd.pwd' | translate }}" autofocus="autofocus" maxlength="20">
+		    <mat-error *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('required')">
+          {{ 'resetpwd.pwdempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('pattern')">
+          {{ 'resetpwd.pwdformat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br><br><br>
+			<app-check-pwd [pwd]="password"></app-check-pwd>
+			<mat-form-field class="reset-input-container">
+        <input matInput type="password" name="repassword" [(ngModel)]="repassword" formControlName="repassword" placeholder="{{ 'resetpwd.repeatpwd' | translate }}" maxlength="20">
+		    <mat-error *ngIf="(userForm.get('repassword').touched || submitted ) && userForm.get('repassword').hasError('required')">
+          {{ 'resetpwd.repeatpwdempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(userForm.get('repassword').touched || submitted ) && userForm.hasError('pwdmatch')">
+          {{ 'resetpwd.equalpwd' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br><br>
+      <button class="ab-btn ab-btn-warning ab-btn-radian abp-btn-fix-exlarge" type="submit" [disabled]="!userForm.valid">{{ 'resetpwd.resetpwd' | translate }}</button>
+ 	  </form>
+ 		<div *ngIf="isSuccess">
+      <p class="ab-h1 ab-text-warning reset-title">{{ 'resetpwd.resetsuccess' | translate }}</p>
+      <p class="ab-text-muted reset-explain">{{ 'resetpwd.3s' | translate }}</p>
+      <button class="ab-btn ab-btn-warning ab-btn-radian abp-btn-fix-exlarge" [routerLink]="['/login']">{{ 'resetpwd.login' | translate }}</button>
+ 		</div>
+ 	</div>
+ </div>

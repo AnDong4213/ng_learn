@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+
+<div class="ab-panel abp-container" >
+    <div class="ab-panel-head">{{ 'sdkcfg.title' | translate }}</div>
+    <br>
+    <div class="exp-status-select">
+        <div class="exp-tab-container">
+          <div class="ab-btn-group-line exp-tab">
+            <button class="ab-btn" [ngClass]="{'ab-btn-line-active': curpage === 'sdkconfig'}" (click)="curpage = 'sdkconfig'">{{ 'sdkcfg.subtitle1' | translate }}</button>
+            <button class="ab-btn" [ngClass]="{'ab-btn-line-active': curpage === 'flaglist'}" (click)="curpage = 'flaglist'">{{ 'sdkcfg.subtitle2' | translate }}</button>
+            <button class="ab-btn" [ngClass]="{'ab-btn-line-active': curpage === 'statlist'}" (click)="curpage = 'statlist'">{{ 'sdkcfg.subtitle3' | translate }}</button>
+            <button class="ab-btn" [ngClass]="{'ab-btn-line-active': curpage === 'comstatlist'}" (click)="curpage = 'comstatlist'">{{ 'sdkcfg.subtitle4' | translate }}</button>
+          </div>
+        </div>
+    </div>
+    <app-sdk-config *ngIf="curpage === 'sdkconfig'"></app-sdk-config>
+    <app-flaginfo-list *ngIf="curpage === 'flaglist'" [stats]="stats" [layers]="layers" [allexp]="allexp" ></app-flaginfo-list>
+    <app-statinfo-list *ngIf="curpage === 'statlist'" [stats]="stats" [layers]="layers" [allexp]="allexp"></app-statinfo-list>
+    <app-comstatinfo-list *ngIf="curpage === 'comstatlist'" [stats]="stats" [layers]="layers" [allexp]="allexp"></app-comstatinfo-list>
+
+    <div class="sdk-body-footer">
+        <button class="ab-btn ab-btn-default abp-btn-fix-large" [routerLink]="['/']"><i class="iconfont icon-left"></i>&nbsp;&nbsp;{{ 'sdkcfg.return' | translate }}</button>
+      </div>
+</div>

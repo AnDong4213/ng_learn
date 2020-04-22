@@ -1,0 +1,61 @@
+.white-list-content {
+    width: 600px;
+    border-top: 4px solid #2165b2;
+	background: #fff;
+    border-radius: 4px;
+    padding: 30px 60px;
+}
+.wl-main-context {
+    margin: 30px 0;
+}
+.wl-mr-12{
+    margin-right: 12px;
+}
+.wl-item-h{
+    height: 34px;
+    line-height: 34px;
+}
+.wl-btn{
+    width: 80px;
+    border-radius: 5px;
+}
+.wl-padding{
+    padding: 10px 0px;
+}
+.wl-file-size{
+    height: 34px;
+    line-height: 34px;
+    margin-right: 12px;
+}
+.wl-font-color{
+    color: #bbb;
+}
+.wl-alert {
+	// position: absolute;
+	line-height: 1.5;
+}
+.upload-area{
+    height:34px;
+    line-height:34px;
+    padding:0 14px;
+}
+.hidden-btn{
+    opacity: 0;
+    width: 80px;
+    height: 34px;
+    position: absolute;
+    cursor: pointer;
+}
+.selected-file{
+    float: left;
+    padding: 0;
+    margin-right: 12px;
+}
+.selected-file-name{
+    max-width: 80px;
+    margin-left: 3px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

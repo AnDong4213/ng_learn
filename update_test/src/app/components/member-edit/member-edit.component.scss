@@ -1,0 +1,43 @@
+
+.member-dialog-lg {
+  width: 480px;
+  height: 90%;
+  padding: 30px 60px;
+  border-top: 4px solid #2165b2;
+  border-radius: 4px;
+
+  background: #fff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.member-input-container {
+  width: 354px;
+}
+
+.member-apps {
+  overflow: auto;
+  max-height: 150px;
+
+  span {
+    display: inline-block;
+    overflow: hidden;
+    width: 100px;
+    margin-right: 12px;
+
+    white-space: nowrap;
+  }
+}
+
+.member-buttons {
+  text-align: center;
+
+  button:first-child {
+    width: 80px;
+    margin-right: 24px;
+  }
+
+  button:last-child {
+    width: 80px;
+  }
+}

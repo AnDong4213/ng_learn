@@ -1,0 +1,14 @@
+$color-list: (#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89,#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89);
+
+.color-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+}
+
+@for $i from 1 to length($color-list) {
+  .color-dot-#{$i} {
+    background: nth($color-list, $i);
+  }
+}

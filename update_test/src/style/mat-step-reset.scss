@@ -1,0 +1,32 @@
+.mat-step-icon,
+.mat-step-icon-not-touched,
+.mat-stepper-horizontal-line {
+  display: none !important;
+}
+
+.mat-step-label {
+  display: block;
+  width: 100%;
+  height: 72px;
+  border-bottom: 4px solid #e1e1e1;
+
+  line-height: 72px;
+  text-align: center;
+}
+
+.mat-horizontal-stepper-content:before {
+  content: ' ';
+
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+
+.mat-horizontal-stepper-header {
+  flex: 1;
+  padding: inherit !important;
+}
+
+.mat-step-label-active {
+  border-bottom: 4px solid #1e5aa9 !important;
+}

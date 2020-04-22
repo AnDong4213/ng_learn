@@ -1,0 +1,29 @@
+.app-container {
+  width: 1152px;
+  margin: 90px auto 30px;
+}
+
+.app-input-container {
+  display: inline-block;
+  width: 480px;
+}
+
+.app-btn-create {
+  margin: 60px 0 34px;
+}
+
+.app-success {
+  width: 480px;
+  margin: 60px auto;
+
+  line-height: 1.5;
+  text-align: left;
+}
+
+.app-input-appkey {
+  width: 480px;
+
+  input {
+    width: calc(100% - 46px);
+  }
+}

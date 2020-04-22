@@ -1,0 +1,34 @@
+<td class="new-part-three-paraname ab-ellipsis">
+  <span *ngIf="!stat.isNew">{{ stat.name}} </span>
+  <form [formGroup]="statForm">
+    <input class="ab-input ab-input-sm new-table-long-input" [ngClass]="{'ab-input-danger': (statForm.get('name').touched) && statForm.get('name').hasError('flagName')}" required type="text" placeholder="请输入指标名称" formControlName="name"  (focus)="focus()" *ngIf="stat.isNew" [matAutocomplete]="comStatauto">
+    <p class="ab-text-danger comstat-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('flagName')">格式不正确<br>请以字母开头,支持字母,数字</p>
+     <p class="ab-text-danger comstat-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('checkrepeat')">名称不能重复</p> 
+    <p class="ab-text-danger comstat-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('maxlength')">指标名称不能超过20个字符</p>
+  </form>
+  <mat-autocomplete #comStatauto="matAutocomplete" (optionSelected)="selectComStat($event)">
+    <mat-option *ngFor="let name of $comStatAutoComplete | async " [value]="name"> {{ name }} </mat-option>
+  </mat-autocomplete>
+</td>
+<td>
+ <div class="new-part-three-des">
+   <p class="new-part-three-short-text ab-ellipsis" *ngIf="!stat.isNew && !stat.isEdit " [popover]="stat.description" popoverPlacement="top" [popoverOnHover]="true" style="width:400px;display:inline-block;" >{{ stat.description }}</p>
+   <form [formGroup]="descForm">
+     <input class="ab-input ab-input-sm new-table-long-input" type="text" placeholder="{{ 'comstat.p8' | translate }}" formControlName="desc" appFocus [autofocus]="descFocus" (focusout)="descEdit()" (focus)="focus()" [(ngModel)]="stat.description" *ngIf="stat.isEdit || stat.isNew">
+   </form>
+   <a *ngIf="!stat.isNew" (click)="edit()"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+ </div>
+</td>
+<td class="new-part-three-short-text ab-ellipsis">
+  <span *ngIf="!stat.isNew"> {{ stat.formula }} </span>
+  <form [formGroup]="comStatForm">
+    <input class="ab-input ab-input-sm new-table-long-input"  type="text" placeholder="{{ 'comstat.p11' | translate }}" [(ngModel)]="stat.formula" *ngIf="stat.isNew" formControlName="formula" [autofocus]="comstatFocus" (focus)="focus()">
+    <p class="comstat-alert ab-text-danger" *ngIf="comStatForm.get('formula').touched && comStatForm.get('formula').hasError('formula')"> {{ 'comstat.p9' | translate }}</p>
+    <p class="comstat-alert ab-text-danger" *ngIf="comStatForm.get('formula').touched && comStatForm.get('formula').hasError('stat')"> {{ 'comstat.p10' | translate }}</p>
+    <p class="comstat-alert ab-text-danger" *ngIf="comStatForm.get('formula').touched && comStatForm.get('formula').hasError('maxstat')"> {{ 'comstat.p12' | translate }}</p>
+  </form>
+</td>
+<td class="ab-text-right">
+  <button class="ab-btn ab-btn-default" type="button" (click)="delItem()" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish && !stat.isNew"><i class="iconfont icon-delete"></i></button>
+  <button class="ab-btn ab-btn-default" type="button" (click)="submit()" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish && stat.isNew"><i class="iconfont icon-check"></i></button>
+</td>

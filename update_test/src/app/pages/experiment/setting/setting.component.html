@@ -1,0 +1,30 @@
+<!-- <a [routerLink]="['/user_filter']">受众条件</a> -->
+<div class="setting-panel">
+  <app-basic-info [exp$]="exp$"></app-basic-info>
+</div>
+<div class="setting-second">
+  <app-flow-chart [exp$]="exp$"></app-flow-chart>
+  <app-operation-control [exp$]="exp$"></app-operation-control>
+</div>
+
+<div class="setting-panel">
+  <app-code-version-edit *ngIf="exp?.typ == versionTyp.EXP_TYPE_CODE" [exp$]="exp$"></app-code-version-edit>
+  <app-build-version-edit *ngIf="exp?.typ == versionTyp.EXP_TYPE_BUILD" [exp$]="exp$"></app-build-version-edit>
+  <popover-content #urlPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'urlversionedit.p1' | translate }}</p>
+    <p>{{ 'urlversionedit.p2' | translate }}</p>
+    <p>{{ 'urlversionedit.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/ver.html" target="_blank">{{ 'urlversionedit.p4' | translate }}</a>{{ 'urlversionedit.p5' | translate }}</p>
+  </popover-content>
+  <div class="ab-panel-head ab-h3" *ngIf="exp?.typ == versionTyp.EXP_TYPE_URL">
+    {{ 'codeversionedit.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="urlPopover"></i>
+  </div>
+  <app-url-version-edit *ngIf="exp?.typ == versionTyp.EXP_TYPE_URL" [exp$]="exp$"></app-url-version-edit>
+</div>
+
+<div class="setting-panel">
+  <app-code-stat-edit [exp$]="exp$"></app-code-stat-edit>
+</div>
+
+<div class="setting-panel">
+  <app-code-com-stat-edit [exp$]="exp$"></app-code-com-stat-edit>
+</div>

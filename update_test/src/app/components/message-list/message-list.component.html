@@ -1,0 +1,17 @@
+<div class="message-cover" (click)="close()"></div>
+<div class="message-container ab-scroll">
+  <span *ngIf="!isLoading">
+    <p class="message-none ab-text-muted" *ngIf="!isHasNotify">{{ 'message.null' |  translate }}</p>
+    <p class="message-head" *ngIf="isHasNotify">
+      <span class="ab-text-muted">{{ notifys.length }}{{ 'message.count' | translate }}</span>
+      <a class="ab-icon-gray" (click)="delAllConfirm()"><i class="iconfont icon-delete"></i></a>
+    </p>
+    <ul class="message-list ab-scroll">
+      <li class="message-content" *ngFor="let notify of notifys" (click)="openDialog(notify)">
+        <span class="message-info ab-ellipsis">{{ notify.subject }}</span>
+        <span class=ab-text-muted>{{ notify.time | date: 'yyyy-MM-dd' }}</span>
+      </li>
+    </ul>
+  </span>
+  <app-loading *ngIf="isLoading" [loadingPartial]="true"></app-loading>
+</div>

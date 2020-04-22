@@ -1,0 +1,21 @@
+.notify-container {
+  width: 480px;
+  max-height: 500px;
+  padding: 30px 60px;
+  border-top: 4px solid #58c58d;
+  border-radius: 4px;
+
+  background: #fff;
+  overflow-y: auto;
+
+  button {
+    display: inline-block;
+    width: 80px;
+    margin-top: 12px;
+  }
+}
+
+.notify-conent {
+  line-height: 1.5;
+  text-align: left;
+}

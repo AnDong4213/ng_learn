@@ -1,0 +1,9 @@
+$color-list: (#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89,#19b5fe,#2ecc71,#f9bf3b,#ef4836,#8e44ad,#1bbc9b,#f9690e,#f62459,#96281b,#6c7a89);
+
+@for $i from 1 to length($color-list) {
+  .version-color-#{$i} {
+    .version-color-item {
+      border-top: 4px solid nth($color-list, $i) !important;
+    }
+  }
+}

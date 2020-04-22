@@ -1,0 +1,52 @@
+.message-cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.message-container {
+  position: absolute;
+  top: 60px;
+  right: 0;
+
+  width: 480px;
+  height: 260px;
+  border-radius: 4px;
+
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.message-none {
+  padding: 12px;
+}
+
+.message-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.message-list {
+  height: 210px;
+  padding: 9px 0;
+  overflow-y: auto;
+}
+
+.message-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 12px;
+
+  &:hover {
+    background: #f6f6f6;
+  }
+}
+
+.message-info {
+  width: 360px;
+}

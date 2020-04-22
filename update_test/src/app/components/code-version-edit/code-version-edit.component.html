@@ -1,0 +1,32 @@
+<popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+  <p>{{ 'codeversionedit.p1' | translate  }}</p>
+  <p>{{ 'codeversionedit.p2' | translate }}</p>
+  <p>{{ 'codeversionedit.p3' | translate }}</p>
+  <p>{{ 'codeversionedit.p4' | translate }}</p>
+  <p>{{ 'codeversionedit.p5' | translate }}<a href="http://help.appadhoc.com/expFlow/ver.html" target="_blank">{{ 'codeversionedit.p6' | translate }}</a>{{ 'codeversionedit.p7' | translate }}</p>
+</popover-content>
+<div class="new-part-three-table-title" id="versions">
+  <p class="ab-h3">{{ 'codeversionedit.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i></p>
+ <span>
+   <button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="add()" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish"><i class="iconfont icon-add ab-icon-gray"></i>&nbsp;&nbsp;{{ 'codeversionedit.add' | translate }}</button>&nbsp;&nbsp;
+   <button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="remove()" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish"><i class="iconfont icon-delete ab-icon-gray"></i>&nbsp;&nbsp;{{ 'codeversionedit.del' | translate }}</button>
+ </span>
+</div>
+<div class="ab-table new-part-three-table">
+ <div class="ab-table-body">
+   <table>
+     <thead>
+       <tr>
+           <th width="8.1%">#</th>
+           <th width="29.1%">{{ 'codeversionedit.name' | translate }}</th>
+           <!--<th>变量{{flagName}}值</th>-->
+           <th *ngFor="let key of flagKeys">{{ 'codeversionedit.variable' | translate}} {{key}} {{ 'codeversionedit.val' | translate }}</th>
+           <th></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr app-code-version-item [version]="v" [allversions]="versions" [exp$]="exp$" [index]="index" [flagkeys]="flagKeys" (valid)="itemValid($event)" (ok)="saveItem($event)" *ngFor="let v of versions; let index = index"></tr>
+     </tbody>
+   </table>
+ </div>
+</div>

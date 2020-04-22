@@ -1,0 +1,37 @@
+<div class="ab-text-center exp-typ-content">
+  <p class="ab-h1 exp-typ-head"><span class="ab-text-primary">{{ 'selectexp.title' | translate }}</span></p>
+	<form>
+		<div class="exp-typ-container">
+			<div class="exp-type" [ngClass]="{'exp-typ-active': expType == versionTyp.EXP_TYPE_CODE}">
+				<label for="code">
+					<input class="exp-typ-radio" name="typ" type="radio" id="code" [value]="versionTyp.EXP_TYPE_CODE" [checked]="expType == versionTyp.EXP_TYPE_CODE" [(ngModel)]="expType"/>
+					<p class="exp-type-icon"><span class="ab-icon-gray"><i class="iconfont icon-code1 exp-type-icon-size"></i></span></p>
+          <p class="exp-type-title"><span>{{ 'selectexp.code' | translate }}</span></p>
+          <p class="ab-h5 exp-typ-tip"><span class="ab-text-muted">{{ 'selectexp.codedesc' | translate }}<br>{{ 'selectexp.codesubdesc' | translate }}</span></p>
+				</label>
+			</div>
+			<div class="exp-type" *ngIf="app.typ != APP_TYPE_WX" [ngClass]="{'exp-typ-active': expType == versionTyp.EXP_TYPE_BUILD}">
+				<label for="build">
+					<input class="exp-typ-radio" name="typ" type="radio" id="build"  [value]="versionTyp.EXP_TYPE_BUILD" [checked]="expType == versionTyp.EXP_TYPE_BUILD" [(ngModel)]="expType"/>
+					<p class="exp-type-icon"><span class="ab-icon-gray"><i class="iconfont icon-eye1 exp-type-icon-size"></i></span></p>
+          <p class="exp-type-title"><span>{{ 'selectexp.build' | translate }}</span></p>
+          <p class="ab-h5 exp-typ-tip"><span class="ab-text-muted">{{ 'selectexp.builddesc' | translate }}<br>{{ 'selectexp.buildsubdesc' | translate }}</span></p>
+				</label>
+			</div>
+			<div class="exp-type" *ngIf="app.typ == APP_TYPE_H5" for="url" [ngClass]="{'exp-typ-active': expType == versionTyp.EXP_TYPE_URL}">
+				<label *ngIf="app.typ == APP_TYPE_H5" for="url">
+					<input class="exp-typ-radio" name="typ" id="url" type="radio"  [value]="versionTyp.EXP_TYPE_URL" [checked]="expTyp == versionTyp.EXP_TYPE_URL" [(ngModel)]="expType"/>
+					<p class="exp-type-icon"><span class="ab-icon-gray"><i class="iconfont icon-link exp-type-icon-size"></i></span></p>
+          <p class="exp-type-title"><span>{{'selectexp.split' | translate }}</span></p>
+          <p class="ab-h5 exp-typ-tip"><span class="ab-text-muted">{{ 'selectexp.splitdesc' | translate }}<br>{{ 'selectexp.splitsubdesc' | translate }}</span></p>
+				</label>
+			</div>
+		</div>
+		<p class="ab-text-center exp-typ-buttons">
+			<a *ngIf="app.typ != APP_TYPE_WX" class="ab-btn ab-btn-default exp-typ-cancel" href="http://help.appadhoc.com" target="_blank">{{ 'selectexp.doc' | translate }}</a>
+			<a *ngIf="app.typ == APP_TYPE_WX" class="ab-btn ab-btn-default exp-typ-cancel" href="http://help.appadhoc.com/sdk/wxSDK.html" target="_blank">{{ 'selectexp.doc' | translate }}</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="ab-btn ab-btn-primary exp-typ-create" (click)="show()">{{ 'selectexp.create'  | translate }}</button>
+		</p>
+	</form> 
+</div>

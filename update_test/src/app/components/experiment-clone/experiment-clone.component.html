@@ -1,0 +1,68 @@
+<div class="clone-content ab-text-center">
+  <span class="ab-text-primary ab-h1 filter-title">{{'expclone.title' | translate }}</span>
+  <br><br>
+
+  <form [formGroup]="cloneForm" (ngSubmit)="cloneFormSubmit(cloneForm)">
+
+    <mat-form-field class="clone-block">
+      <input matInput type="text" placeholder="{{ 'expclone.name' | translate }}" formControlName="name" required>
+      <mat-error *ngIf="(cloneForm.get('name').touched || isSubmit) && cloneForm.get('name').hasError('required')">
+        {{ 'expclone.p1' | translate }}
+      </mat-error>
+      <mat-error *ngIf="(cloneForm.get('name').touched || isSubmit) && cloneForm.get('name').hasError('expname')">
+        {{ 'expclone.p2' | translate }}
+      </mat-error>
+      <mat-error *ngIf="(cloneForm.get('name').touched || isSubmit) && cloneForm.get('name').hasError('checkrepeat')">
+         {{ 'expclone.p3' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <br><br>
+    <p class="clone-block ab-text-muted">{{ 'expclone.p4' | translate }}</p>
+    <br>
+
+    <div class="clone-block disLayer ab-row" *ngIf="appType.H5 !== curApp.typ && cloneExp.typ === versionTyp.EXP_TYPE_BUILD; else selectLayer">
+        {{activeLayer.text}}
+    </div>
+    <ng-template #selectLayer>
+
+        <div class="ab-input-group ab-input-group-right clone-select ab-row" *appRole="layerRole;else stpl">
+            <div class="ab-input clone-layer">{{ activeLayer.text }}</div>
+            <button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+            <p class="ab-text-danger ab-text-left ab-line-height" *ngIf="activeLayer.id !== 'default' && layerItems">{{ 'expclone.p5' | translate }}</p>
+            <mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+              <button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of layerItems">{{l.text}}</button>
+            </mat-menu>
+          </div>
+
+          <ng-template #stpl>
+            <div class="ab-input-group ab-input-group-right clone-select ab-row">
+              <div class="ab-input clone-layer">{{ activeLayer.text }}</div>
+              <button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+              <mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+                <button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of [activeLayer]">{{l.text}}</button>
+                <button mat-menu-item style="height:60px;line-height:30px;">
+                  {{ 'expclone.p6' | translate }}<br>
+                  <span class="ab-text-muted">{{ 'expclone.p7' | translate }}</span>
+                </button>
+              </mat-menu>
+            </div>
+          </ng-template>
+
+    </ng-template>
+
+    <p class="ab-line-height ab-text-danger clone-block">
+      {{ 'expclone.p8' | translate }}
+    </p>
+    <br>
+    <p class="ab-line-height clone-block">
+      {{ 'expclone.p9' | translate }}
+    </p>
+    <br>
+
+  </form>
+
+  <br>
+  <button class="ab-btn ab-btn-default" type="button" (click)="close()">&nbsp;&nbsp;{{ 'modal.cancel' | translate }}&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="ab-btn ab-btn-primary" (click)="cloneFormSubmit(cloneForm)" [disabled]="lock">&nbsp;&nbsp;{{ 'modal.ok' | translate }}&nbsp;&nbsp;</button>
+</div>

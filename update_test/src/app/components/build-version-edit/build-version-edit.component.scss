@@ -1,0 +1,15 @@
+.build-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.build-version-container {
+  padding-top: 24px;
+
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

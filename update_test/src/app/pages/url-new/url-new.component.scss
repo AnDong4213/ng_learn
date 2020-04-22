@@ -1,0 +1,56 @@
+.create-bg {
+  text-align: center;
+  background: linear-gradient(#fff 31%, #fafafa 31%);
+}
+
+.create-item {
+  width: 480px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.create-footer {
+  padding: 24px;
+
+  background: #f6f6f6;
+}
+
+.create-bg-icon {
+  position: absolute;
+  top: 140px;
+  left: -40px;
+
+  i {
+    font-size: 130px;
+    color: #f6f6f6;
+  }
+}
+
+.create-layer {
+  position: relative;
+
+  .ab-input {
+    display: inline-block;
+    width: 435px;
+
+    text-align: left;
+  }
+}
+
+.create-help {
+  position: absolute;
+  top: 10px;
+  right: -30px;
+}
+
+.create-layer-list {
+  position: absolute;
+  z-index: 1;
+  top: 28px;
+  right: 0;
+  left: auto;
+
+  width: 240px;
+  max-height: 240px;
+  overflow-y: auto;
+}

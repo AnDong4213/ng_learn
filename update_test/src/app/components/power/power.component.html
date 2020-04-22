@@ -1,0 +1,76 @@
+<div class="ab-modal" (click)="close()"></div>
+<div class="ab-modal-dialog ab-modal-dialog-primary power-dialog-lg">
+
+  <div class="ab-table indicator-panel">
+    <div class="ab-table-head indicator-panel-head">
+      <div class="indicator-head-left">
+        {{ 'power.p1' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray"></i>
+      </div>
+    </div>
+    <div class="ab-table-body">
+      <table class="indicator-table">
+        <tr>
+          <th>{{ 'power.p2' | translate }}</th>
+          <th>UV</th>
+          <th>{{ 'power.p3' | translate }}</th>
+          <th>{{ 'power.p4' | translate }}</th>
+        </tr>
+        <tr *ngFor="let v of allTableDatas">
+          <td>{{ v.exp_name }}</td>
+          <td>{{ v.client_sum }}</td>
+          <!--<td>{{ indexPvSum[v.id] ? indexPvSum[v.id].sum: 0 }}</td>-->
+          <td>{{ v.mean | number: '1.0-4'}}</td>
+          <td>{{ v.standard_deviation | number: '1.0-4'}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="ab-table indicator-panel">
+    <div class="ab-table-head indicator-panel-head">
+      <div class="indicator-head-left">
+
+        <form class="example-form">
+          <mat-form-field class="power-control-field">
+            <input matInput  placeholder="{{ 'power.p10' | translate }}" type="number" [(ngModel)]="opts.aplha" [ngModelOptions]="{standalone: true}" (ngModelChange)="changeAplha()">
+            <mat-hint align="start"><strong>{{ 'power.p5' | translate }}</strong> </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="power-control-field">
+            <input matInput  placeholder="{{ 'power.p11' | translate }}" type="number" [(ngModel)]="opts.mda" [ngModelOptions]="{standalone: true}" (ngModelChange)="changeMda()">
+            <mat-hint align="start"><strong>{{ 'power.p6' | translate }}</strong> </mat-hint>
+          </mat-form-field>
+        </form>
+
+      </div>
+    </div>
+    <div class="ab-table-body">
+      <table class="indicator-table">
+        <tr>
+          <td>{{ 'power.p7' | translate: {val: opts.confidence_level} }}</td>
+          <td> 
+            <div>{{ (power.variant || 0) | number: '1.0-2' }}% {{ '[' + ((power.ci_low || 0) | number: '1.0-3') + '%, ' + ((power.ci_high || 0) | number: '1.0-3') +'%]'}}</div>
+          </td>
+          <td>{{ power.effect_desc }}</td>
+        </tr>
+        <tr>
+          <td>p-value<br>{{ 'power.p8' | translate }}</td>
+          <td>{{ power.pvalue | number: '1.0-3' }}</td>
+          <td>{{ power.significance_desc }}</td>
+        </tr>
+        <tr>
+          <td>{{ 'power.p9' | translate }}</td>
+          <td>{{power.mpower}}</td>
+          <td>{{ power.power_desc}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <div>
+    <div echarts [options]="distributionData" [merge]="mergeData" style="width: 98%; height: 400px;"></div>
+  </div>
+
+</div>

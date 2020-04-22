@@ -1,0 +1,25 @@
+.new-partone-sdk-title {
+  display: inline-block;
+  width: 480px;
+  margin: 12px 0;
+
+  text-align: left;
+}
+
+.new-partone-sdk-container {
+  position: relative;
+
+  display: inline-block;
+  width: 480px;
+  margin-bottom: 30px;
+
+  text-align: left;
+
+  input {
+    width: calc(100% - 46px);
+  }
+
+  button {
+    margin-left: -4px;
+  }
+}

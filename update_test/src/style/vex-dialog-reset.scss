@@ -1,0 +1,44 @@
+// reset dialog
+.vex.vex-theme-default .vex-content {
+  padding: 30px 60px !important;
+  border-top: 4px solid #ff8181 !important;
+
+  color: #313131 !important;
+  background: #fff !important;
+}
+
+.vex-dialog-buttons {
+  width: 278px !important;
+  margin: 0 auto !important;
+}
+
+.vex.vex-theme-default .vex-dialog-form .vex-dialog-message {
+  margin-bottom: 30px !important;
+
+  line-height: 1.5 !important;
+}
+
+.vex.vex-theme-default .vex-dialog-button {
+  border: 1px !important;
+}
+
+.vex.vex-theme-default .vex-dialog-button.vex-dialog-button-primary {
+  width: 124px !important;
+  height: 48px !important;
+
+  font-size: 14px !important;
+  color: #fff !important;
+  background: #ff8181 !important;
+}
+
+.vex.vex-theme-default .vex-dialog-button.vex-dialog-button-secondary {
+  float: left !important;
+
+  width: 124px !important;
+  height: 48px !important;
+  border: 1px solid #e5e5e5 !important;
+
+  font-size: 14px !important;
+  color: #313131 !important;
+  background: #fff !important;
+}

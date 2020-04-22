@@ -1,0 +1,447 @@
+/* 单按钮 */
+.ab-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: $radius;
+
+  cursor: pointer;
+  font-size: $font-size;
+  line-height: $line-height;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+
+  transition: 0.25s background;
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      outline: none;
+    }
+  }
+
+  &.disabled,
+  &[disabled] {
+    border: 1px solid $gray-06;
+
+    cursor: not-allowed;
+    color: $white;
+    background: $gray-06;
+  }
+}
+// 按钮尺寸
+.ab-btn-large {
+  padding: 15px 20px;
+
+  font-size: 18px;
+
+  .iconfont {
+    font-size: 18px;
+  }
+}
+
+.ab-btn-big {
+  padding: 14px 18px;
+}
+
+.ab-btn-sm {
+  padding: 9px;
+
+  font-size: 12px;
+
+  .iconfont {
+    font-size: 12px;
+  }
+}
+
+.ab-btn-exsm {
+  padding: 6px;
+
+  font-size: 12px;
+
+  .iconfont {
+    font-size: 12px;
+  }
+}
+
+/* 按钮弧度 */
+.ab-btn-radian {
+  border-radius: 48px;
+}
+
+// 固定宽高的按钮,这个之后从组件库中移出去===========
+.abp-btn-fix-exlarge {
+  width: 300px;
+  height: 48px;
+
+  font-size: 18px;
+
+  .iconfont {
+    font-size: 18px;
+  }
+}
+
+.abp-btn-fix-lg {
+  width: 240px;
+  height: 48px;
+
+  font-size: 18px;
+
+  .iconfont {
+    font-size: 18px;
+  }
+}
+
+.abp-btn-fix-big {
+  width: 124px;
+  height: 48px;
+}
+// =============================================
+
+// 自适应宽度的按钮。。。
+
+// 按钮颜色
+.ab-btn-default {
+  border: 1px solid $gray-07;
+
+  color: $black;
+  background: $white;
+
+  &:hover {
+    box-shadow: $shadow-default;
+  }
+
+  &:focus {
+    background: $gray-08;
+  }
+}
+
+.ab-btn-default-active {
+  background: $gray-08;
+}
+
+.ab-btn-primary {
+  border: 1px solid $blue-01;
+
+  color: $white;
+  background: $blue-01;
+
+  &:hover {
+    background: $blue-02;
+    box-shadow: $shadow-primary;
+  }
+
+  &:focus {
+    background: $blue-03;
+  }
+}
+
+.ab-btn-primary-active {
+  background: $blue-03;
+}
+
+.ab-btn-success {
+  border: 1px solid $green-01;
+
+  color: $white;
+  background: $green-01;
+
+  &:hover {
+    background: $green-02;
+    box-shadow: $shadow-success;
+  }
+
+  &:focus {
+    background: $green-03;
+  }
+}
+
+.ab-btn-success-active {
+  background: $green-03;
+}
+
+.ab-btn-danger {
+  border: 1px solid $red-01;
+
+  color: $white;
+  background: $red-01;
+
+  &:hover {
+    background: $red-02;
+    box-shadow: $shadow-danger;
+  }
+
+  &:focus {
+    background: $red-03;
+  }
+}
+
+.ab-btn-danger-active {
+  background: $red-03;
+}
+
+.ab-btn-warning {
+  border: 1px solid $yellow-01;
+
+  color: $white;
+  background: $yellow-01;
+
+  &:hover {
+    background: $yellow-02;
+    box-shadow: $shadow-warning;
+  }
+
+  &:focus {
+    background: $yellow-03;
+  }
+}
+
+.ab-btn-warning-active {
+  background: $yellow-03;
+}
+
+.ab-btn-disabled {
+  border: 1px solid $gray-06;
+
+  cursor: not-allowed;
+  color: $gray-03;
+  background: $gray-08;
+}
+
+.ab-btn-light {
+  border: 1px solid $white;
+
+  color: $gray-01;
+  background: $white;
+  // &:hover {
+  //   color: $btn-light-bg;
+  //   background: $btn-light-bg-hover;
+  //   border: 1px solid $btn-light-bg-focus;
+  // }
+  // &:focus {
+  //   color: $btn-light-bg;
+  //   background: $btn-light-bg-focus;
+  //   border: 1px solid $btn-light-bg-focus;
+  // }
+}
+
+.ab-btn-light-active {
+  // color: $btn-light-bg;
+  // background: $btn-light-bg-hover;
+  // border: 1px solid $btn-light-bg-focus;
+}
+
+.ab-btn-dark {
+  border: 1px solid $gray-09;
+
+  color: $gray-01;
+  background: $gray-09;
+}
+
+//.ab-btn-dark-active {
+//
+//}
+
+.ab-btn-darker {
+  border: 1px solid $gray-08;
+
+  color: $gray-01;
+  background: $gray-08;
+}
+
+//.ab-btn-darker-active {
+//
+//}
+
+// input后面的按钮样式
+.ab-btn-gray {
+  color: $gray-06;
+  background: $gray-08;
+
+  @include border;
+}
+
+// 按钮里面有字体图标时，字体图标先显示灰色，然后显示黑色
+.ab-btn-icon-gray {
+  .iconfont {
+    color: $gray-07;
+  }
+
+  &:hover {
+    .iconfont {
+      color: $gray-01;
+    }
+  }
+}
+
+.ab-btn-icon-gray-active {
+  .iconfont {
+    color: $gray-01;
+  }
+}
+
+/* ===========按钮组============ */
+.ab-btn-group {
+  display: inline-block;
+
+  .ab-btn {
+    border-right: 1px solid transparent;
+    border-radius: 0;
+  }
+
+  .ab-btn:first-child {
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+  }
+
+  .ab-btn:last-child {
+    border-right: 1px solid #e5e5e5;
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+
+  .ab-btn + .ab-btn {
+    margin-left: -4px;
+  }
+}
+
+/* 按钮组--上面角度4，下面无角度 */
+
+// .ab-btn-group-tab {
+//   .ab-btn:first-child {
+//     border-top-left-radius: $radius;
+//     border-bottom-left-radius: 0;
+//   }
+//   .ab-btn:last-child {
+//     border-top-right-radius: $radius;
+//     border-bottom-right-radius: 0;
+//   }
+// }
+
+/* 按钮组-尺寸 */
+
+// .ab-btn-group-sm {
+//   .ab-btn {
+//     min-width: 70px;
+//     height: 36px;
+//   }
+// }
+// .ab-btn-group-xs {
+//   .ab-btn {
+//     font-size: 12px;
+//     min-width: 70px;
+//     height: 30px;
+//     padding: 9px;
+//   }
+// }
+
+/* =========下拉按钮============== */
+.ab-dropdown {
+  position: relative;
+
+  display: inline-block;
+}
+
+.ab-btn-down {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  padding-right: 36px;
+
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.ab-btn-down::after {
+  content: '\e757';
+  position: absolute;
+  right: 14px;
+
+  display: inline-block;
+  padding-left: 10px;
+
+  font-family: 'iconfont', sans-serif;
+  color: #aab2bd;
+}
+
+.ab-btn-down-big {
+  width: 240px;
+  height: 38px;
+  border: none;
+}
+
+.ab-dropdown-menu {
+  position: absolute;
+  left: 0;
+
+  width: 180px;
+  padding: 9px 0;
+  margin-top: 12px;
+  border-radius: $radius;
+
+  font-size: $font-size;
+  background: #fff;
+  box-shadow: $shadow-default;
+
+  li > a {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 14px;
+
+    color: $gray-01;
+
+    &:hover {
+      background: $gray-08;
+    }
+  }
+}
+
+.ab-dropdown-menu-big {
+  width: 240px;
+}
+
+.ab-dropdown-menu-lg {
+  width: 300px;
+}
+
+.ab-dropdown-menu-exlarge {
+  width: 480px;
+}
+
+/* =========按钮组：下面是一条直线============= */
+.ab-btn-group-line {
+  display: inline-block;
+
+  white-space: nowrap;
+  overflow-x: auto;
+
+  .ab-btn {
+    padding: 12px 14px 10px;
+    border: none;
+    border-bottom: 2px solid $gray-06;
+    border-radius: 0;
+
+    color: $gray-03;
+    background: transparent;
+
+    &:hover {
+      border-bottom: 2px solid $blue-01;
+
+      color: $blue-01;
+    }
+  }
+
+  .ab-btn + .ab-btn {
+    margin-left: -4px;
+  }
+
+  .ab-btn-line-active {
+    border-bottom: 2px solid $blue-01;
+
+    color: $blue-01;
+  }
+}

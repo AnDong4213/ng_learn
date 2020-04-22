@@ -1,0 +1,28 @@
+<div class="abp-bg-yellow">
+	<div class="abp-container ab-text-center ab-scroll">
+		<img class="forget-logo" src="/assets/images/LOGO_gray@2x.png" alt="">
+	  <form (ngSubmit)="submit(emailForm)" [formGroup]="emailForm" novalidate *ngIf="!isSuccess">
+      <p class="ab-h1 ab-text-warning forget-title">{{ 'forgot.title' | translate }}</p>
+			<mat-form-field class="forget-input-container">
+        <input matInput type="text" formControlName="email"  placeholder="{{ 'forgot.email' | translate }}" autofocus="autofocus">
+		    <mat-error *ngIf="(emailForm.get('email').touched || submitted ) && emailForm.get('email').hasError('required')">
+           {{ 'forgot.emailempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(emailForm.get('email').touched || submitted ) && emailForm.get('email').hasError('email')">
+          {{ 'forgot.emailformat' | translate }}
+		    </mat-error>
+				<mat-error *ngIf="error_msg">
+		      {{error_msg}}
+		    </mat-error>
+		  </mat-form-field>
+			<br>
+      <button class="ab-btn ab-btn-radian abp-btn-fix-exlarge" type="submit" [disabled]="!emailForm.valid" [ngClass]="{'ab-btn-warning': emailForm.valid}">{{ 'forgot.button' | translate }}</button>
+      <p class="forget-tip"><span class="ab-text-muted">{{ 'forgot.know' | translate }}</span><a class="ab-text-primary" [routerLink]="['/login']">{{ 'login.register' | translate }}</a></p>
+	  </form>
+		<div *ngIf="isSuccess">
+      <p class="ab-h1 ab-text-warning forget-title">{{ 'forgot.send' | translate }}</p>
+      <p class="ab-text-muted forget-explain">{{ 'forgot.tip' | translate }}</p>
+      <p class="ab-text-muted"><a class="ab-text-primary" (click)="resend()">{{ 'forgot.p1' | translate }}</a>{{ 'forgot.resend' | translate }}</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<div class="ab-text-center white-list-content">
+    <div>
+      <p class="ab-text-primary ab-h1 ab-text-center">{{ 'whitelist.title' | translate}}</p>
+      <div class="wl-main-context clearfloat">
+          
+          <span class="ab-btn-default ab-fl wl-btn wl-padding wl-mr-12">{{ 'whitelist.selectName' | translate }}</span>
+          
+          <span class="wl-btn ab-fl wl-mr-12 ab-btn-default ab-select-sm ab-select-border ab-row">
+              <ng-select [items]="optData" [active]="[defaultOpt]" (selected)="switchFilter($event)">
+              </ng-select>
+          </span>
+          <!-- <form id="whitelist" [formGroup]="whiteListForm">  -->
+            <span *ngIf="!fileSelected" class="clearfloat ab-fl" >
+                <span class="wl-btn ab-fl wl-mr-12 ab-btn-default upload-area clearfloat" >
+                        <input class="hidden-btn" type="file" accept=".txt"  (change)="uploadFile($event)">
+                        <i class="iconfont icon-upload"></i>
+                        <span>上传名单</span>
+                </span>
+                <p *ngIf="ifEmptyError" class="wl-alert ab-text-danger">{{ 'whitelist.error2' | translate  }}</p>
+                <p *ngIf="ifExceedError" class="wl-alert ab-text-danger">{{ 'whitelist.error1' | translate  }}</p>
+                <p *ngIf="ifTypeError" class="wl-alert ab-text-danger">{{ 'whitelist.error3' | translate  }}</p>
+                <p *ngIf="ifUploadError" class="wl-alert ab-text-danger">{{ 'whitelist.error4' | translate  }}</p>
+                
+            </span>  
+            
+            <!-- <p class="wl-alert ab-text-danger" *ngIf="whiteListForm.get('uploadfile').touched && whiteListForm.get('uploadfile').hasError('formula')"> {{ 'whitelist.error1' | translate }}</p> -->
+            <!-- <p class="wl-alert ab-text-danger" *ngIf="whiteListForm.get('uploadfile').touched && whiteListForm.get('uploadfile').hasError('exceed')"> {{ 'whitelist.error2' | translate }}</p> -->
+          <!-- </form>   -->
+          <span *ngIf="fileSelected" class="selected-file upload-area clearfloat">
+              <i class="iconfont icon-menu ab-fl"></i>
+              <span class="ab-fl selected-file-name">{{thisFileName}}</span>
+          </span>
+          <span class="wl-file-size wl-font-color ab-fl wl-item-h" #dataSize>5M以内</span>
+          <a *ngIf="fileSelected" class="wl-mr-12 ab-fl wl-item-h" (click)="deleteFileSel()">
+              <i class="iconfont icon-delete"></i>
+              <span class="wl-font-color">移除</span>
+          </a>
+          
+          <i class="iconfont icon-help ab-icon-gray ab-fl wl-item-h" [popover]="myPopover"></i>
+          <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+              <p>{{ 'whitelist.p1' | translate }}</p>
+              <p>{{ 'whitelist.p2' | translate }}</p>
+              <p>{{ 'whitelist.p3' | translate }}</p>
+              <p>{{ 'whitelist.p4' | translate }}</p>
+              <a href="http://help.appadhoc.com/expFlow/orientationTest.html" target="_blank">{{ 'whitelist.p5' | translate }}</a>
+            </popover-content>
+
+      </div>
+      <button class="ab-btn ab-btn-primary" (click)="submit(whiteListForm)" style="margin-right:30px" type="submit" >{{ 'modal.ok' | translate }}</button>
+      <button class="ab-btn ab-btn-default" (click)="close()">{{ 'modal.cancel' | translate }}</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,29 @@
+<div class="navbar-place"></div>
+<div class="navbar" >
+	<div class="navbar-container">
+		<div class="navbar-logo" [routerLink]="['/app_manage']"></div>
+		<div class="navbar-operate">
+			<div class="ab-dropdown navbar-appname" (click)="show('apps')" *ngIf="app">
+				<button class="ab-btn ab-btn-down ab-ellipsis">
+			  <i class="iconfont icon-h" *ngIf="app?.typ == APP_TYPE_H5"></i>
+		      <i class="iconfont icon-apple" *ngIf="app?.typ == APP_TYPE_IOS"></i>
+		      <i class="iconfont icon-android" *ngIf="app?.typ == APP_TYPE_ANDROID"></i>
+					<i class="iconfont icon-LPO" *ngIf="app?.typ == APP_TYPE_LPO"></i>
+					<i class="iconfont icon-xiaochenxu" *ngIf="app?.typ == APP_TYPE_WX"></i>
+		      <i class="iconfont icon-code2" *ngIf="app?.typ == APP_TYPE_DEF"></i>
+		      &nbsp;&nbsp;{{ app?.name }}
+				</button>
+			</div>
+			<a class="ab-icon-white" (click)="translateLanguage($event)"><i class="iconfont {{iconType}} navbar-icon" ></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="ab-icon-white" href="http://help.appadhoc.com" target="_blank"><i class="iconfont icon-book_big navbar-icon"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="ab-icon-white" style="position: relative;" (click)="show('message')"><i class="iconfont icon-bell navbar-icon"></i>
+			  <div class="navbar-point" *ngIf="isHasNotify"></div>
+			</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<a class="ab-icon-white" (click)="show('user')"><i class="iconfont icon-user navbar-icon"></i></a>
+			<app-app-list *ngIf=" showList == 'apps'" [curApp$]="curApp$" (isShow)="close($event)" ></app-app-list>
+			<app-message-list *ngIf=" showList == 'message'" (redPoint)="disappear($event)" (isShow)="close($event)"></app-message-list>
+			<app-user *ngIf=" showList == 'user'" (isShow)="close($event)"></app-user>
+		</div>
+	</div>
+</div>

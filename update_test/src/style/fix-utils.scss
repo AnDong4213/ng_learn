@@ -1,0 +1,37 @@
+.ab-line-block {
+  display: inline-block;
+}
+
+.ab-flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ab-flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ab-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ab-row {
+  margin-bottom: 15px;
+}
+
+.ab-row-big {
+  margin-bottom: 30px;
+}
+
+.ab-space {
+  margin-right: 15px;
+}
+
+.ab-space-big {
+  margin-right: 30px;
+}

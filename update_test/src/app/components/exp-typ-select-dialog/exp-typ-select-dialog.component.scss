@@ -1,0 +1,90 @@
+.exp-typ-content {
+  width: 758px;
+  padding: 30px 60px;
+  border-top: 4px solid #2165b2;
+  border-radius: 4px;
+
+  background: #fff;
+}
+
+.exp-typ-head {
+  margin: 30px;
+
+  text-align: center;
+}
+
+.exp-typ-container {
+  display: flex;
+  justify-content: center;
+}
+
+.exp-type {
+  flex-grow: 1;
+  margin-right: 12px;
+
+  text-align: center;
+
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    .exp-type-title > span,
+    .exp-type-icon > span {
+      color: #2165b2;
+    }
+  }
+}
+
+.exp-typ-active,
+.exp-type:hover {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  .exp-type-title > span,
+  .exp-type-icon > span {
+    color: #2165b2;
+  }
+}
+
+.exp-typ-radio {
+  position: absolute;
+
+  opacity: 0;
+}
+
+.exp-type:last-child {
+  margin-right: 0;
+}
+
+.exp-type-title {
+  margin: 24px 0;
+}
+
+.exp-type-icon {
+  margin-top: 30px;
+}
+
+.exp-type-icon-size {
+  font-size: 48px;
+}
+
+.exp-typ-tip {
+  margin-bottom: 30px;
+
+  line-height: 1.5;
+}
+
+.exp-typ-buttons {
+  margin-top: 30px;
+}
+
+.exp-typ-cancel {
+  width: 124px;
+  height: 48px;
+  padding: 0;
+
+  line-height: 48px;
+}
+
+.exp-typ-create {
+  width: 124px;
+  height: 48px;
+}

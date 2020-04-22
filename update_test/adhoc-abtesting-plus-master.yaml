@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: adhoc-abtesting-plus
+spec:
+  replicas: 1
+  selector:
+    app: adhoc-abtesting-plus
+  template:
+    metadata:
+      name: adhoc-abtesting-plus
+      labels:
+        app: adhoc-abtesting-plus
+    spec:
+      imagePullSecrets:
+        - name: adhoc-docker-registry
+      containers:
+      - name: adhoc-abtesting-plus
+        image: registry-prod.appadhoc.com:30443/adhoc-abtesting-plus:master
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 200Mi
+        env:
+        - name: ABTESTING_ENV
+          value: "dev"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: adhoc-abtesting-plus
+spec:
+  selector:
+    app: adhoc-abtesting-plus
+  ports:
+  - name: adhoc-abtesting-plus
+    port: 80
+    targetPort: 80

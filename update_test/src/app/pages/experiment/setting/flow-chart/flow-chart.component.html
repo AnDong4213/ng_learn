@@ -1,0 +1,12 @@
+<!-- 流量图表 -->
+<div class="ab-panel flow-panel" id="flow-chart">
+  <div class="ab-panel-head ab-h3">{{ 'flowchart.title' | translate }}</div>
+  <div class="ab-panel-body flow-scroll ab-scroll">
+
+    <div echarts [options]="pieData" style="width: 99%; height: 300px;"></div>
+
+    <ul class="flow-version">
+      <li *ngFor="let v of version; let i = index"> <app-color-dot [num]="i"></app-color-dot> {{ v.name}} </li> 
+    </ul>
+  </div>
+</div>

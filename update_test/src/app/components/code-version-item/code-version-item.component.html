@@ -1,0 +1,28 @@
+<!--<td class="new-part-three-paraname ab-ellipsis">{{ index === 0 ? '对照组': '试验'  + index }}</td>-->
+<td class="new-part-three-paraname ab-ellipsis">{{ index === 0 ? '对照组': '试验组' }}</td>
+ <td>
+   <div class="new-part-three-paraname" >
+     <span class="version-name ab-ellipsis" *ngIf="!version.isEdit">{{version.name}}</span>
+     <a (click)="edit()" *ngIf="!version.isControl && !version.isEdit"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+     <form [formGroup]="newVersionForm" *ngIf="version.isEdit"> 
+       <input type="text" class="ab-input ab-input-sm new-table-long-input" autocomplete="off" (focusout)="save($event,newVersionForm)" formControlName="name" required appFocus >
+     </form>
+   </div>
+ </td>
+ <td *ngFor="let key of flagkeys;let index = index">
+   <span *ngIf="!isFlagValEdit">{{ getFlagVal(key, index) }}</span>
+   &nbsp;&nbsp;
+   <a (click)="flagEdit()" *ngIf="!version.isControl && !isFlagValEdit && !isOldExp && isRole && version?.status == vst.Default"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+   <form [formGroup]="flagVersionForm" *ngIf="isFlagValEdit && !isOldExp"> 
+     <input type="text" class="ab-input ab-input-sm new-table-long-input" autocomplete="off" (focusout)="flagSave($event,flagVersionForm,key,index)" formControlName="val" value="{{ getFlagVal(key,index) }}" type="{{ flagtype}}" required appFocus>
+   </form>
+   <br />
+   <span *ngIf="!isOldExp">{{ flagtype }}</span>
+ </td>
+ <td class="ab-text-right" *appRole="publishRole">
+  
+    <button *ngIf="index != 0 && curExp && curExp.status === vst.Run" class="ab-btn ab-btn-default" type="button" (click)="pushVersion(version)" >{{ 'codeversionedit.push' | translate}}</button>
+    <span *ngIf="index != 0 && curExp && curExp.status === vst.Publish && ifPushed(version)" ><i class="iconfont icon-done ab-space"></i>{{ 'codeversionedit.pushmsg' | translate}}</span>
+  
+</td>
+

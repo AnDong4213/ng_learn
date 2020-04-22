@@ -1,0 +1,98 @@
+<!-- 数据留存 -->
+<div class="ab-panel ab-row-big" id="retention">
+  <div class="ab-panel-head ab-flex-between">
+    <div class="ab-h3">{{ 'retention.title' | translate }}&nbsp;&nbsp;
+      <!-- <i class="iconfont icon-help ab-icon-gray"></i> -->
+    </div>
+    <div class="ab-flex-end">
+      <div class="ab-btn-group-line">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_MEAN }" (click)="styp = STAT_TYPE_MEAN">{{ 'retention.number' | translate }}</button>
+        <!--<button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_SUM }" (click)="styp = STAT_TYPE_SUM">总值</button>-->
+        <!--<button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV }" (click)="styp = STAT_TYPE_UV">转化人数</button>-->
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': statType == STAT_TYPE_UV_MEAN }" (click)="styp = STAT_TYPE_UV_MEAN">{{ 'retention.rate' | translate }}</button>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <app-date-range  [options]="myDateRangePickerOptions" [exp]="exp"
+        [model]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)">
+      </app-date-range>
+
+      <!-- <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions" [(ngModel)]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)"></my-date-range-picker> -->
+
+      <!--<div class="ab-dropdown">-->
+      <!--<button class="ab-btn ab-btn-default ab-btn-down">06/13/2017 - 06/19/2017</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+  <div class="ab-panel-body">
+    <div echarts [options]="barChartData" style="width: 99%; height: 180px;" *appRole="retentionRole;else stpl"></div>
+    <ng-template #stpl>
+      <p class="ab-text-center ab-text-muted"><i class="iconfont icon-lock ab-icon-left ab-icon-gray"></i>{{ 'retention.t8' | translate }}</p>
+    </ng-template>
+  </div>
+</div>
+<div class="ab-table" *appRole="retentionRole">
+  <div class="ab-table-head">
+    <div class="ab-btn-group-line">
+      <button class="ab-btn ab-btn-line-active" *ngFor="let v of versions" [ngClass]="{'ab-btn-line-active': selectVersion.id == v.id}"
+        (click)="switchVersion(v)">{{ v.name }}</button>
+    </div>
+  </div>
+  <div class="ab-table-body">
+
+    <table class="retention-table">
+      <thead>
+        <tr>
+          <th>{{ 'retention.date' | translate }}</th>
+          <th>{{ 'retention.newuser' | translate }}</th>
+          <th *ngFor="let s of rstat">
+            {{s.name | translate }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let h of curNewExpRetention">
+          <td>{{h.hour}}</td>
+          <td>{{h.newData}}</td>
+          <td class="{{ 'rb' + getRateFig(h.Retained1,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained1}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained1,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained2,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained2}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained2,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained3,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained3}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained3,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained4,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained4}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained4,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained5,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained5}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained5,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained6,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained6}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained6,h.newData)}}</span>
+          </td>
+          <td class="{{ 'rb'+getRateFig(h.Retained7,h.newData) }}">
+            <span *ngIf="retainedRateFig">{{h.Retained7}}</span>
+            <br *ngIf="retainedRateFig">
+            <span *ngIf="!retainedRateFig">{{getRate(h.Retained7,h.newData)}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>

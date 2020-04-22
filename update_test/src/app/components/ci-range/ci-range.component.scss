@@ -1,0 +1,17 @@
+.range-green {
+  color: #58c584;
+}
+
+.range-red {
+  color: #ff8181;
+}
+
+.range-gray {
+  color: #bcbcbc;
+}
+
+.range-green:hover,
+.range-red:hover,
+.range-gray:hover {
+  cursor: pointer;
+}

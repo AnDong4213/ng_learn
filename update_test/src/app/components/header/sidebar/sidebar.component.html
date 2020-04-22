@@ -1,0 +1,26 @@
+<div class="sidebar ab-text-muted ab-scroll">
+  <p class="sidebar-title" [routerLink]="['/']"><i class="iconfont icon-out"></i>&nbsp;&nbsp;{{ 'sidebar.list' | translate}}</p>
+  <ul>
+    <li class="sidebar-page" *ngIf="exp?.status != vss.Default">
+      <a class="sidebar-item" [routerLink]="['/exp',id,'data']" routerLinkActive="cur-active-data"><i class="iconfont icon-overview"></i>&nbsp;&nbsp;{{ 'sidebar.data' | translate }}</a>
+      <ul class="sidebar-list">
+        <li><a class="sidebar-data side-active" [ngx-scroll-to]="'#overview'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.preview' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#traffice'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.trffic' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#data-details'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.stat' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#retention'" [ngx-scroll-to-offset]="-80" *ngIf="app.typ !== APP_TYPE_H5">{{ 'sidebar.retention' | translate }}</a></li>
+      </ul>
+    </li>
+    <li class="sidebar-page">
+      <a class="sidebar-item" [routerLink]="['/exp',id,'setting']" routerLinkActive="cur-active-setting"><i class="iconfont icon-settings1"></i>&nbsp;&nbsp;{{ 'sidebar.setting' | translate }}</a>
+      <ul class="sidebar-list">
+        <li><a class="sidebar-data side-active" [ngx-scroll-to]="'#basic-info'" [ngx-scroll-to-offset]="-80" >{{ 'sidebar.info' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#flow-chart'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.execution' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#versions'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.version' | translate }}</a></li>
+        <li><a class="sidebar-data" [ngx-scroll-to]="'#stat-edit'" [ngx-scroll-to-offset]="-80">{{ 'sidebar.stat' | translate }}</a></li>
+      </ul>
+    </li>
+    <li class="sidebar-page">
+      <a class="sidebar-item" [routerLink]="['/exp',id,'devtest']" routerLinkActive="cur-active-debug"><i class="iconfont icon-tune"></i>&nbsp;&nbsp;{{ 'sidebar.debug' | translate }}</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,11 @@
+<div class="aiselect-dialog-content content ab-text-center">
+  <p class="ab-text-primary ab-h1 ab-row-big">{{ 'aidialog.title' | translate }}</p>
+  <div class="ab-select ab-select-big ab-select-border ab-row-big aiselect-select">
+    <ng-select [items]="data" [active]="defaultStat"  (selected)="switchFilter($event)">
+    </ng-select>
+  </div>
+  <p class="ab-text-muted ab-text-left ab-line-height ab-row-big">{{ 'aidialog.desc' | translate }}&nbsp;
+    <a class="ab-text-primary" href="http://help.appadhoc.com/expFlow/flowDistribution.html" target="_blank" >{{ 'aidialog.p1' | translate }}</a> {{ 'aidialog.p2' | translate }}</p>
+  <button class="ab-btn ab-btn-default" (click)="close()">&nbsp;&nbsp;{{ 'modal.cancel' | translate }}&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="ab-btn ab-btn-primary" (click)="ok()" [disabled]="activeStat == null">&nbsp;&nbsp;{{ 'modal.ok' | translate }}&nbsp;&nbsp;</button>
+</div>

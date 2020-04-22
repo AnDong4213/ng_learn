@@ -1,0 +1,33 @@
+.bind-mobile-modal-container {
+  background-color: #fff;
+  padding: 30px;
+  border-top: 4px solid #2165b2;
+  border-radius: 4px;
+  background: #fff;
+  width: 100%;
+
+  .dialog-title {
+    text-align: center;
+    font-size: 24px;
+    color: #2165b2;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .desc {
+    margin-top: 20px;
+    line-height: 25px;
+  }
+
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    .w-100 {
+      width: 100px;
+    }
+  }
+}

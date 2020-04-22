@@ -1,0 +1,20 @@
+<div class="ab-date-range">
+  <!--<input type="text" [value]="model?.formatted" (click)="toggle()" class="ab-input"/>-->
+  <button class="ab-btn ab-btn-default ab-btn-down" (click)="toggle()"> {{ model?.formatted }}</button>
+
+  <div class="ab-date-range-inner" *ngIf="isShow">
+
+    <div class="ab-date-range-select">
+      <my-date-range-picker name="mydaterange" [options]="optionsDate"
+         [(ngModel)]="model" (dateRangeChanged)="dateChange($event)"  ></my-date-range-picker>
+    </div>
+
+    <div class="ab-date-range-menu">
+      <button class="ab-btn ab-btn-default" (click)="beginToNow()" *ngIf="exp.control.status == VersionStatus.Run">{{ 'dateRange.begin' | translate }}</button>
+      <button class="ab-btn ab-btn-default" (click)="last7Day()" *ngIf="is7Day">{{ 'dateRange.7day' | translate }}</button>
+      <button class="ab-btn ab-btn-default" (click)="lastToEnd()" *ngIf="exp.control.status == VersionStatus.Stop || exp.control.status == VersionStatus.Publish">{{ 'dateRange.today' | translate }}</button>
+      <button class="ab-btn ab-btn-default" (click)="close()">{{ 'dateRange.close' | translate }}</button>
+    </div>
+    
+  </div>
+  </div>

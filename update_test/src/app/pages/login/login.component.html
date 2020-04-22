@@ -1,0 +1,44 @@
+<div class="abp-bg-bule">
+	<div class="abp-container ab-scroll">
+		<img class="login-logo" src="/assets/images/LOGO_gray@2x.png" alt="">
+	  <form [formGroup]="userForm" (ngSubmit)="submit(userForm)"  novalidate autocomplete="off">
+      <p class="ab-h1 ab-text-primary login-title">{{ 'login.title' | translate }}</p>
+			<mat-form-field class="login-input-container">
+        <input matInput type="text" formControlName="username" autocomplete="foo"  placeholder="{{ 'login.email' | translate }}">
+		    <mat-error *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('required')">
+          {{ 'login.emailempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('email')">
+          {{ 'login.emailformat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br>
+			<mat-form-field class="login-input-container">
+        <input matInput type="password" formControlName="password" autocomplete="foo"  placeholder="{{ 'login.pwd' | translate }}">
+		    <mat-error *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('required')">
+          {{ 'login.pwdempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="error_msg">
+		      {{ error_msg }}
+		    </mat-error>
+		  </mat-form-field>
+			<br>
+			<!-- <div class="ab-form-material login-input-container">
+				<input class="ab-form-control" type="text" formControlName="username" autocomplete="foo" [(ngModel)]="user.username" placeholder="" >
+				<label>邮箱</label><br><br>
+				<span class="ab-text-danger login-error" *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('required')">邮箱不能为空</span>
+				<span class="ab-text-danger login-error" *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('email')">邮箱格式不正确</span>
+			</div><br><br><br>
+			<div class="ab-form-material login-input-container">
+				<input class="ab-form-control" type="password" autocomplete="foo"  formControlName="password" [(ngModel)]="user.password" placeholder="">
+				<label>密码</label><br><br>
+				<span class="ab-text-danger login-error" *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('required')">密码不能为空</span>
+	      <span class="ab-text-danger login-error" *ngIf="error_msg">{{ error_msg }}</span>
+			</div><br> -->
+
+      <p class="login-forget"><a class="ab-text-muted" [routerLink]="['/forgot']">{{ 'login.forgot' | translate }}</a></p>
+      <button class="ab-btn ab-btn-primary ab-btn-radian abp-btn-fix-exlarge" type="submit" [disabled]="!userForm.valid">{{ 'login.login' | translate }}</button>
+	  </form>
+    <p class="login-tip"><span class="ab-text-muted">{{ 'login.account' | translate }}</span>&nbsp;<a class="ab-text-primary" [routerLink]="['/register']">{{ 'login.register' | translate }}</a></p>
+	</div>
+</div>

@@ -1,0 +1,7 @@
+.mat-input-underline.mat-form-field-underline {
+  background-color: #d2d2d2;
+}
+//去除浏览器默认黄色背景
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}

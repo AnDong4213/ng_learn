@@ -1,0 +1,90 @@
+<!-- H5 可视化 、H5 多连接、APP可视化-->
+<div class="ab-panel">
+  <popover-content #androidPopover placement="right" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'devtest.p1' |  translate }}</p>
+    <p>{{ 'devtest.p2' |  translate }}</p>
+    <p>{{ 'devtest.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blanl">{{'devtest.p4' | translate }}</a>{{ 'devtest.p5' | translate }}</p>
+  </popover-content>
+  <popover-content #iosPopover placement="right" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'devtest.p6' | translate }}</p>
+    <p>{{ 'devtest.p7' | translate }}</p>
+    <br/>
+    <p>{{ 'devtest.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blanl">{{'devtest.p4' | translate }}</a>{{ 'devtest.p5' | translate }}</p>
+  </popover-content>
+  <popover-content #defaultPopover placement="right" [animation]="true" [closeOnClickOutside]="true">
+    <p>{{ 'devtest.p8' | translate }}</p>
+    <p>{{ 'devtest.p9' | translate }}</p>
+    <br/>
+    <p>{{ 'devtest.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blanl">{{'devtest.p4' | translate }}</a>{{ 'devtest.p5' | translate }}</p>
+  </popover-content>
+  <div class="ab-table-head ab-flex-between">
+    <div class="ab-h3">{{ 'devtest.title' | translate }}&nbsp;&nbsp;
+      <i class="iconfont icon-help ab-icon-gray" [popover]="defaultPopover" *ngIf="curApp.typ != APP_TYPE_IOS && curApp.typ != APP_TYPE_ANDROID"></i>
+      <i class="iconfont icon-help ab-icon-gray" [popover]="iosPopover" *ngIf="curApp.typ === APP_TYPE_IOS"></i>
+      <i class="iconfont icon-help ab-icon-gray" [popover]="androidPopover" *ngIf="curApp.typ === APP_TYPE_ANDROID"></i>
+    </div>
+    <div class="ab-btn-group-line" style="width:850px;">
+      <button class="ab-btn ab-btn-line-active" [ngClass]="{'ab-btn-line-active': v.id == selectVersion?.id }" *ngFor="let v of versions" (click)="switchVersion(v)">{{ v.name }}</button>
+    </div>
+  </div>
+  <div class="ab-panel-body test-table-body" >
+    <div class="test-version" *ngIf="curExp?.typ == vtp.EXP_TYPE_CODE">
+      <div class="test-version-name ab-ellipsis">{{selectVersion?.name}}</div>
+      <div class="test-version-des ab-text-muted ab-ellipsis">{{selectVersion?.description}}</div>
+    </div>
+
+    <div class="test-version" *ngIf="curExp?.typ != vtp.EXP_TYPE_CODE">
+      <div class="test-version-name ab-ellipsis">{{selectVersion?.name}}</div>
+      <div class="test-version-des ab-text-muted ab-ellipsis">{{selectVersion?.description}}</div>
+      <div class="test-version-img"><img [src]="preview_url" style="width:100%" onerror="this.src = '/assets/images/def.png'"/></div>
+    </div>
+
+    <div class="test-panel-right">
+
+      <div class="test-code-container" *ngIf="curApp.typ == ap.ANDROID || curApp.typ == ap.IOS ">
+        <div class="test-code">
+          <ngx-qrcode qrc-element-type="'canvas'" qrc-class="qrcode" qrc-value="{{selectVersion?.qr_code}}"></ngx-qrcode>
+        </div>
+        <p class="ab-text-muted">{{ 'devtest.p10' | translate }}</p>
+      </div>
+
+      <div class="ab-row-big" *ngIf="curApp.typ == ap.H5 || curApp.typ == ap.WX">
+        <div class="ab-input-group ab-input-group-right test-url-input-group">
+          <input class="ab-input" type="text" [(ngModel)]="base_url" (keyup)='keyUp.next($event)' [disabled]="curExp?.typ == vtp.EXP_TYPE_URL && curExp?.typ == vtp.EXP_TYPE_BUILD">
+          <button class="ab-btn ab-btn-gray" name="button" type="button" (click)="preview()">{{ 'devtest.preview' | translate }}</button>
+          <button class="ab-btn ab-btn-gray" *ngIf="ifShowBtn" name="button" type="button" (click)="createClientID()">{{ 'devtest.createID' | translate }}</button>
+      	</div>
+        <p class="ab-text-muted test-url-tip">{{ 'devtest.p11' | translate }}</p>
+      </div>
+
+
+      <div>
+        <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+          <p>{{ 'devtest.p8' | translate }}</p>
+          <p>{{ 'devtest.p9' | translate }}</p>
+          <br/>
+          <p>{{ 'devtest.p3' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blanl">{{'devtest.p4' | translate }}</a>{{ 'devtest.p5' | translate }}</p>
+        </popover-content>
+        <div class="ab-table-head ab-flex-between">
+          
+          <div>{{ 'devtest.goal' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="myPopover"></i></div>
+          <button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="refresh()"><i class="iconfont icon-refresh ab-icon-gray ab-icon-left"></i>{{ 'devtest.refresh' | translate }}</button>
+        </div>
+        <div class="ab-table-body test-indicator-body ab-scroll-bg">
+          <table>
+            <tr>
+              <th>{{ 'devtest.sample' | translate }}</th>
+              <th *ngFor="let i of stats">{{i}}</th>
+            </tr>
+            <tr>
+              <td>{{ getDebugDataByClient() }}</td>
+              <td *ngFor="let i of stats">{{ getDebugDataByStat(i) }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loading [loadingPartial]="false" *ngIf="!curExp"></app-loading>

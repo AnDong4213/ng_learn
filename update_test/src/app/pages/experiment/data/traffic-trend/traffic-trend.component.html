@@ -1,0 +1,31 @@
+<!-- 流量走势 -->
+<div class="ab-panel" id="traffice">
+  <div class="ab-panel-head ab-flex-between">
+    <div class="ab-h3">{{ 'traffice.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="trafficePopover"></i>
+<popover-content #trafficePopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+  <p>{{ 'traffice.ppmsg' | translate }}</p>
+</popover-content>
+    </div>
+    <div class="ab-flex-end">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="ab-btn-group-line ab-space-big">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': byType == day}" (click)="byType = day">{{ 'traffice.day' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': byType == hour }" (click)="byType = hour">{{ 'traffice.hour' | translate }}</button>
+      </div>
+
+      <app-date-range  [options]="myDateRangePickerOptions" [exp]="exp" [by]="by"
+        [model]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)" >
+      </app-date-range>
+
+       <!--<my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"-->
+          <!--[(ngModel)]="modelPicker" (dateRangeChanged)="onDateRangeChanged($event)"  ></my-date-range-picker>-->
+
+      <!--<div class="ab-dropdown">-->
+        <!--<button class="ab-btn ab-btn-default ab-btn-down">06/13/2017 - 06/19/2017</button>-->
+      <!--</div>-->
+    </div>
+  </div>
+  <div class="ab-panel-body">
+     <div echarts [options]="flowData" style="width: 99%; height: 300px;"></div>
+  </div>
+</div>

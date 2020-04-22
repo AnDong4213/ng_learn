@@ -1,0 +1,22 @@
+<div class="new-part-two-version version-color-item">
+  <div class="new-part-two-version-name">
+    <p class="ab-ellipsis" *ngIf="!version.isEdit">{{ version.name }}</p>
+    <form [formGroup]="newVersionForm" *ngIf="version.isEdit" (focusout)="tt()">
+      <input matInput class="ab-input ab-input-sm" type="text" name="name" formControlName="name" [(ngModel)]="version.name" (focusout)="save($event, newVersionForm)" appFocus />
+    </form>
+    <a class="new-part-two-edit-icon" *ngIf="!version.isControl" (click)="edit()"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+  </div>
+
+  <div class="new-part-two-version-des">
+    <p class="ab-text-muted ab-ellipsis" *ngIf="!descEdit">{{ version.description }}</p>
+    <form [formGroup]="descVersionForm" *ngIf="descEdit">
+      <input class="ab-input ab-input-sm" type="text" name="desc" formControlName="desc" [(ngModel)]="version.description" (focusout)="saveDesc($event, descVersionForm)" appFocus />
+    </form>
+    <a class="new-part-two-edit-icon" *ngIf="!version.isControl" (click)="editDesc()"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+  </div>
+
+  <div class="new-part-two-version-img">
+    <img [src]="getPreviewImgURL(version)" onerror="this.src = '/assets/images/def.png'">
+  </div>
+  <button class="ab-btn ab-btn-default" type="button" name="button" (click)="preview(version)" *ngIf="app.typ === appType.H5">{{ 'buildversionedit.preview' | translate }}</button>
+</div>

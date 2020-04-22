@@ -1,0 +1,42 @@
+<div class="ab-table new-part-three-table">
+    
+    <div class="ab-table-body">
+      <table>
+        <thead>
+          <th>{{ 'sdkcfg.tname' | translate }}</th>
+          <th>{{ 'sdkcfg.discribe' | translate }}</th>
+          <th>{{ 'sdkcfg.formula' | translate }}</th>
+          <th width="30%">{{ 'sdkcfg.expType' | translate }}</th>
+          <th width="20%">{{ 'sdkcfg.curLayer' | translate }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of expData;let index = index;">
+            <td>{{item.name}}</td>
+            <td>
+              <popover-content #statdesc placement="top" [animation]="true" [closeOnClickOutside]="true">
+                  <span >{{item.discribe}}</span>
+              </popover-content>
+              <span [popover]="statdesc" [popoverOnHover]="true">{{item.discribe}}</span>
+            </td>
+            <td>{{item.formula}}</td>
+            <td colspan="2">
+             
+                <div class="kl-exp-box">
+                  <div class="kl-exp-first">
+                    <span class="ab-fl" style="width:60%;">{{item.explist[0].expname}}</span>
+                    <span class="ab-fl">{{item.explist[0].layer}}   |   {{item.explist[0].traffic}}%</span>
+                    <span class="ab-fr kl-show-all" *ngIf="item.explist.length != 1" (click)="showAllExp($event,index)">{{ 'sdkcfg.showall' | translate }}</span>
+                  </div>
+                  <div class="kl-exp-list" *ngIf="ifShowIndex === index && showToggle">
+                    <div *ngFor="let layer of item.explist">
+                      <span class="ab-fl" style="width:60%;">{{layer.expname}}</span>
+                      <span class="ab-fl">{{layer.layer}}   |   {{layer.traffic}}%</span>
+                    </div>
+                  </div>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

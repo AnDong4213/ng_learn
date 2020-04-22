@@ -4,35 +4,61 @@ import { FormsModule } from '@angular/forms';
 import {
   ScrollableTabComponent,
   ImageSliderComponent,
-  HorizontalGridComponent
+  HorizontalGridComponent,
+  CountDownComponent,
+  FooterComponent,
+  VerticalGridComponent,
+  ProductCardComponent,
+  ProductTileComponent,
+  BackButtonComponent
 } from './components';
 import {
   GridItemDirective,
   GridItemImageDirective,
-  GridItemTitleDirective
+  GridItemTitleDirective,
+  TagDirective,
+  AvatarDirective
 } from './directives';
 import { AgoPipe } from './pipes';
+import { DialogModule } from '../dialog';
 
 @NgModule({
   declarations: [
     ScrollableTabComponent,
     ImageSliderComponent,
     HorizontalGridComponent,
+    CountDownComponent,
+    FooterComponent,
+    VerticalGridComponent,
+    ProductCardComponent,
+    ProductTileComponent,
+    BackButtonComponent,
     GridItemDirective,
     GridItemImageDirective,
     GridItemTitleDirective,
+    TagDirective,
+    AvatarDirective,
     AgoPipe
   ],
   imports: [CommonModule, FormsModule],
   exports: [
     CommonModule,
     FormsModule,
+    DialogModule,
     ScrollableTabComponent,
     ImageSliderComponent,
     HorizontalGridComponent,
+    CountDownComponent,
+    FooterComponent,
+    VerticalGridComponent,
+    ProductCardComponent,
+    ProductTileComponent,
+    BackButtonComponent,
     GridItemDirective,
     GridItemImageDirective,
     GridItemTitleDirective,
+    TagDirective,
+    AvatarDirective,
     AgoPipe
   ]
 })

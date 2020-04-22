@@ -1,0 +1,34 @@
+.new-part-three-paraname {
+  width: 200px;
+}
+
+.new-part-three-long-text {
+  max-width: 800px;
+}
+
+.new-part-three-des {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+
+  a {
+    opacity: 0;
+
+    transition: 0.5s;
+  }
+
+  &:hover a {
+    opacity: 1;
+  }
+}
+
+.new-table-long-input {
+  width: 90%;
+}
+
+.stat-name-alert {
+  position: absolute;
+
+  line-height: 1.5;
+}
+

@@ -1,0 +1,71 @@
+<div class="abp-bg-green">
+	<div class="abp-container ab-scroll">
+		<img class="register-logo" src="/assets/images/LOGO_gray@2x.png" alt="">
+		<form (ngSubmit)="submit(userForm)" [formGroup]="userForm" novalidate>
+      <p class="ab-h1 ab-text-success register-title">{{ 'register.title' | translate }}</p>
+
+			<mat-form-field class="register-input-container">
+        <input matInput type="text" formControlName="inviteCode" autocomplete="foo" [(ngModel)] = "user.inviteCode"  placeholder="{{ 'register.7bit' | translate }}" >
+		    <mat-error *ngIf="(userForm.get('inviteCode').touched || submitted ) && userForm.get('inviteCode').hasError('required')">
+           {{ 'register.7bitempty' | translate }}
+				</mat-error>
+				<mat-error *ngIf="(userForm.get('inviteCode').touched || submitted ) && ( userForm.get('inviteCode').hasError('minLength') || userForm.get('inviteCode').hasError('maxLength') )">
+           {{ 'register.7bitformat' | translate }}
+				</mat-error>
+		  </mat-form-field>
+			<br>
+
+			<mat-form-field class="register-input-container">
+        <input matInput type="text" formControlName="username" autocomplete="foo" [(ngModel)] = "user.username"  placeholder="{{ 'login.email' | translate }}" >
+		    <mat-error *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('required')">
+           {{ 'login.emailempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(userForm.get('username').touched || submitted ) && userForm.get('username').hasError('email')">
+            {{ 'login.emailformat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br>
+
+			<mat-form-field class="register-input-container">
+        <input matInput type="password" formControlName="password" autocomplete="foo" [(ngModel)] = "user.password"  placeholder="{{ 'login.pwd' | translate }}" maxlength="20">
+		    <mat-error *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('required')">
+            {{ 'login.pwdempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(userForm.get('password').touched || submitted ) && userForm.get('password').hasError('pattern')">
+            {{ 'register.pwdformat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br><br><br>
+			<app-check-pwd [pwd]="user.password"></app-check-pwd>
+			<br>
+			<mat-form-field class="register-input-container">
+        <input matInput type="password" formControlName="repwd" autocomplete="foo" [(ngModel)] = "user.repwd"  placeholder="{{ 'register.repeat' | translate }}" maxlength="20">
+		    <mat-error *ngIf="(userForm.get('repwd').touched || submitted ) && userForm.get('repwd').hasError('required')">
+          {{ 'register.pwdempty' | translate }}
+				</mat-error>
+				<mat-error *ngIf="(userForm.get('repwd').touched || submitted ) && userForm.hasError('pwdmatch')">
+            {{ 'register.equalpwd' | translate }}
+				</mat-error>
+				<p class="ab-text-danger register-error" *ngIf="(userForm.get('repwd').touched || submitted ) && userForm.hasError('pwdmatch')">{{ 'register.equalpwd' | translate }}</p>
+			</mat-form-field>
+      
+			<br><br>
+
+			<div class="register-terms">	
+				<p>
+          <label class="ab-text-muted">
+						<input type="checkbox" formControlName="ischeck" [(ngModel)] = "ischeck" />&nbsp;&nbsp;{{ 'register.read' | translate }}</label>
+          <a class="ab-text-primary" href="https://www.appadhoc.com/agreement.html" target="_blank">《{{ 'register.tt' | translate }}》</a>
+				</p>
+				<p class="ab-text-danger register-error" *ngIf="!ischeck && submitted">请确认遵守吆喝科技服务条款</p>
+			</div>
+
+			<br><br><br>
+
+      <button class="ab-btn ab-btn-radian abp-btn-fix-exlarge" [ngClass]="{'ab-btn-success': userForm.valid && ischeck}" type="submit" [disabled]="!ischeck || !userForm.valid">{{ 'register.register' | translate }}</button>
+			<br><br><br>
+      <p class="ab-text-muted"> {{ 'register.p1' | translate }}<a class="ab-text-primary" [routerLink]="['/login']">{{ 'register.login' | translate }}</a> | {{ 'register.p2' | translate }}<a class="ab-text-primary" href="https://www.appadhoc.com/#apply">{{ 'register.apply' | translate }}</a></p>
+
+		</form>
+	</div>
+</div>

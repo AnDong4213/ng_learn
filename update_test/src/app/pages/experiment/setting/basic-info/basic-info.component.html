@@ -1,0 +1,39 @@
+<!-- 基本信息 -->
+<div id="basic-info">
+	<div class="ab-table-head ab-flex-between">
+    <span class="ab-h3">{{ 'basic.title' | translate }}</span>
+    <button class="ab-btn ab-btn-default" (click)="openLog()">{{ 'basic.log' | translate }}</button>
+	</div>
+	<div class="ab-table-body">
+		<table>
+			<tbody>
+				<tr>
+          <th width="29.1%">{{ 'basic.name' | translate }}</th>
+          <th width="43.4%">{{ 'basic.desc' | translate }}</th>
+          <th>{{ 'basic.curlayer' | translate  }}</th>
+				</tr>
+				<tr>
+					<td class="basic-item ab-ellipsis">
+						<span *ngIf="!isEditName" style="display:inline-block;width: 250px;" class="ab-ellipsis">{{ curExp?.name }}</span>
+						<form [formGroup]="nameForm" *ngIf="isEditName"> 
+							<input type="text" class="ab-input ab-input-sm" [(ngModel)]="curExp.name" (focusout)="saveName($event,nameForm)" formControlName="name" required appFocus >
+							<p class="ab-text-danger basic-name-alert" *ngIf="(nameForm.get('name').touched || nameFormSubmit) && nameForm.get('name').hasError('checkrepeat') && nameForm.get('name').value != oldName">
+                {{ 'basic.checkText' | translate }}
+							</p>
+						</form>
+						<a (click)="editName()" *ngIf="!isEditName"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+					</td>
+					<td class="basic-item ab-ellipsis">
+            <span *ngIf="!isEditDes" [popover]="curExp?.description" [popoverOnHover]="true" style="width:400px;display:inline-block;" class="ab-ellipsis">{{ curExp?.description }}</span>
+						<form [formGroup]="desForm" *ngIf="isEditDes"> 
+							<input type="text" class="ab-input ab-input-sm" [(ngModel)]="curExp.description" (focusout)="saveDes($event,desForm)" formControlName="des" required appFocus >
+						</form>
+						<a (click)="editDes()" *ngIf="!isEditDes"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+					</td>
+          <td class="basic-item ab-ellipsis">{{ getLayerNameById(curExp?.layer_id) }} ({{ 'basic.elseTrffic' | translate }}:{{ getLayerTraffice(curExp?.layer_id)}}%)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<app-log *ngIf="isShowLog" [versions]="versions" [groupId]="curExp.id" [expType]="expType" (isShowLog)="closeLog($event)"></app-log>

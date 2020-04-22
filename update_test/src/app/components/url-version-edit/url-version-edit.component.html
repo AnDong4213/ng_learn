@@ -1,0 +1,4 @@
+<div id="versions">
+<app-url-version-item [version]="v" [url]="v.annotation.base_url" [index]="index"(ok)="saveItem($event)" [thisExp]="exp" [versions]="versions" (delOk)="delVersion($event)"  *ngFor="let v of versions; let index = index"></app-url-version-item>
+<button class="ab-btn ab-btn-default url-add-version" (click)="add()" type="button" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop" [disabled]="lastAddLock">{{ 'urlversionedit.add' | translate }}</button>
+</div>

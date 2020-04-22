@@ -1,0 +1,15 @@
+<div class="export-content ab-text-center">
+  <span class="ab-text-primary ab-h1">{{ 'export.title' | translate }}</span>
+  <br><br>
+
+  <div class="export-date">
+    <p>{{ 'export.desc' | translate }}</p>
+    <br/>
+    <my-date-range-picker name="mydaterange" [options]="options"
+       [(ngModel)]="model" (dateRangeChanged)="dateChange($event)"  ></my-date-range-picker>
+  </div>
+  <br />
+  <a [href]="downloadURL" class="ab-btn ab-btn-default export-down" target="_blank" *ngIf="downloadURL">{{ 'export.download' | translate }}</a>
+  <br />
+  <div *ngIf="isError" class="ab-text-danger export-error">{{ 'dimension.empty' | translate }}</div>
+</div>

@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<!-- 没有受众分组时 -->
+<div class="ab-panel filter-edit-container abp-container-sm" *ngIf="!isHaveAudiences && !ifShowWhiteList">
+  <div class="ab-panel-body">
+    <p class="ab-text-primary ab-h1 filter-edit-title">{{ 'userfilteredit.title' | translate }}</p>
+    <p class="ab-text-muted">{{ 'userfilteredit.p1' | translate }}</p>
+    <p class="filter-edit-icons">
+      <i class="iconfont icon-group ab-text-primary"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+      <i class="iconfont icon-group ab-text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+      <i class="iconfont icon-group ab-text-warning"></i>
+    </p>
+    <button class="ab-btn ab-btn-primary ab-btn-radian abp-btn-fix-exlarge" (click)="userFilterCreate()">{{ 'userfilteredit.create' | translate }}</button>
+    <br>
+    <p class="ab-text-muted filter-edit-tip">{{ 'userfilteredit.p2' | translate }}<a class="ab-text-primary" href="http://help.appadhoc.com/expFlow/orientationTest.html" target="_blank">{{ 'userfilteredit.p3' | translate }}</a>{{ 'userfilteredit.p4' | translate }}</p>
+  </div>
+</div>
+
+<!-- 受众分组table -->
+<div class="ab-table abp-container" *ngIf="isHaveAudiences || ifShowWhiteList">
+  <div class="ab-table-head filter-add-head">
+    <span>{{ 'userfilteredit.name' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="myPopover"></i></span>
+    <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+      <p>{{ 'userfilteredit.p7' | translate }}</p>
+      <br/>
+      <p>{{ 'userfilteredit.p5' | translate }}
+        <a href="http://help.appadhoc.com/expFlow/orientationTest.html" target="_blank">{{ 'userfilteredit.p6' | translate }}</a> {{ 'userfilteredit.p4' | translate }}
+      </p>
+    </popover-content>
+    <button class="ab-btn ab-btn-primary ab-btn-sm" (click)="userFilterCreate()"><i class="iconfont icon-add"></i>&nbsp;&nbsp;{{ 'userfilteredit.new' | translate }}</button>
+  </div>
+  <div class="ab-table-body">
+    <table>
+      <tr>
+        <th>{{ 'userfilteredit.t1' | translate }}</th>
+        <th>{{ 'userfilteredit.t2' | translate }}</th>
+        <th>{{ 'userfilteredit.t3' | translate }}</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngIf="ifShowWhiteList">
+        <td>{{ 'whitelist.name' | translate}}</td>
+        <td></td>
+        <td>{{rule}}</td>
+        <td>
+          <button *ngIf="!ifwlCreated" class="ab-btn ab-btn-default ab-btn-sm" (click)="whiteListAdd($event)">{{ 'whitelist.addbtn' | translate}}</button>
+          <button *ngIf="ifwlCreated" class="ab-btn ab-btn-default ab-btn-sm" (click)="whiteListEdit($event)">{{ 'whitelist.editbtn' | translate }}</button>
+        </td>
+        <td></td>
+      </tr>
+      <tr app-filter-name-edit [audience]="a" [ngClass]="{'wl-ifshow': a.name == White_List}" [index]="index" (newAudience)="updateAudience($event,a)" (delAudience)="delAudience($event, a)" *ngFor="let a of audiences; let index = index"></tr>
+    </table>
+  </div>
+</div>

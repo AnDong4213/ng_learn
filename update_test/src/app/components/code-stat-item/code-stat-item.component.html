@@ -1,0 +1,44 @@
+<td class="new-part-three-paraname ab-ellipsis">
+  <span *ngIf="!stat.isNew">{{stat.name}}</span>
+  <form [formGroup]="statForm" *ngIf="stat.isNew">
+    <input class="ab-input ab-input-sm new-table-long-input" type="text" placeholder="{{ 'codestat.inputName' | translate }}"  formControlName="name" (focusout)="completeName(statForm)" [matAutocomplete]="auto" >
+    <p class="ab-text-danger stat-name-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('flagName')">{{ 'codestat.w1' | translate  }}</p>
+    <p class="ab-text-danger stat-name-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('maxlength')">{{ 'codestat.w2' | translate  }}</p>
+    <p class="ab-text-danger stat-name-alert" *ngIf="(statForm.get('name').touched) && statForm.get('name').hasError('checkrepeat')">{{ 'codestat.w3' | translate  }}</p>
+  </form>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectStat($event)">
+    <mat-option *ngFor="let name of $statAutoComplete | async" [value]="name"> {{ name }} </mat-option>
+  </mat-autocomplete>
+</td>
+<td>
+ <div class="new-part-three-des">
+   <p class="new-part-three-long-text ab-ellipsis" *ngIf="!stat.isEdit && !stat.isNew" style="width:500px;">{{stat.description }}</p>
+   <input class="ab-input ab-input-sm new-table-long-input" type="text" placeholder="{{ 'codestat.inputDesc' | translate }}" *ngIf="stat.isEdit" (focusout)="upDesc()" [(ngModel)]="stat.description">
+   <input class="ab-input ab-input-sm new-table-long-input" type="text" placeholder="{{ 'codestat.inputDesc' | translate }}" *ngIf="stat.isNew" [(ngModel)]="stat.description">
+   <a *ngIf="!stat.isEdit && !stat.isNew" (click)="edit()"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+ </div>
+ 
+</td>
+<td>
+  
+  <input class="js-select-radio" 
+  [checked]="thisKeyStatName === stat.name"
+  type="radio" 
+  name="keystat" 
+  id="keystat"
+  [value]="stat.name" 
+  (click)="selectKeyStat(stat.name)">
+</td>
+<td class="ab-text-right">
+  <a *ngIf="stat?.isBuild "><i class="iconfont icon-eye"></i></a>
+  <button class="ab-btn ab-btn-default" type="button" (click)="submit(statForm)" *ngIf="stat.isNew"><i class="iconfont icon-check"></i></button>
+  <button class="ab-btn ab-btn-default" type="button" (click)="upDesc()" *ngIf="stat.isEdit"><i class="iconfont icon-check"></i></button>
+  <button 
+  class="ab-btn ab-btn-default" 
+  type="button" 
+  (click)="goEdit()"  
+  *ngIf="(exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish && stat?.isBuild && !stat.isEdit && !stat.isNew && app.typ == APP_TYPE_IOS) || (exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish && stat?.isBuild && !stat.isEdit && !stat.isNew && app.typ == APP_TYPE_ANDROID)" 
+  [disabled]="thisKeyStatName === stat.name" 
+  ><i class="iconfont icon-delete"></i></button>
+  <button class="ab-btn ab-btn-default" type="button" (click)="delConfirm(stat)" *ngIf="exp?.status != versionStatus.Run && exp?.status != versionStatus.Stop && exp?.status != versionStatus.Publish && !stat?.isBuild && !stat.isEdit && !stat.isNew" [disabled]="thisKeyStatName === stat.name"><i class="iconfont icon-delete"></i></button>
+</td>

@@ -1,0 +1,49 @@
+.account-blue {
+  padding: 60px;
+  border-radius: 4px 4px 0 0;
+
+  text-align: center;
+  background: #2165b2;
+}
+
+.account-email {
+  position: relative;
+
+  padding-bottom: 24px;
+}
+
+.account-password-btn {
+  position: absolute;
+
+  margin-left: 12px;
+
+  transition: 0.25s;
+  transition-timing-function: ease-in-out;
+}
+
+.account-gray {
+  padding: 24px 0;
+
+  text-align: center;
+  background: #fafafa;
+}
+
+.account-time {
+  padding-top: 12px;
+}
+
+.account-white {
+  padding: 30px 0;
+  border-radius: 0 0 4px 4px;
+
+  text-align: center;
+  background: #fff;
+}
+
+.account-api-num {
+  padding: 12px 0 30px;
+}
+
+.account-api-max {
+  padding-top: 12px;
+}

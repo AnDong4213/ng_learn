@@ -1,0 +1,12 @@
+<div class="ab-modal"></div>
+<div class="ab-modal-dialog ab-modal-dialog-primary ab-text-center">
+  <p class="ab-text-primary ab-text-center ab-h1">{{ 'urlversionselect.p1' | translate }}</p>
+  <p class="ab-text-muted verison-tip">{{ 'urlversionselect.p2' | translate }}</p>
+  <p class="version-item" *ngFor="let v of versions; let index = index">
+      <span>
+        <app-color-dot [num]="index"></app-color-dot> {{ v.name }}
+      </span>
+      <button class="ab-btn ab-btn-default ab-btn-exsm" type="button" (click)="goH5Edit(v)">{{ 'urlversionselect.p3' | translate }}</button>
+  </p>
+  <button class="ab-btn ab-btn-default close-btn" (click)="close()" type="button">{{ 'urlversionselect.p4' | translate }}</button>
+</div>

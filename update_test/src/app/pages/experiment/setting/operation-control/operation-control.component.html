@@ -1,0 +1,101 @@
+<!-- <a [routerLink]="['/user_filter']">受众条件</a> -->
+
+<div class="ab-table opera-table ab-scroll">
+		<popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+			<ul>
+        <li><b>{{ 'operation.title' | translate }}:</b></li>
+        <li>{{ 'operation.p1' | translate }}</li>
+        <li>{{ 'operation.p2' | translate }}</li>
+        <li>{{ 'operation.p3' | translate }}</li>
+        <li>{{ 'operation.p4' | translate }}<a href="http://help.appadhoc.com/expFlow/flowDistribution.html" target="_blank">{{ 'operation.p5' | translate }}</a> {{ 'operation.p6' | translate }}</li>
+			</ul>
+			<br>
+			<ul>
+        <li><b>{{ 'operation.audience' | translate }}:</b></li>
+        <li>{{ 'operation.p7' | translate }}</li>
+        <li>{{ 'operation.p8' | translate }}</li>
+        <li>{{ 'operation.p9' | translate }}</li>
+        <li>{{ 'operation.p4' | translate }}<a href="http://help.appadhoc.com/expFlow/flowDistribution.html" target="_blank">{{ 'operation.p5' | translate }}</a> {{ 'operation.p6' | translate }}</li>
+			</ul>
+		</popover-content>
+
+		<popover-content #aihelper placement="top" [animation]="true" [closeOnClickOutside]="true">
+      <p>{{ 'operation.aihelper' | translate }}</p>
+		</popover-content>
+
+		<div class="ab-table-head ab-flex-between">
+		  <span class="ab-h3">
+        {{ 'operation.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="myPopover"></i>
+			</span>
+			
+			<span class="ab-flex-end" *appRole="audienceRole;else stpl">
+        <span class="ab-text-muted" *ngIf="audienceCondition" popover="{{ audienceCondition }}" popoverPlacement="top" [popoverOnHover]="true">{{ 'operation.filterexp' | translate }}：{{ audienceName || '受众已删除' }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="ab-text-muted" *ngIf="!audienceCondition">{{ 'operation.filterexp' | translate }}：{{ audienceName || '受众已删除' }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="ab-btn ab-btn-default" (click)="openSetFilter()" *ngIf="curExp?.control?.status == vs.Default">{{ 'operation.audience' | translate }}</button>
+			</span>
+			
+			<ng-template #stpl>
+				<span class="ab-flex-end">
+          <span class="ab-text-muted"><i class="iconfont icon-lock ab-icon-left ab-icon-gray"></i>{{ 'operation.filterexp' | translate }}：{{ 'operation.noauth' | translate }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="ab-btn ab-btn-default" disabled>{{ 'operation.audience' | translate }}</button>
+				</span>
+			</ng-template>
+
+		</div>
+
+    <div class="ab-table-head opera-status">
+      <span *ngIf="curExp?.control?.status == vs.Default">{{ 'operation.default' | translate }}</span>
+      <span *ngIf="curExp?.control?.status == vs.Run">{{ translateMsg('operation.runmsg', (curExp.control.start_date | toDay)) | async }}</span>
+      <span *ngIf="curExp?.control?.status == vs.Stop">{{ translateMsg('operation.stopmsg', (curExp?.control?.start_date | toDay: (curExp?.control?.end_date * 1000))) | async }}</span>
+      <span *ngIf="curExp?.control?.status == vs.Publish">{{ translateMsg('operation.publishmsg', (curExp?.control?.start_date | toDay: (curExp?.control?.end_date * 1000))) | async }}</span>
+			<span>
+				&nbsp;&nbsp;
+        <button class="ab-btn ab-btn-primary" *ngIf="curExp?.control?.status == vs.Default" (click)="runExp()">{{ 'operation.run' | translate }}</button>
+        <button class="ab-btn ab-btn-primary" *ngIf="curExp?.control?.status == vs.Run" (click)="stopExp()">{{ 'operation.stop' | translate }}</button>
+			</span>
+		</div>
+
+    <div class="ab-table-head opera-status">
+      <span *appRole="aiRole;else stpl"> {{ 'operation.ai' | translate }}
+        &nbsp;&nbsp; <mat-slide-toggle [checked]="isAi" (click)="aiSwitch()" [disabled]="curExp?.control?.status == vs.Stop" (change)="aidrap($event)"></mat-slide-toggle>
+        &nbsp;&nbsp;<i class="iconfont icon-help ab-icon-gray" [popover]="aihelper"></i>&nbsp;&nbsp;
+        <span *ngIf="isAi">{{ 'operation.aistat' | translate }}:&nbsp; <button (click)="modifyAiStat()" [disabled]="curExp?.control?.status != vs.Default">{{ curExp?.ai_stat_key }}</button> </span>
+      </span>
+
+      <span>
+
+      <ng-template #stpl>
+        <span></span>
+      </ng-template>
+
+        <button class="ab-btn" [disabled]="!isTrafficChange" *ngIf="curExp?.control?.status != vs.Stop && curExp?.control?.status != vs.Publish" [ngClass]="{'ab-btn-success' : isTrafficChange}" (click)="saveTrafficConfirm()">{{ 'operation.save' | translate }}</button>
+      </span>
+
+    </div>
+
+		<div class="ab-table-body operation-table-body ab-scroll">
+			<table>
+		    <tbody>
+  		    <tr >
+            <th class="opera-version-name ab-ellipsis">{{ 'operation.total' | translate }}({{elseTraffic}}% {{ 'operation.available' | translate }})</th>
+            <td class="opera-version-slider">
+              <mat-slider class="opera-slider" thumbLabel tickInterval="auto" [min]="0" [max]="elseTraffic" [value]="curTraffic" [step]="versions?.length" (change)="avgTraffic($event)" [disabled]="(curExp?.control?.status == vs.Stop || curExp?.control?.status == vs.Publish) || (curExp?.is_ai && curExp?.control?.status == vs.Run)"></mat-slider>
+            </td>
+            <td class="ab-ellipsis ab-text-right">
+              <input class="ab-input ab-input-sm opera-version-traffic" type="text" [(ngModel)]="curTraffic" disabled="disabled">
+            </td>
+  		    </tr>
+					<tr *ngFor="let v of versions; let index = index;">
+            <td class="opera-version-name ab-ellipsis" *ngIf="index === 0"><i class="iconfont icon-copy new-partone-icon-copy" (click)="showId(v)"></i>&nbsp;<app-color-dot [num]="index"></app-color-dot> {{ 'operation.originversion' | translate }}</td>
+            <td class="opera-version-name ab-ellipsis" *ngIf="index !== 0"><i class="iconfont icon-copy new-partone-icon-copy" (click)="showId(v)"></i>&nbsp;<app-color-dot [num]="index"></app-color-dot> {{ v.name }}</td>
+            <td class="opera-version-slider my-slider-{{index + 1}}">
+              <mat-slider class="opera-slider" thumbLabel tickInterval="auto" [min]="0" [max]="elseTraffic" [value]="v.traffic" (change)="sliderChange($event, v)" [disabled]="(curExp?.control?.status == vs.Stop || curExp?.control?.status == vs.Publish) || curExp?.is_ai"></mat-slider>
+            </td>
+            <td class="ab-ellipsis ab-text-right">
+              <input class="ab-input ab-input-sm opera-version-traffic" type="text" value="{{v.traffic}}" (change)="valueInput($event, v)" [disabled]="(curExp?.control?.status == vs.Stop || curExp?.control?.status == vs.Publish) || curExp?.is_ai">
+            </td>
+  		    </tr>
+  			</tbody>
+      </table>
+		</div>
+	</div>

@@ -1,0 +1,42 @@
+<div>
+  <span> {{ 'dimension.title' | translate }}: </span>
+  <span *appRole="dimensionRole;else stpl">
+    <div class="ab-select ab-select-border dimensions-select" style="width:230px;">
+      <ng-select [items]="selectType"
+        [active]="curSelectType"
+        (selected)="switchDimansionsType($event)"
+        placeholder="{{ 'dimension.search' | translate }}" >
+         </ng-select>
+   </div>
+ 
+   <div class="ab-select ab-select-border dimensions-select" *ngIf="curSelectType[0].id !== 'all' && aloneTypes.length > 0" style="width:230px;">
+     <ng-select [items]="aloneTypes"
+         [active]="activeAlone"
+         (selected)="switchAloneType($event)"
+         placeholder="{{ 'dimension.search' | translate }}">
+         </ng-select>
+   </div>
+   <div class="dimensions-select" *ngIf="curSelectType[0].id !== 'all' && (aloneTypes.length == 0 || values.length == 0)">
+     暂无维度数据 
+   </div>
+ 
+   <span *ngIf="curSelectType[0].id != 'all' && values.length > 0" style="width:230px;">
+     <div class="ab-select-330 ab-select-border dimensions-select" >
+       <ng-select [items]="values"
+           (selected)="switchValue($event)"
+           [active]="activeValue"
+            placeholder="{{ 'dimension.search' | translate }}">
+       </ng-select>
+     </div>
+     <button class="ab-btn dimensions-select" (click)="query()">{{ 'dimension.query' | translate }}</button>
+     &nbsp;&nbsp;
+     <button class="ab-btn dimensions-select" (click)="exportDialog()">{{ 'dimension.export' | translate }}</button>
+   </span>
+  </span>
+  
+  <ng-template #stpl>
+    <span class="ab-text-muted"><i class="iconfont icon-lock ab-icon-left ab-icon-gray"></i>{{ 'retention.t8' | translate  }}</span>
+  </ng-template>
+
+
+</div>

@@ -10,7 +10,6 @@
   place-items: center;
   grid-gap: 0.4rem;
   grid-auto-flow: row;
-  margin-left: 0.4rem;
 }
 .underline {
   width: 20%;

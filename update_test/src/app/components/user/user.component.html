@@ -1,0 +1,7 @@
+<div class="user-cover" (click)="close()"></div>
+<ul class="user-list">
+  <li><a class="user-email ab-ellipsis"  [routerLink]="['/account']">{{ email }}</a></li>
+  <li><a class="user-apps" [routerLink]="['/app_manage']">{{ 'appuser.applist' | translate }}</a></li>
+  <li><a class="user-manage" [routerLink]="['/management']" *ngIf="isRole">{{ 'appuser.memberManage' | translate }}</a></li>
+  <li><a class="user-out ab-text-muted" (click)="logout()">{{ 'appuser.logout' | translate }}</a></li>
+</ul>

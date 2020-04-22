@@ -1,0 +1,116 @@
+{
+  "connecting" : {
+    "connecting-server": "正在连接服务器，请稍等 ...",
+    "no-connection": "连接服务器失败，请检查您的网络设置，然后刷新页面！",
+    "connecting-ios": "连接 iOS 应用 ...",
+    "connecting-ios-old": "您的编辑数据的SDK版本号较低。请确保移动端应用上安装了{{value}}以下版本的SDK，否则可能无法连接编辑器。",
+    "connecting-ios-body": "请在APP中加入版本号高于{{value}}的SDK<a class=\"ab-text-primary\" href=\"http://help.appadhoc.com/sdk/iosSDK.html#debug\" target=\"_blank\">[调试代码]</a> ，之后启动APP点击悬浮按钮进入编辑器。",
+    "connection-exists": "已经有其他窗口连接编辑器！",
+    "connection-exists-body": "请检查您的浏览器，或者检查其他人的浏览器，然后刷新界面。",
+    "disconnect": "APP已断开连接！",
+    "disconnect-body": "如果要继续编辑，请在手机上结束APP进程后重新连接。",
+    "server-error": "连接服务器失败！",
+    "server-error-body": "请检查您的网络设置并刷新页面，如问题持续，请联系技术人员！",
+    "default": "连接服务器失败，请检查您的网络设置，然后刷新页面！"
+  },
+  "menu": {
+    "save": {
+      "save": "保存",
+      "saving": "正在保存",
+      "save-success": "保存成功！",
+      "cannot-save-1": "试验开始后不可编辑！",
+      "cannot-save-2": "试验结束后不可编辑！",
+      "cannot-save-0": "该试验不可编辑！"
+    },
+    "help": "帮助",
+    "add-version": "添加版本",
+    "my-stat": "我的指标",
+    "my-edit": "我的编辑",
+    "tree": "控件树"
+  },
+  "stat": {
+    "alert": {
+      "no-name": "请填写指标名称",
+      "bad-pattern": "格式不正确，请以字母开头，支持字母，数字，下划线",
+      "duplicate": "指标已存在，请不要重复创建",
+      "need-select": "请【选择一个指标】或【新建一个指标】",
+      "has-bind": "该元素已经绑定了一项指标。是否删除原先指标、绑定新的指标？",
+      "no-element": "请选择一个元素绑定指标",
+      "create-success": "新建指标成功！指标名称：",
+      "bind-success": "绑定指标成功！",
+      "confirm-unbind": "确定解绑该指标？",
+      "confirm-delete": "确定删除该指标？",
+      "cannot-bind": "该控件不可以绑定指标",
+      "error": "创建指标失败"
+    },
+    "title": "优化指标",
+    "title2": "点此绑定优化指标",
+    "desc1": "若无法选中想要的元素",
+    "desc2": "请联系客户经理获得帮助",
+    "select-stat": "选择已有指标",
+    "add-stat": "新建指标",
+    "create-stat-name": "新建指标名称",
+    "create-stat-desc": "新建指标描述",
+    "empty": "无指标项"
+  },
+  "edit": {
+    "edit-type": {
+      "bgColor": "背景颜色",
+      "textColor": "文字颜色",
+      "bgImage": "背景图片",
+      "text": "文字内容",
+      "image": "前景图片"
+    },
+    "edit-item": {
+      "text-placeholder": "请输入修改文字！",
+      "pic": "图",
+      "select": " 选择",
+      "upload": "上传",
+      "p1": "请上传png格式的图片。其他类型图片在iOS设备上可能会出现渲染问题。"
+    },
+    "title": "编辑面板",
+    "title2": "点此编辑元素",
+    "batch-not-found": "没有找到类似的控件！",
+    "batch-title": "批量修改",
+    "batch-description": "注意：开启批量修改，会默认修改所有相同控件。",
+    "batch-class": "批量编辑 {{reuse}} > {{class}}",
+    "batch-amount": "不含下标为{{value}}的控件",
+    "empty": "无编辑项",
+    "control": "原始版本不可编辑",
+    "empty-history": "无编辑记录",
+    "confirm-delete": "确定删除该项编辑？",
+    "confirm-delete-batch": "确定删除批量编辑？这项操作将对所有同类元素删除该项编辑。",
+    "no-text": "（空字符串）",
+    "alert": {
+      "3pics": "请上传三张图片！",
+      "error": "未知错误",
+      "size-error": "图片倍数不符合要求！",
+      "cancel": "重新选择",
+      "continue": "继续上传"
+    }
+  },
+  "main": {
+    "refresh": " 刷新页面",
+    "undo": " 重置版本",
+    "undo-popover": "重置当前版本的改动",
+    "undo-alert": "确定重置所有改动吗？"
+  },
+  "create-version": {
+    "new-version-name": "新建版本名称",
+    "new-version-description": "新建版本描述",
+    "no-name": "请填写名称！",
+    "version": "版本"
+  },
+  "delete-version": "确认删除版本{{value}}？删除后不可恢复！",
+  "alert": {
+    "OK": "确认",
+    "CANCEL": "取消",
+    "CLEAR": "清空",
+    "close": "确定退出编辑器？未保存的操作将会丢失。",
+    "error": "未知错误"
+  },
+  "other": {
+    "search": "搜索",
+    "no-picture": "图片加载中<br/>请稍等"
+  }
+}

@@ -1,0 +1,46 @@
+<div class="bind-mobile-modal-container">
+	<h2 class="dialog-title">{{ 'bindmobilemodal.title' | translate }}</h2>
+	<div>
+		<form [formGroup]="bindMobileForm" (ngSubmit)="submit(bindMobileForm)" novalidate autocomplete="off">
+			<mat-form-field class="register-input-container">
+				<input matInput type="text" formControlName="username" autocomplete="foo" [(ngModel)]="childAccount.username"
+					placeholder="{{ 'bindmobilemodal.username' | translate }}" required>
+				<mat-error
+					*ngIf="(bindMobileForm.get('username').touched || submitted ) && bindMobileForm.get('username').hasError('required')">
+					{{ 'bindmobilemodal.usernameempty' | translate }}
+				</mat-error>
+			</mat-form-field>
+			<br>
+
+			<mat-form-field class="register-input-container">
+				<input matInput type="text" formControlName="phone" autocomplete="foo" [(ngModel)]="childAccount.phone"
+					placeholder="{{ 'bindmobilemodal.mobile' | translate }}" required>
+				<mat-error
+					*ngIf="(bindMobileForm.get('phone').touched || submitted ) && bindMobileForm.get('username').hasError('required')">
+					{{ 'bindmobilemodal.mobilempty' | translate }}
+				</mat-error>
+				<mat-error
+					*ngIf="(bindMobileForm.get('phone').touched || submitted ) && bindMobileForm.get('phone').hasError('phone')">
+					{{ 'bindmobilemodal.mobileformat' | translate }}
+				</mat-error>
+			</mat-form-field>
+			<br>
+
+			<mat-form-field class="register-input-container">
+				<input matInput type="text" formControlName="department" autocomplete="foo"
+					[(ngModel)]="childAccount.department" placeholder="{{ 'bindmobilemodal.department' | translate }}" required>
+				<mat-error
+					*ngIf="(bindMobileForm.get('department').touched || submitted ) && bindMobileForm.get('department').hasError('required')">
+					{{ 'bindmobilemodal.departmentempty' | translate }}
+				</mat-error>
+			</mat-form-field>
+
+			<p class="desc">{{'bindmobilemodal.desc' | translate}}</p>
+
+			<div class="btn-wrapper">
+				<button class="ab-btn ab-btn-primary ab-btn-radian w-100" mat-button
+					type="submit">{{'bindmobilemodal.confirm' | translate}}</button>
+			</div>
+		</form>
+	</div>
+</div>

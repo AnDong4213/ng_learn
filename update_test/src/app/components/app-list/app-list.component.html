@@ -1,0 +1,26 @@
+<div class="app-cover" (click)="close()"></div>
+<div class="app-container">
+  <a class="app-head" [routerLink]="['/app_manage']">
+    <span class="ab-text-muted">{{ 'goapplist' | translate }}</span>
+    <i class="iconfont icon-right ab-icon-gray"></i>
+  </a>
+  <app-loading *ngIf="!myApps && !apps" [loadingPartial]="true"></app-loading>
+  <ul class="app-list ab-scroll">
+    <li class="app-content ab-ellipsis" *ngFor="let app of myApps | sort: 'created_at'" (click)="selectApp(app)">
+      <i class="iconfont icon-h" *ngIf="app.typ == APP_TYPE_H5"></i>
+      <i class="iconfont icon-apple" *ngIf="app.typ == APP_TYPE_IOS"></i>
+      <i class="iconfont icon-android" *ngIf="app.typ == APP_TYPE_ANDROID"></i>
+      <i class="iconfont icon-LPO" *ngIf="app.typ == APP_TYPE_LPO"></i>
+      <i class="iconfont icon-xiaochenxu" *ngIf="app.typ == APP_TYPE_WX"></i>
+      <i class="iconfont icon-code2" *ngIf="app.typ == APP_TYPE_DEF"></i>
+      &nbsp;&nbsp;<span>{{ app.name }}</span>
+    </li>
+    <!--<li class="app-content ab-ellipsis" *ngFor="let app of apps | sort: 'created_at'" (click)="selectApp(app)">-->
+      <!--<i class="iconfont icon-h ab-icon-gray" *ngIf="app.typ == APP_TYPE_H5"></i>-->
+      <!--<i class="iconfont icon-apple ab-icon-gray" *ngIf="app.typ == APP_TYPE_IOS"></i>-->
+      <!--<i class="iconfont icon-android ab-icon-gray" *ngIf="app.typ == APP_TYPE_ANDROID"></i>-->
+      <!--<i class="iconfont icon-LPO ab-icon-gray" *ngIf="app.typ == APP_TYPE_LPO"></i>-->
+      <!--&nbsp;&nbsp;<span>{{ app.name }}</span>-->
+    <!--</li>-->
+  </ul>
+</div>

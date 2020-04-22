@@ -1,0 +1,56 @@
+<div class="ab-scroll member-dialog-lg">
+  <p class="ab-text-primary ab-h1 ab-text-center" *ngIf="member">{{ 'management.memberEditor' | translate }}</p>
+  <p class="ab-text-primary ab-h1 ab-text-center" *ngIf="!member">{{ 'management.inviteMember' | translate }}</p>
+
+		<form (ngSubmit)="submit()" [formGroup]="memberForm" novalidate>
+			<mat-form-field class="member-input-container">
+        <input matInput type="text" formControlName="email" autocomplete="foo" placeholder="{{ 'management.email' | translate }}">
+		    <mat-error *ngIf="(memberForm.get('email').touched || submitted ) && memberForm.get('email').hasError('required')">
+          {{ 'management.email' | translate }}{{ 'valid.notEmpty' | translate}}
+		    </mat-error>
+		    <mat-error *ngIf="(memberForm.get('email').touched || submitted ) && memberForm.get('email').hasError('email')">
+          {{ 'valid.emailFormat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br>
+
+			<mat-form-field  class="member-input-container">
+        <input matInput type="text" formControlName="comment" autocomplete="foo" placeholder="{{ 'management.description' | translate }}" maxlength="20">
+		  </mat-form-field>
+
+      <div>
+        <p class="ab-text-muted">{{ 'account.level' | translate }}</p>
+        <br>
+        <select name="role" id="role" (change)="select($event.target.value)">
+          <option *ngFor="let o of selectRole" [value]="o.key" [selected]="o.key === activeSelect.key">{{ translateKey(o.text) | async }}</option>
+        </select>
+        <span class="ab-text-muted" *ngIf="activeSelect.key === 'Admin'">{{ 'account.admininfo' | translate }}</span>
+        <span class="ab-text-muted" *ngIf="activeSelect.key === 'Collaborator'">{{ 'account.userinfo' | translate }}</span>
+      </div>
+
+      <br><br>
+
+      <div class="member-apps ab-scroll">
+        <p class="ab-text-muted">{{ 'management.involvedApp' | translate }}</p>
+        <br>
+        <div class="ab-text-center">
+            <app-loading *ngIf="isLoading"></app-loading>
+        </div>
+        <span *ngFor="let app of apps">
+          <input type="checkbox" name="app" id="{{ app.id }}" [checked]="isChecked(app.id)" (click)="check(app)"/> 
+          <label for="{{ app.id }}">{{ app.name }}</label>
+        </span>
+      </div>
+      <div style="margin-top:20px;margin-bottom:10px;color:#ff8181;">
+        {{ 'management.tips' | translate }}
+      </div>
+
+      <br><br>
+
+      <div class="member-buttons">
+        <button class="ab-btn ab-btn-default" (click)="closeDialog()" type="button">{{ 'modal.cancel' |  translate }}</button> 
+        <button class="ab-btn ab-btn-primary" type="submit">{{ 'modal.ok' | translate }}</button> 
+      </div>
+    </form>
+
+</div>

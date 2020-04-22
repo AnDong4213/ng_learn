@@ -1,0 +1,95 @@
+.sidebar {
+  position: fixed;
+  z-index: 999;
+  top: 60px;
+  left: 0;
+
+  width: 125px;
+  height: 100%;
+
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  padding: 24px 36px 24px 0;
+  border-bottom: 1px solid #e5e5e5;
+
+  text-align: right;
+
+  &:focus {
+    outline: none;
+  }
+
+  i {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+}
+
+.sidebar-item {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 36px 12px 0;
+
+  text-align: right;
+  color: #313131;
+
+  i {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+}
+
+.sidebar-data {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 36px;
+
+  text-align: right;
+  background: #fafafa;
+}
+
+.sidebar-item:hover,
+.sidebar-data:hover {
+  color: #313131;
+}
+
+.side-active {
+  color: #313131;
+}
+
+.sidebar-list {
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+}
+
+.cur-active-data + .sidebar-list {
+  opacity: 1;
+  height: auto;
+
+  transition: 0.25s opacity;
+  transition-timing-function: ease-in;
+}
+
+.cur-active-setting + .sidebar-list {
+  opacity: 1;
+  height: auto;
+
+  transition: 0.25s opacity;
+  transition-timing-function: ease-in;
+}
+
+.cur-active-debug + .sidebar-list {
+  opacity: 1;
+  height: auto;
+
+  transition: 0.25s opacity;
+  transition-timing-function: ease-in;
+}
+
+.sidebar-page > p:focus {
+  outline: none;
+}

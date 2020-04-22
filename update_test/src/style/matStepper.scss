@@ -1,0 +1,29 @@
+.mat-stepper-horizontal .mat-horizontal-content-container {
+  overflow: auto;
+  padding: 0;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'Material Icons';
+  src: url(/assets/font/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2');
+}
+
+.material-icons {
+  direction: ltr;
+
+  display: inline-block;
+
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Material Icons';
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: normal;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  word-wrap: normal;
+}

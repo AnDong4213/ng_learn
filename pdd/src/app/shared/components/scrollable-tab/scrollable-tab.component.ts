@@ -3,7 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 export interface TopMenu {
@@ -16,7 +16,7 @@ export interface TopMenu {
   selector: 'app-scrollable-tab',
   templateUrl: './scrollable-tab.component.html',
   styleUrls: ['./scrollable-tab.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 /**
  * 接口是可选的，也就说只要有类似 ngOnInit 这样的方法存在
@@ -26,6 +26,7 @@ export interface TopMenu {
  */
 export class ScrollableTabComponent {
   selectedIndex = -1;
+  @Input() selectedTabLink: string;
   @Input() menus: TopMenu[] = [];
   @Input() backgroundColor = '#fff';
   @Input() titleActiveColor = 'yellow';
@@ -42,7 +43,6 @@ export class ScrollableTabComponent {
   }
 
   handleSelection(index: number) {
-    this.selectedIndex = index;
-    this.tabSelected.emit(this.menus[this.selectedIndex]);
+    this.tabSelected.emit(this.menus[index]);
   }
 }

@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="ab-panel app-container">
+  <div class="ab-panel-head">{{ 'appnew.title' | translate }}</div>
+	<div class="ab-panel-body ab-text-center">
+		<form (ngSubmit)="submit(appForm)" [formGroup]="appForm" novalidate>
+
+			<mat-form-field class="app-input-container">
+        <input matInput type="text" formControlName="name" placeholder="{{ 'appnew.name' | translate }}" >
+		    <mat-error *ngIf="(appForm.get('name').touched || submitted ) && appForm.get('name').hasError('required')">
+          {{ 'appnew.checkempty' | translate }}
+		    </mat-error>
+		    <mat-error *ngIf="(appForm.get('name').touched || submitted ) && appForm.get('name').hasError('pattern')">
+          {{ 'appnew.checkformat' | translate }}
+		    </mat-error>
+		  </mat-form-field>
+			<br><br>
+			<p>
+				<label><input class="aso-input" type="radio" formControlName="typ" [value]="APP_TYPE_H5" [checked]="app.typ == APP_TYPE_H5" />&nbsp;&nbsp;web</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input class="aso-input" type="radio" formControlName="typ" [value]="APP_TYPE_ANDROID" [checked]="app.typ == APP_TYPE_ANDROID" />&nbsp;&nbsp;Android</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input class="aso-input" type="radio" formControlName="typ" [value]="APP_TYPE_IOS" [checked]="app.typ == APP_TYPE_IOS" />&nbsp;&nbsp;iOS</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input class="aso-input" type="radio" formControlName="typ" [value]="APP_TYPE_WX" [checked]="app.typ == APP_TYPE_WX" />&nbsp;&nbsp;微信小程序</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <label><input class="aso-input" type="radio" formControlName="typ" [value]="APP_TYPE_LPO" [checked]="app.typ == APP_TYPE_LPO" />&nbsp;&nbsp;LPO</label>&nbsp;&nbsp;&nbsp;&nbsp; -->
+			</p>
+
+      <button class="ab-btn ab-btn-primary abp-btn-fix-big app-btn-create" type="submit" [disabled]="!appForm.valid || createSuccess">{{ 'appnew.btn' | translate }}</button>
+
+		</form>
+
+		<div class="app-success" *ngIf="createSuccess">
+      <p>{{ 'appnew.success' | translate }}</p>
+      <p class="ab-text-muted">{{ 'appnew.desc' | translate }}<a class="ab-text-primary" href="http://help.appadhoc.com/sdk/htmlSDK.html" target="_blank">{{ 'appnew.p2' | translate }}</a>{{'appnew.p3'  | translate }}</p>
+			<div class="ab-input-group ab-input-group-right app-input-appkey">
+				<input class="ab-input" type="text" [(ngModel)]="app.app_key" disabled="disabled">
+				<button class="ab-btn ab-btn-gray" name="button" type="button" [clip]="app.app_key" (onClip)="clip($event)"><i class="iconfont icon-copy ab-icon-gray"></i></button>
+			</div>
+			<p class="ab-text-center">
+        <button class="ab-btn ab-btn-primary abp-btn-fix-big app-btn-create" (click)="goApp()">{{ 'appnew.go' | translate }}</button>
+			</p>
+		</div>
+
+	</div>
+</div>

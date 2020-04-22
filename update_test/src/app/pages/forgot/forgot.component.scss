@@ -1,0 +1,46 @@
+.abp-bg-yellow {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+
+  background: linear-gradient(#f6bb42, #ffce54);
+}
+
+.abp-container {
+  overflow: auto;
+  width: 1152px;
+  height: 100%;
+  margin: 0 auto;
+
+  background: #fff;
+}
+
+.forget-logo {
+  width: 164px;
+  height: 30px;
+  margin-top: 48px;
+}
+
+.forget-title {
+  padding-top: 48px;
+  padding-bottom: 60px;
+}
+
+.forget-input-container {
+  width: 300px;
+  margin-bottom: 48px;
+}
+
+.abp-error {
+  position: absolute;
+}
+
+.forget-tip {
+  padding-top: 24px;
+}
+
+.forget-explain {
+  margin-bottom: 24px;
+}

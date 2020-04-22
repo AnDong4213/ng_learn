@@ -1,0 +1,10 @@
+<div class="filter-content ab-text-center">
+  <p class="ab-text-primary ab-h1 ab-row-big">{{ 'userfiler.title' | translate }}</p>
+  <div class="ab-select ab-select-big ab-select-border ab-row-big filter-select">
+    <ng-select [items]="data" [active]="[defaultAudience]" (selected)="switchFilter($event)">
+    </ng-select>
+  </div>
+  <p class="ab-text-muted ab-text-left ab-line-height ab-row-big">{{ 'userfiler.edit' | translate }}&nbsp;<a class="ab-text-primary" (click)="show()">{{ 'userfiler.edit' | translate }}</a></p>
+  <button class="ab-btn ab-btn-default" (click)="close()">&nbsp;&nbsp;{{ 'modal.cancel' | translate }}&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="ab-btn ab-btn-primary" (click)="ok()">&nbsp;&nbsp;{{ 'modal.ok' | translate }}&nbsp;&nbsp;</button>
+</div>

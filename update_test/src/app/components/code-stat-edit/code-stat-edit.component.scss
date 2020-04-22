@@ -1,0 +1,25 @@
+.new-part-three-table-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 24px;
+
+  background: #fafafa;
+}
+
+.new-part-three-table {
+  box-shadow: none;
+}
+
+.new-part-three-short-text {
+  max-width: 300px;
+}
+
+.new-part-three-step {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+
+  background: #f6f6f6;
+}

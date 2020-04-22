@@ -1,0 +1,36 @@
+stages:
+  - test
+  - deploy
+  - test-prod
+  - deploy-prod
+
+test:
+  stage: test
+  script: "deploy-utils test default \"--build-arg ENV=dev\""
+  tags:
+    - adhoc_os
+
+
+deploy:
+  stage: deploy
+  script: "deploy-utils deploy"
+  only:
+    - dev
+  tags:
+    - adhoc_os
+
+
+test-prod:
+  stage: test-prod
+  script: "deploy-utils test"
+  tags:
+    - adhoc_os_prod
+
+
+deploy-prod:
+  stage: deploy-prod
+  script: "deploy-utils deploy"
+  only:
+    - master
+  tags:
+    - adhoc_os_prod

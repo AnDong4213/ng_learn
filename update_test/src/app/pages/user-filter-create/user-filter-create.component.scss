@@ -1,0 +1,79 @@
+.group-dialog {
+  overflow: auto;
+  width: 758px;
+  height: 600px;
+  overflow-y: scroll;
+  padding: 30px 60px;
+  border-top: 4px solid #2165b2;
+  border-radius: 4px;
+
+  background: #fff;
+}
+
+.groud-condition-container {
+  position: relative;
+
+  width: 100%;
+  padding-left: 24px;
+  margin: 12px 0;
+  border-left: 2px solid #e5e5e5;
+}
+
+.group-bracket-link {
+  padding-bottom: 12px;
+  margin-left: -50px;
+
+  background: #fff;
+}
+
+.group-link {
+  display: block;
+  margin: 12px 0;
+}
+
+.group-del {
+  margin-left: 24px;
+}
+
+.group-error {
+  float: right;
+  right: 285px;
+  position: relative;
+}
+
+.group-add-item {
+  margin-top: 12px;
+}
+
+.group-brackets {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+
+  color: #e5e5e5;
+
+  transform: translateY(-50%);
+}
+
+.group-input-container {
+  width: 100%;
+}
+
+.group-formula-container {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.group-btns {
+  padding-top: 30px;
+
+  text-align: center;
+}
+.ab-width-175{
+  width: 175px;
+}

@@ -7,7 +7,7 @@ import {
   Renderer2,
   AfterViewInit,
   OnDestroy,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 export interface ImageSlider {
@@ -21,20 +21,23 @@ export interface ImageSlider {
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',
   styleUrls: ['./image-slider.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() sliders: ImageSlider[] = [];
   @Input() sliderHeight = '160px';
-  @ViewChild('imageSlider', { static: false })
-  imgSlider: ElementRef;
   @Input() intervalBySeconds = 2;
+  @ViewChild('imageSlider', { static: true })
+  imgSlider: ElementRef;
   selectedIndex = 0;
   constructor(private rd2: Renderer2) {}
   intervalId;
   ngOnInit() {}
 
   ngAfterViewInit(): void {
+    if (this.intervalBySeconds <= 0) {
+      return;
+    }
     this.intervalId = setInterval(() => {
       this.rd2.setProperty(
         this.imgSlider.nativeElement,

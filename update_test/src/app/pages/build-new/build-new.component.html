@@ -1,0 +1,249 @@
+<app-navbar></app-navbar>
+
+<div class="ab-panel abp-container">
+  <div class="ab-panel-head" *ngIf="app.typ == appType.H5">{{ 'codenew.p1' | translate  }}：H5{{ 'codenew.buildtitle' | translate }}</div>
+  <div class="ab-panel-head" *ngIf="app.typ == appType.ANDROID">{{ 'codenew.p1' | translate  }}：Android{{ 'codenew.buildtitle' | translate }}</div>
+  <div class="ab-panel-head" *ngIf="app.typ == appType.IOS">{{ 'codenew.p1' | translate  }}：iOS{{ 'codenew.buildtitle' | translate }}</div>
+  <div class="ab-panel-body ab-panel-nopadding">
+    <mat-horizontal-stepper linear>
+      <mat-step [stepControl]="stepOneForm" [editable]="false">
+        <form class="create-bg" [formGroup]="stepOneForm" (ngSubmit)="stepOneSubmit(stepOneForm)">
+          <ng-template matStepLabel>{{ 'codenew.step1' | translate }}</ng-template>
+
+          <mat-form-field class="create-item ab-row">
+            <input matInput type="text" placeholder="{{ 'codenew.expname' | translate }}" formControlName="name" required>
+            <mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('required')">
+                {{ 'codenew.p3' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('expname')">
+               {{ 'codenew.p4' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('checkrepeat')">
+                {{ 'codenew.p5' | translate }}
+            </mat-error>
+						<mat-error *ngIf="(stepOneForm.get('name').touched || stepsubmit) && stepOneForm.get('name').hasError('maxlength')">
+               {{ 'codenew.p6' | translate }}
+						</mat-error>
+          </mat-form-field>
+          <br>
+
+          <mat-form-field class="create-item ab-row">
+            <input matInput type="text" placeholder="{{ 'codenew.desc' | translate }}" formControlName="description">
+          </mat-form-field>
+          <br>
+          <br>
+
+          <div *ngIf="app.typ == appType.H5">
+
+            <div class="ab-input-group ab-input-group-right create-layer ab-row" *appRole="layerRole;else stpl">
+              <div class="ab-input">{{ activeLayer.text }}</div>
+              <button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+              <i class="iconfont icon-help ab-icon-left ab-icon-gray create-help" [popover]="layerPopover"></i>
+              <popover-content #layerPopover placement="left" [animation]="true" [closeOnClickOutside]="true">
+                <p>{{ 'codenew.p8' | translate }}</p><br>
+                <p>{{ 'codenew.p9' | translate }}</p><br>
+                <p>{{ 'codenew.p10' | translate }}<a href="http://help.appadhoc.com/expFlow/stratifiedFlow.html" target="_blank">{{ 'codenew.p11' | translate }}</a>{{ 'codenew.p12' | translate }}</p>
+              </popover-content>
+              <p class="ab-text-danger ab-text-left ab-line-height" *ngIf="activeLayer.id !== 'default' && layerItems">{{ 'codenew.p13' | translate }}</p>
+              <mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+                <button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of layerItems">{{l.text}}</button>
+              </mat-menu>
+            </div>
+
+            <ng-template #stpl>
+              <div class="ab-input-group ab-input-group-right create-layer ab-row">
+                <div class="ab-input">{{ activeLayer.text }}</div>
+                <button class="ab-btn ab-btn-gray" name="button" type="button" [matMenuTriggerFor]="menu" [disabled]="!layerItems"><i class="iconfont icon-add ab-icon-gray"></i></button>
+                <i class="iconfont icon-help ab-icon-left ab-icon-gray create-help" [popover]="layerPopover"></i>
+                <popover-content #layerPopover placement="left" [animation]="true" [closeOnClickOutside]="true">
+                <p>{{ 'codenew.p8' | translate }}</p><br>
+                <p>{{ 'codenew.p9' | translate }}</p><br>
+                <p>{{ 'codenew.p10' | translate }}<a href="http://help.appadhoc.com/expFlow/stratifiedFlow.html" target="_blank">{{ 'codenew.p11' | translate }}</a>{{ 'codenew.p12' | translate }}</p>
+                </popover-content>
+                <mat-menu #menu="matMenu" [overlapTrigger]="false"  xPosition="before">
+                  <button mat-menu-item (click)="switchLayer(l)" *ngFor="let l of [activeLayer]">{{l.text}}</button>
+                  <button mat-menu-item style="height:60px;line-height:30px;" disabled>
+                    {{ 'codenew.newlayer' | translate }}<br>
+                    <span class="ab-text-muted">{{ 'codenew.p14' | translate }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </ng-template>
+
+          </div>
+        
+
+          <div class="create-item create-layer ab-row disLayer" *ngIf="app.typ !== appType.H5">
+            {{activeLayer.text}}
+          </div>
+
+          <br />
+
+          <!-- android download info -->
+          <div *ngIf="app.typ === appType.ANDROID">
+            <div class="create-item ab-text-left">{{ 'buildnew.p10' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="androidPopover"></i></div>
+            <br>
+            <div class="ab-text-muted ab-text-left create-item ab-row">{{ 'buildnew.p11' | translate }}</div>
+            <br>
+          </div>
+
+          <popover-content #androidPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+            <p>{{ 'buildnew.p12' | translate }}<a href="http://help.appadhoc.com/sdk/androidSDK.html#debug" target="_blank">{{ 'buildnew.p13' | translate }}</a>。</p>
+            <p>{{ 'buildnew.p14' | translate }}</p>
+            <p>{{ 'buildnew.p15' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blank">{{ 'buildnew.p16' | translate }}</a>{{ 'buildnew.p16' |  translate }}</p>
+          </popover-content>
+
+          <!-- ios download info -->
+          <div *ngIf="app.typ === appType.IOS">
+            <div class="create-item ab-text-left">{{ 'buildnew.p10' |  translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="iosPopover"></i></div>
+            <br>
+            <div class="ab-text-muted ab-text-left create-item">{{ 'buildnew.p11' | translate }}</div>
+            <br>
+          </div>
+
+          <popover-content #iosPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+            <p>{{ 'buildnew.p12' | translate }}<a href="http://help.appadhoc.com/sdk/iosSDK.html#debug" target="_blank">{{ 'buildnew.p13' | translate }}</a>。</p>
+            <p>{{ 'buildnew.p14' | translate }}</p>
+            <p>{{ 'buildnew.p15' | translate }}<a href="http://help.appadhoc.com/expFlow/debug.html" target="_blank">{{ 'buildnew.p16' | translate }}</a>{{ 'buildnew.p17' | translate }}</p>
+          </popover-content>
+
+          <div *ngIf="app.typ == appType.H5">
+            <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+              <ul>
+                <li><b>{{ 'buildnew.match' | translate }}：</b></li>
+                <li>{{ 'buildnew.p18' | translate }}</li>
+              </ul>
+              <br>
+              <ul>
+                <li><b>{{ 'buildnew.regexp' | translate }}：</b></li>
+                <li>{{ 'buildnew.p19' | translate }}</li>
+                <li>{{ 'buildnew.p15' | translate }}<a href="http://help.appadhoc.com/H5exp/" target="_blank">{{ 'buildnew.p16' | translate }}</a>{{ 'buildnew.p17' | translate  }}</li>
+              </ul><br>
+              <p>{{ 'buildnew.p21' | translate }}</p>
+            </popover-content>
+            <br>
+            <div class="create-item ab-text-left">{{ 'buildnew.p1' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i></div>
+            <br>
+
+            <div class="ab-select ab-select-lg ab-select-border create-item ab-row">
+              <ng-select [items]="urlMode" [active]="activeURLMode" (selected)="switchURLMode($event)">
+              </ng-select>
+            </div>
+            <mat-form-field class="create-item ab-row">
+              <input matInput type="text" placeholder="{{ 'buildnew.url' | translate }}" formControlName="url" required (focusout)="changeUrl()">
+              <mat-error *ngIf="(stepOneForm.get('url').touched || stepsubmit) && stepOneForm.get('url').hasError('required')">
+                {{ 'buildnew.p2' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('url').touched || stepsubmit) && stepOneForm.get('url').hasError('url')">
+                {{ 'buildnew.p3' | translate }}
+              </mat-error>
+              <!-- <mat-error *ngIf="(stepOneForm.get('url').touched || stepsubmit) && stepOneForm.get('url').hasError('repeat')">
+                {{ 'buildnew.p20' | translate }}
+              </mat-error> -->
+              
+            </mat-form-field>
+            <div class="ab-text-danger ab-text-left create-item show-switch-errmsg" *ngIf="isErrorFlags">{{ 'buildnew.p20' | translate }}</div>
+            <br>
+
+            <mat-form-field class="create-item ab-row" *ngIf="activeURLMode[0].mode === 'regex'">
+              <input matInput type="text" placeholder="{{ 'buildnew.p9' | translate }}" formControlName="regexp" required>
+              <mat-error *ngIf="(stepOneForm.get('regexp').touched || stepsubmit) && stepOneForm.get('regexp').hasError('required')">
+                {{ 'buildnew.p8' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('regexp').touched || stepsubmit) && stepOneForm.get('regexp').hasError('repeat')">
+                  {{ 'buildnew.p25' | translate }}{{stepOneForm.get('regexp').touched}}{{stepsubmit}}{{stepOneForm.get('regexp').hasError('repeat')}}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('regexp').touched || stepsubmit) && stepOneForm.get('regexp').hasError('regexpformat')">
+                  {{ 'buildnew.p23' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('regexp').touched || stepsubmit) && stepOneForm.get('regexp').hasError('regexpMatch')">
+                  {{ 'buildnew.p24' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="create-item ab-row" *ngIf="activeURLMode[0].mode === 'jsregexp'">
+              <input matInput type="text" placeholder="{{ 'buildnew.p22' | translate }}" formControlName="jsregexp" required>
+              <mat-error *ngIf="(stepOneForm.get('jsregexp').touched || stepsubmit) && stepOneForm.get('jsregexp').hasError('required')">
+                {{ 'buildnew.p8' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('jsregexp').touched || stepsubmit) && stepOneForm.get('jsregexp').hasError('regexpformat')">
+                  {{ 'buildnew.p23' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('jsregexp').touched || stepsubmit) && stepOneForm.get('jsregexp').hasError('repeat')">
+                  {{ 'buildnew.p25' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(stepOneForm.get('jsregexp').touched || stepsubmit) && stepOneForm.get('jsregexp').hasError('regexpMatch')">
+                  {{ 'buildnew.p24' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <br>
+            <div class="ab-text-muted ab-text-left create-item ab-row">{{ 'buildnew.p7' | translate }}</div>
+          </div>
+          <br>
+
+          <div *ngIf="app.typ == appType.H5">
+            <popover-content #urlcheck placement="top" [animation]="true" [closeOnClickOutside]="true">
+              <p>{{ 'buildnew.p6' | translate }}</p>
+            </popover-content>
+            <div class="create-item ab-text-left">{{ 'buildnew.p5' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="urlcheck"></i></div>
+            <br>
+            <div class="create-item ab-text-left">
+              <a href="http://www.appadhoc.com/url-match-test.html" target="_blank" class="ab-btn ab-btn-default">URL Match Tester</a>
+              <br>
+              <br>
+              <p class="ab-text-muted">{{ 'buildnew.p4' | translate }}</p>
+            </div>
+          </div>
+          <br>
+
+          <app-h5-desc *ngIf="app.typ == appType.H5" [app]="app"></app-h5-desc>
+          <app-android-desc *ngIf="app.typ == appType.ANDROID" [app]="app"></app-android-desc>
+          <app-ios-desc *ngIf="app.typ == appType.IOS" [app]="app"></app-ios-desc>
+          
+
+          <div class="create-footer ab-flex-between">
+            <button class="ab-btn ab-btn-default abp-btn-fix-large" [routerLink]="['/']" type="button"><i class="iconfont icon-left"></i>&nbsp;&nbsp;{{ 'codenew.previous' | translate }}</button>
+            <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext [disabled] = "!stepOneForm.valid">{{ 'codenew.next' | translate }}&nbsp;&nbsp;
+            <!-- <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext >{{ 'codenew.next' | translate }}&nbsp;&nbsp; -->
+              <i class="iconfont icon-right"></i>
+            </button>
+          </div>
+          <div class="create-bg-icon">
+            <i class="iconfont icon-h" [ngClass]="{'icon-h':app.typ == appType.H5,'icon-android':app.typ == appType.ANDROID,'icon-apple':app.typ == appType.IOS }"></i>
+          </div>
+        </form>
+
+      </mat-step>
+
+
+      <mat-step [stepControl]="stepSecondForm">
+        <form [formGroup]="stepSecondForm">
+          <ng-template matStepLabel>{{ 'codenew.step2' | translate }}</ng-template>
+          <app-build-version-edit [exp$]="exp$"></app-build-version-edit>
+          <div class="create-footer ab-flex-end">
+            <!--<button class="ab-btn ab-btn-default abp-btn-fix-large" matStepperPrevious type="button"><i class="iconfont icon-left"></i>&nbsp;&nbsp;上一步</button>-->
+            <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext>{{ 'codenew.next' | translate }}&nbsp;&nbsp;
+              <i class="iconfont icon-right"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="stepThirdForm">
+        <form [formGroup]="stepThirdForm" (ngSubmit)="complete()">
+          <ng-template matStepLabel>{{ 'codenew.step3' | translate }}</ng-template>
+          <app-code-stat-edit [exp$]="exp$"></app-code-stat-edit>
+          <app-code-com-stat-edit [exp$]="exp$"></app-code-com-stat-edit>
+          <div class="create-footer ab-flex-between">
+            <button class="ab-btn ab-btn-default abp-btn-fix-large" matStepperPrevious type="button">
+              <i class="iconfont icon-left"></i>&nbsp;&nbsp;{{ 'codenew.previous' | translate }}</button>
+            <button class="ab-btn ab-btn-primary abp-btn-fix-large" matStepperNext>{{ 'codenew.complete' | translate }}</button>
+          </div>
+
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

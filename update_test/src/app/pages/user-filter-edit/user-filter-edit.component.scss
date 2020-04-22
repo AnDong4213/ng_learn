@@ -1,0 +1,33 @@
+.filter-edit-container {
+  text-align: center;
+}
+
+.filter-edit-title {
+  padding-top: 36px;
+  padding-bottom: 24px;
+}
+
+.filter-edit-icons {
+  margin: 80px 0;
+
+  i {
+    margin: 0 6px;
+
+    font-size: 30px;
+  }
+}
+
+.filter-edit-tip {
+  margin: 24px 0 30px;
+}
+
+.filter-add-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wl-ifshow{
+  display: none;
+}
+
+

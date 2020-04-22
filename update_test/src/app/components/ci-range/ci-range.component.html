@@ -1,0 +1,4 @@
+<span [ngClass]="{'range-green': ci?.low >= 0 , 'range-red': ci?.high <= 0, 'range-gray': ci?.low <= 0 && ci?.high >=0}">
+  [<span *ngIf="ci?.low > 0">+</span>{{  (ci?.low || 0) | number: '1.0-3' }}%, <span *ngIf="ci?.low > 0">+</span>{{  (ci?.high || 0) | number: '1.0-3' }}%]
+</span>
+

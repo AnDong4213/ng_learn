@@ -1,0 +1,165 @@
+.ab-input {
+  height: 38px;
+  padding: 10px 12px;
+  border-radius: $radius;
+
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $gray-01;
+  background: $white;
+
+  @include border;
+}
+
+.ab-input:focus {
+  outline: 0;
+
+  box-shadow: $shadow-default;
+}
+
+.ab-input-danger {
+  border: 1px solid $red-01;
+
+  &:focus {
+    box-shadow: $shadow-danger;
+  }
+}
+
+.ab-input-warning {
+  border: 1px solid $yellow-01;
+
+  &:focus {
+    box-shadow: $shadow-warning;
+  }
+}
+
+.ab-input-lg {
+  height: 50px;
+  padding: 11px 12px;
+
+  font-size: 18px;
+
+  & + .ab-btn {
+    padding: 11px 12px;
+
+    font-size: 18px;
+  }
+}
+
+.ab-input-sm {
+  height: 36px;
+  padding: 7px 12px;
+
+  & + .ab-btn {
+    padding: 7px 12px;
+  }
+}
+
+// input后面的按钮
+
+.ab-input-group {
+  display: inline-table;
+
+  line-height: normal;
+  border-collapse: separate;
+
+  .ab-btn {
+    height: 38px;
+
+    vertical-align: top;
+  }
+}
+
+.ab-input-group-right {
+  .ab-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .ab-btn {
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .ab-btn:last-of-type {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+.ab-input-group-left {
+  .ab-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .ab-btn {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.ab-form-material {
+  position: relative;
+
+  display: inline-block;
+  height: 50px;
+  padding-top: 24px;
+
+  text-align: left;
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    cursor: text;
+
+    transform: translateY(30px);
+    transition: all 0.2s ease-out;
+  }
+}
+
+.ab-form-control {
+  width: 100%;
+  padding-right: 0;
+  padding-bottom: 6px;
+  padding-left: 0;
+  border-color: transparent;
+  border-radius: 0;
+
+  background-color: transparent;
+  box-shadow: 0 1px 0 #e5e5e5;
+
+  transition: box-shadow 0.3s ease-out;
+
+  &:focus {
+    outline: 0;
+
+    box-shadow: 0 2px 0 #e5e5e5;
+  }
+}
+
+.ab-form-control:focus + label {
+  font-weight: 600;
+
+  transform: translateY(0);
+  transition: all 0.2s ease-out;
+}
+
+.ab-form-control-danger {
+  box-shadow: 0 1px 0 #e9573f;
+
+  &:focus {
+    box-shadow: 0 2px 0 #e9573f;
+  }
+}
+
+.ab-form-control-warning {
+  box-shadow: 0 1px 0 #f6bb42;
+
+  &:focus {
+    box-shadow: 0 2px 0 #f6bb42;
+  }
+}

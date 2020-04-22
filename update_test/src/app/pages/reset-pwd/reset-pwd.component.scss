@@ -1,0 +1,41 @@
+.abp-bg-yellow {
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(#f6bb42, #ffce54);
+}
+
+.abp-container {
+  overflow: auto;
+  width: 1152px;
+  height: 100%;
+  margin: 0 auto;
+
+  background: #fff;
+}
+
+.reset-logo {
+  width: 164px;
+  height: 30px;
+  margin-top: 48px;
+}
+
+.reset-title {
+  padding-top: 48px;
+  padding-bottom: 60px;
+}
+
+.reset-input-container {
+  width: 300px;
+  // margin-bottom: 48px;
+}
+
+.abp-error {
+  position: absolute;
+}
+
+.reset-explain {
+  margin-bottom: 24px;
+}

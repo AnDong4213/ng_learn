@@ -1,0 +1,34 @@
+/* flex布局默认 */
+.ab-flex {
+  display: flex;
+}
+
+/* flex布局 两端分散，等间距分散 */
+.ab-flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* flex布局 居中 */
+.ab-flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* flex布局 右面对齐 */
+.ab-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 垂直居中 */
+.ab-flex-vertical {
+  display: flex;
+  align-items: center;
+}
+
+/* 向上对齐 */
+.ab-flex-top {
+  display: flex;
+  align-items: flex-start;
+}

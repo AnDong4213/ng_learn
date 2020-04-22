@@ -1,0 +1,61 @@
+// 颜色
+$blue-01 : #2165b2;
+$blue-02 : #427cbd;
+$blue-03 : #1c5597;
+
+$green-01 : #58c584;
+$green-02 : #76cf9a;
+$green-03 : #4aa770;
+
+$red-01 : #ff8181;
+$red-02 : #ff9797;
+$red-03 : #e57373;
+
+$yellow-01 : #ffce54;
+$yellow-02 : #ffdc87;
+$yellow-03 : #f2c34f;
+
+$gray-01 : #313131;
+$gray-02 : #8f8f8f;
+$gray-03 : #a0a0a0;
+$gray-04 : #bcbcbc;
+$gray-05 : #c0c0c0;
+$gray-06 : #d2d2d2;
+$gray-07 : #e5e5e5;
+$gray-08 : #f6f6f6;
+$gray-09 : #fafafa;
+
+$white : #fff;
+
+$black : #000;
+
+// 图标专用颜色
+// #19b5fe #2ecc71 #f9bf3b #ef4836 #8e44ad #1bbc9b #f9690e #f62459 #96281b #6c7a89
+
+// 阴影
+$shadow-default : 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+$shadow-dark : 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+$shadow-big : 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+$shadow-primary : 0 2px 6px 0 rgba(33, 101, 178, 0.3);
+$shadow-success : 0 2px 6px 0 rgba(88, 197, 132, 0.3);
+$shadow-warning : 0 2px 6px 0 rgba(255, 206, 84, 0.3);
+$shadow-danger : 0 2px 6px 0 rgba(255, 129, 129, 0.3);
+
+// 圆角
+$radius : 4px;
+
+// 行高
+$line-height : 1;
+$line-height-large : 1.5;
+
+$font-size : 14px;
+
+$font-size-h1 : 24px;
+$font-size-h2 : 18px;
+$font-size-h3 : 16px;
+$font-size-h4 : 14px;
+$font-size-h5 : 12px;
+
+@mixin border {
+  border: 1px solid $gray-07;
+}

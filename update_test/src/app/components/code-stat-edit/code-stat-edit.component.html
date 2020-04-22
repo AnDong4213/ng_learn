@@ -1,0 +1,54 @@
+<div class="ab-table new-part-three-table">
+    <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+      <p>{{ 'codestat.p1' | translate }}</p>
+      <p>{{ 'codestat.p2' | translate }}</p>
+      <p>{{ 'codestat.p3' | translate }}</p>
+      <p>{{ 'codestat.p4' | translate }}<a href="http://help.appadhoc.com/expFlow/stat.html" target="_blank">{{ 'codestat.p5' | translate }}</a> {{ 'codestat.p6' | translate }}</p>
+    </popover-content>
+  <div class="ab-table-head new-part-three-table-title" id="stat-edit">
+    <p class="ab-h3">{{ 'codestat.title' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i></p>
+    <span *ngIf="!isLoading">
+      <button class="ab-btn ab-btn-default ab-btn-icon-gray" *ngIf="exp?.typ == versionTyp.EXP_TYPE_URL" (click)="showVersionSelect()" type="button"  [disabled]="exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop" [ngClass]="{'ab-btn-disabled': exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop}"><i class="iconfont icon-track ab-icon-gray"></i>&nbsp;&nbsp;{{ 'codestat.ccc' | translate }}</button>
+      <button class="ab-btn ab-btn-default ab-btn-icon-gray" *ngIf="exp?.typ == versionTyp.EXP_TYPE_BUILD" (click)="goEdit()" type="button"  [disabled]="exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop" [ngClass]="{'ab-btn-disabled': exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop}"><i class="iconfont icon-track ab-icon-gray"></i>&nbsp;&nbsp;{{ 'codestat.ccc' | translate }}</button>
+      <button class="ab-btn ab-btn-default ab-btn-icon-gray" type="button" (click)="newStat($event)" [disabled]="exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop || exp?.status === versionStatus.Publish" [ngClass]="{'ab-btn-disabled': exp?.status === versionStatus.Run || exp?.status === versionStatus.Stop}"><i class="iconfont icon-add ab-icon-gray"></i>&nbsp;&nbsp;{{ 'codestat.add' | translate }}</button>
+    </span>
+  </div>
+ <div class="ab-table-body">
+   <table>
+     <tbody>
+       <tr>
+         <th width="17.2%">{{ 'codestat.name' | translate }}</th>
+         <th >{{ 'codestat.desc' | translate }}</th>
+         <th>{{ 'codestat.keyindicator' | translate }}&nbsp;&nbsp;<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myStatPopover"></i></th>
+         <popover-content #myStatPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+          <p>{{ 'codestat.p8' | translate }}</p> 
+         </popover-content>
+         <th></th>
+        </tr>
+       <tr>
+         <td>{{ 'codestat.total' | translate }}</td>
+         <td colspan="3">{{ 'codestat.systemtxt' | translate }}</td>
+         
+       </tr>
+       <tr app-code-stat-item 
+        [stat]="i" 
+        [exp]="exp" 
+        [appStats]="stats" 
+        [curStats]="curStats"
+        [curComStats]="curComStats" 
+        [comStats]="comStats"
+        [thisNum]="index" 
+        [thisKeyStatName]="nowSelectStatName" 
+        [thisKeyStat]="thisKeyStat"
+        *ngFor="let i of curStats;let index = index" 
+        (saveKeyStat$)="saveKeyStat($event)" 
+        (del$)="delItem($event)" 
+        (save$)="saveItem($event)" 
+        (setNewStat)="setCreateKeyStat($event)"
+        [exp$]="exp$"></tr>
+     </tbody>
+   </table>
+ </div>
+</div>
+<app-url-version-select *ngIf="isShowSelect" [versions]="versions" (isClose)="closeVersionSelect()"></app-url-version-select>
+<app-loading *ngIf="isLoading" [loadingPartial]="true"></app-loading>

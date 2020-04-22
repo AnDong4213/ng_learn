@@ -1,0 +1,5 @@
+<div *ngIf="isShow" class="charge-status-bar"  [ngClass]="{'charge-status': isChargeLang == true,'charge-status-sm': isChargeLang == false}">
+  <a [routerLink]="['/account']">
+    <i class="iconfont icon-warning"></i> {{textMsg}}  
+  </a>
+</div>

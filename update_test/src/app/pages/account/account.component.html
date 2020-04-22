@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="ab-panel abp-container-sm">
+  <div class="account-blue">
+    <div class="account-email">
+      <span class="ab-h1 ab-text-white">{{ ui?.email}}</span>
+      <button class="ab-btn ab-btn-default ab-btn-exsm account-password-btn" [routerLink]="['/change_pwd']">{{ 'changepwd.title' | translate }}</button>
+    </div>
+    <p class="ab-text-white">{{ 'account.level' | translate  }} ：{{ ui?.getRoleStr() | translate }}</p>
+  </div>
+
+  <div class="account-gray" *ngIf="!isFree && isPay && !isExpire">
+    <p class="ab-text-primary ab-h3">{{ 'account.payUser' | translate }}</p>
+    <p class="ab-text-muted account-time">{{ 'account.expireDate' | translate}}: {{ lastPay.end * 1000 | date: 'yyyy-MM-dd' }} </p>
+    <br>
+    <p class="ab-text-danger" *ngIf="isPayWarning()">{{ 'account.expriedMsg' | translate }}</p>
+  </div>
+
+  <div class="account-gray" *ngIf="isFree">
+    <p class="ab-text-primary ab-h3">{{ 'account.freeUser' | translate }}</p>
+    <p class="ab-text-muted account-time">{{ 'account.expireDate' | translate }}：{{ ui?.free.end * 1000 | date: 'yyyy-MM-dd' }}</p>
+    <br>
+    <p class="ab-text-danger" *ngIf="isFreeWarning()">{{ 'account.expriedMsg' | translate }}</p>
+  </div>
+
+  <div class="account-gray" *ngIf="isExpire">
+    <p class="ab-text-primary ab-h3">{{ 'account.expire' | translate }}</p>
+  </div>
+  <div class="account-white" *ngIf="isExpire">
+    <p class="ab-text-muted ab-h3">{{ 'account.expiredesc' | translate }}</p>
+  </div>
+
+  <div class="account-white" *ngIf="!isExpire">
+      <p class="ab-text-muted">{{ 'account.apiUse' | translate }}</p>
+      <p class="account-api-num">{{ lastApi?.num }}</p>
+    <span *ngIf="!isFree && isPay">
+      <p class="ab-text-muted">{{ 'account.curApiMax' |  translate }}</p>
+      <p class="account-api-max">{{ curMaxApi }}</p>
+      <br>
+      <p class="ab-text-danger" *ngIf="isApiWarning() && !isApiNone()">{{ 'account.api' | translate }}</p>
+      <p class="ab-text-danger" *ngIf="isApiNone()">{{ 'account.api' | translate  }}</p>
+    </span>
+  </div>
+</div>

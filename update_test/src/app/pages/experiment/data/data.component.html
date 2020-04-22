@@ -1,0 +1,15 @@
+<div class="data-panel">
+    <app-data-overview [expid]="expid"></app-data-overview>
+</div>
+
+<div class="data-panel">
+    <app-traffic-trend [expid]="expid"></app-traffic-trend>
+</div>
+
+<div class="data-panel">
+    <app-indicator-details [expid]="expid"></app-indicator-details>
+</div>
+
+<div class="data-panel">
+    <app-data-retention [expid]="expid" *ngIf="app.typ != APP_TYPE_H5"></app-data-retention>
+</div>

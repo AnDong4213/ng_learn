@@ -1,0 +1,93 @@
+.navbar-place {
+  height: 60px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+
+  width: 100%;
+  height: 60px;
+
+  background: #2165b2;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1152px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  width: 164px;
+  height: 30px;
+
+  background: url('/assets/images/LOGO.png') no-repeat center center;
+  background-size: contain;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (min-resolution: 1.5dppx) {
+  .navbar-logo {
+    width: 164px;
+    height: 30px;
+
+    background: url('/assets/images/LOGO2x.png') no-repeat center center;
+    background-size: contain;
+  }
+}
+
+.navbar-logo:focus {
+  outline: none;
+}
+
+.navbar-operate {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.navbar-appname {
+  width: 200px;
+  margin-right: 48px;
+
+  button {
+    width: 150px;
+
+    color: #fff;
+    background: transparent;
+
+    &:after {
+      color: #fff;
+    }
+  }
+}
+
+.navbar-icon {
+  font-size: 24px;
+}
+
+.navbar-point {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+
+  background: #ff8181;
+}

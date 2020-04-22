@@ -1,0 +1,25 @@
+<div class="ab-text-center push-version-content">
+    <div>
+      <p>{{'codeversionedit.noticebefore' | translate}}<span class="ab-text-danger">{{ 'codeversionedit.notice' | translate }}</span>{{ 'codeversionedit.noticeafter' | translate }}</p>
+      <div class="push-main-context">
+        <form [formGroup]="pwdForm" (ngSubmit)="submit(pwdForm)" novalidate autocomplete="off" >
+            <mat-form-field class="login-input-container">
+                <input matInput type="password" formControlName="password" autocomplete="auto"  placeholder="{{ 'codeversionedit.pwd' | translate }}">
+                <mat-error *ngIf="(pwdForm.get('password').touched || submited ) && pwdForm.get('password').hasError('required')">
+                  {{ 'login.pwdempty' | translate }}
+                </mat-error>
+                <div class="pwd-error-msg" *ngIf="(pwdForm.get('password').touched || submited ) && error_msg">
+                  {{ error_msg }}
+                </div>
+              
+              </mat-form-field>
+              <div>
+                  <button class="ab-btn ab-btn-primary push-mgt-20" type="submit">{{ 'modal.ok' | translate }}&nbsp;&nbsp;</button>
+              </div>
+              
+        </form>
+      </div>
+     
+    </div>
+  </div>
+  

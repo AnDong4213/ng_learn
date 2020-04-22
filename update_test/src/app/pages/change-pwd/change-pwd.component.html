@@ -1,0 +1,62 @@
+<div class="abp-bg-green">
+  <div class="abp-container ab-scroll">
+    <img class="login-logo" src="/assets/images/LOGO_gray@2x.png" alt="">
+    <span *ngIf="!isChange">
+        <form (ngSubmit)="submit(userForm)" [formGroup]="userForm"  novalidate autocomplete="off">
+          <p class="ab-h1 ab-text-success login-title">{{ 'changepwd.title' | translate }}</p>
+    
+          <mat-form-field class="login-input-container">
+            <input matInput type="password" formControlName="oldpasswd" autocomplete="foo" placeholder="{{ 'changepwd.oldholder' | translate }}" >
+            <mat-error *ngIf="(userForm.get('oldpasswd').touched || submitted ) && userForm.get('oldpasswd').hasError('required')">
+              {{ 'changepwd.oldempty' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(userForm.get('oldpasswd').touched || submitted ) && userForm.get('oldpasswd').hasError('pattern')">
+             {{ 'changepwd.oldFormat' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <br>
+    
+          <mat-form-field class="login-input-container">
+            <input matInput type="password" formControlName="newpasswd" autocomplete="foo" placeholder="{{ 'changepwd.newholder' | translate }}">
+            <mat-error *ngIf="(userForm.get('newpasswd').touched || submitted ) && userForm.get('newpasswd').hasError('required')">
+              {{ 'changepwd.newempty' | translate }}
+            </mat-error>
+            <mat-error *ngIf="(userForm.get('newpasswd').touched || submitted ) && userForm.get('newpasswd').hasError('pattern')">
+               {{ 'changepwd.newFormat' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <br><br><br>
+          <div class="login-check-container">
+            <app-check-pwd [pwd]="newpasswd"></app-check-pwd>
+          </div>
+          
+          <br>
+    
+          <mat-form-field class="login-input-container">
+            <input matInput type="password" formControlName="repasswd" autocomplete="foo" placeholder="{{ 'changepwd.repeatholder' | translate }}">
+              <mat-error *ngIf="(userForm.get('repasswd').touched || submitted ) && userForm.get('repasswd').hasError('required')">
+                 {{ 'changepwd.newempty' | translate }}
+              </mat-error>
+              <mat-error *ngIf="(userForm.get('repasswd').touched || submitted ) && userForm.hasError('pwdmatch')">
+                 {{ 'changepwd.repeatformat' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <br><br><br>
+    
+            <button class="ab-btn ab-btn-success ab-btn-radian abp-btn-fix-exlarge" type="submit" [disabled]="!userForm.valid">{{ 'changepwd.ok' | translate }}</button>
+        </form>
+        <p class="login-tip"><a class="ab-text-muted" [routerLink]="['/account']">{{ 'modal.cancel' | translate }}</a></p>
+    
+    </span>
+ 
+		<div *ngIf="isChange">
+      <br><br><br>
+      <p class="ab-h1 ab-text-success forget-title">{{ 'changepwd.success' | translate }}</p>
+      <br><br>
+      <p class="ab-text-muted forget-explain">{{ 'changepwd.go' | translate }}</p>
+      <br><br><br>
+
+      <button class="ab-btn ab-btn-success ab-btn-radian abp-btn-fix-exlarge" type="button" [routerLink]="['/login']">{{ 'changepwd.login' | translate }}</button>
+    </div>
+  </div>
+</div>

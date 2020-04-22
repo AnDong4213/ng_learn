@@ -1,0 +1,16 @@
+
+
+
+<div class="new-partone-sdk-title" [innerHTML]="'descall.p1' | translate "></div>
+<br>
+<div class="new-partone-sdk-container">
+ <textarea class="new-partone-sdk-textarea" rows="10" cols="50" disabled="disabled">
+&lt;script src="https://sdk.appadhoc.com/ab.plus.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    adhoc('init', {
+        appKey: '{{ this.app.app_key }}'
+    })
+&lt;/script&gt;
+ </textarea>
+ <a class="ab-icon-gray" [clip]="sdkCode" (onClip)="clip($event)"><i class="iconfont icon-copy new-partone-icon-copy"></i></a>
+</div>

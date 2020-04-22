@@ -1,0 +1,40 @@
+<div class="header-place"></div>
+<div class="header">
+	<div class="header-logo-container" [routerLink]="['/']">
+		<div class="header-logo"></div>
+	</div>
+	<div class="header-container">
+		<div class="header-content">
+      <p><span class="ab-h3">{{ exp?.name }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="ab-text-muted" *ngIf="exp?.status == vss.Run">{{ translateNum('header.runmsg', (exp?.control?.start_date | toDay)) | async }}</span>
+        <span class="ab-text-muted" *ngIf="exp?.status == vss.Default">{{ 'header.inactive' | translate }}</span>
+				<span class="ab-text-muted" *ngIf="exp?.status == vss.Stop || exp?.status == vss.AutoStop">{{ translateNum('header.totalmsg', (exp?.control?.start_date | toDay: (exp?.control?.end_date * 1000) )) | async }}</span>
+				<span class="ab-text-muted" *ngIf="exp?.status == vss.Publish">{{ 'header.pushedmsg' | translate }}</span>
+      </p>
+			<div class="header-operate">
+				<div class="ab-dropdown header-appname" (click)="show('apps')">
+					<button class="ab-btn ab-btn-down ab-ellipsis">
+						<i class="iconfont icon-h" *ngIf="app.typ == APP_TYPE_H5"></i>
+			      <i class="iconfont icon-apple" *ngIf="app.typ == APP_TYPE_IOS"></i>
+						<i class="iconfont icon-android" *ngIf="app.typ == APP_TYPE_ANDROID"></i>
+						<i class="iconfont icon-xiaochenxu" *ngIf="app.typ == APP_TYPE_WX"></i>
+			      <i class="iconfont icon-LPO" *ngIf="app.typ == APP_TYPE_LPO"></i>
+			      &nbsp;&nbsp;{{ app.name }}
+					</button>
+				</div>
+
+				<a class="ab-icon-gray" (click)="changeLanguage($event)"><i class="iconfont {{iconType}} header-icon"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="ab-icon-gray" href="http://help.appadhoc.com/" target="_blank" ><i class="iconfont icon-book_big header-icon"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<a class="ab-icon-gray" style="position: relative;" (click)="show('message')"><i class="iconfont icon-bell header-icon"></i>
+					<div class="navbar-point" *ngIf="isHasNotify"></div>
+				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="ab-icon-gray" (click)="show('user')"><i class="iconfont icon-user header-icon"></i></a>
+				<app-app-list *ngIf=" showList == 'apps' " [curApp$]="curApp$" (isShow)="close($event)"></app-app-list>
+				<app-message-list *ngIf=" showList == 'message' " (redPoint)="disappear($event)" (isShow)="close($event)"></app-message-list>
+				<app-user *ngIf=" showList == 'user' " (isShow)="close($event)"></app-user>
+			</div>
+		</div>
+	</div>
+</div>
+<app-sidebar [exp]="exp"></app-sidebar>

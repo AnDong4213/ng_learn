@@ -1,0 +1,101 @@
+
+.exp-create-container {
+  text-align: center;
+}
+
+.exp-create-title {
+  padding: 36px 0 24px;
+}
+
+.exp-create-btn {
+  margin: 80px 0;
+}
+
+.exp-input-appkey {
+  width: 480px;
+
+  input {
+    width: calc(100% - 46px);
+  }
+}
+
+.exp-charge {
+  margin-top: 30px;
+}
+
+.exp-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.exp-status-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 24px;
+  border-bottom: 1px solid #e5e5e5;
+
+  background: #fff;
+}
+
+.exp-tab-container {
+  display: flex;
+  height: 100%;
+}
+
+.exp-full-select {
+  margin-top: 44px;
+}
+
+.exp-tab {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.exp-table-body {
+  padding-top: 0;
+}
+
+.exp-go-data {
+  max-width: 600px;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.exp-status-btn {
+  pointer-events: none;
+}
+
+.exp-list {
+	height: calc(100% - 120px);
+	overflow-y: auto;
+}
+.exp-mr-10{
+	margin-right: 10px;
+}
+.version-name-elli{
+  width: 100px;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+.v-f-span{
+  height: 60px;
+}
+.v-dot-span{
+  float: left;
+  margin-right: 6px;
+}
+.v-stat-span{
+  float: left;
+}

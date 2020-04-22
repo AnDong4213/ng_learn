@@ -1,8 +1,0 @@
-<span [textContent]="title"></span>
-<!--
-  如果不使用绑定，采用直接写 DOM 的形式可以解决脏值检测无限循环的带来的性能问题
-  <span #timeRef></span>
--->
-<span [textContent]="time | date: 'HH:mm:ss:SSS'"></span>
-<p>child works!</p>
-<button (click)="handleClick()">触发脏值检测</button>

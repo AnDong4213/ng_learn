@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+
+<div class="exp-charge">
+	<app-charge-status-bar [isChargeLang]="true"></app-charge-status-bar>
+</div>
+
+<app-loading [loadingPartial]="false" *ngIf="loading"></app-loading>
+
+<div class="ab-panel exp-create-container abp-container-sm" *ngIf="!isExistExp && !loading">
+	<div class="ab-panel-body">
+    <p class="ab-text-primary ab-h1 exp-create-title">{{ 'explist.noexp' | translate }}</p>
+    <p class="ab-text-muted">{{ 'explist.click' | translate }}</p>
+    <button class="ab-btn ab-btn-primary ab-btn-radian abp-btn-fix-exlarge exp-create-btn" (click)="newExperiment()">{{ 'explist.create' | translate }}</button>
+		<br>
+    <p class="ab-text-muted">{{ 'explist.p1' | translate }}
+	  <a *ngIf="app.typ != APP_TYPE_WX" class="ab-text-primary" href="http://help.appadhoc.com/sdk/htmlSDK.html" target="_blank">{{ 'explist.p2' | translate }}</a> 
+	  <a *ngIf="app.typ == APP_TYPE_WX" class="ab-text-primary" href="http://help.appadhoc.com/sdk/wxSDK.html" target="_blank">{{ 'explist.p2' | translate }}</a>  
+	  {{ 'explist.p3' | translate }}
+	  
+	</p>
+		<br>
+    <p class="ab-text-muted">{{ 'explist.appkey' | translate }}</p>
+		<br>
+		<div class="ab-input-group ab-input-group-right exp-input-appkey">
+			<input class="ab-input" type="text" [value]="app?.app_key" disabled="disabled">
+			<button class="ab-btn ab-btn-gray" name="button" type="button" [clip]="app.app_key" (onClip)="clip($event)">
+				<i class="iconfont icon-copy ab-icon-gray"></i>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="ab-table abp-container exp-list ab-scroll" *ngIf="isExistExp && !loading">
+	<div class="ab-table-head">
+		<div class="exp-container-header">
+      <span>{{ 'explist.title' | translate }}</span>
+			<span>
+				<a [routerLink]="['/sdk_config']">
+          <i class="iconfont icon-settings ab-icon-left"></i>{{ 'explist.config' | translate }}</a>&nbsp;&nbsp;
+				<button class="ab-btn ab-btn-primary" (click)="newExperiment()">
+          <i class="iconfont icon-add ab-icon-left"></i>{{ 'explist.create' | translate }}</button>
+			</span>
+		</div>
+	</div>
+
+	<div class="exp-status-select">
+		<div class="exp-tab-container">
+
+			<div class="exp-full-select">
+				<input type="checkbox" (change)="selectAllExp($event)" [checked]="isChecked">
+				<a (click)="deleteAlert()" *ngIf="isChecked">&nbsp;&nbsp;
+          <i class="iconfont icon-delete ab-icon-left"></i>{{ 'explist.delete' | translate }}</a>
+			</div>
+
+			<div class="ab-btn-group-line exp-tab" *ngIf="!isChecked">
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': expTyp == 'all' }" (click)="selectTyp('all')">{{ 'explist.all' | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': expTyp == expStatus.Default }" (click)="selectTyp(expStatus.Default)">{{ 'explist.inactive'  | translate }}</button>
+        <button class="ab-btn" [ngClass]="{'ab-btn-line-active': expTyp == expStatus.Run }" (click)="selectTyp(expStatus.Run)">{{ 'explist.active' | translate }}</button>
+		<button class="ab-btn" [ngClass]="{'ab-btn-line-active': expTyp == expStatus.Stop }" (click)="selectTyp(expStatus.Stop)">{{ 'explist.stop' | translate }}</button>
+		<button class="ab-btn" [ngClass]="{'ab-btn-line-active': expTyp == expStatus.Publish }" (click)="selectTyp(expStatus.Publish)">{{ 'explist.pushed' | translate }}</button>
+			</div>
+		</div>
+		<div class="ab-input-group ab-input-group-right">
+			<input class="ab-input" type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()">
+			<button class="ab-btn ab-btn-gray" name="button" type="button">
+				<i class="iconfont icon-search ab-icon-gray"></i>
+			</button>
+		</div>
+	</div>
+
+	<div class="ab-table-body exp-table-body">
+		<table>
+			<tbody>
+				<tr *ngFor="let exp of expResults | expSort ">
+					<td>
+						<input type="checkbox" name="isCheck" [disabled]="expStatus.Run == exp.status" [checked]="isCheckdExp(exp)" (change)="changeItemChecked($event, exp)">
+						<!--<mat-checkbox  name="isCheck" [disabled]="expStatus.Run == exp.status" [checked]="isCheckdExp(exp)" (change)="changeItemChecked($event, exp)"></mat-checkbox>-->
+					</td>
+					<td class="exp-go-data" (click)="goDataPage(exp)">
+						<p class="ab-line-height ab-ellipsis" style="width: 400px">
+							{{exp.name}}&nbsp;&nbsp;
+							<i class="iconfont icon-link1 ab-icon-gray" *ngIf="exp.typ == versionTyp.EXP_TYPE_URL"></i>
+							<i class="iconfont icon-eye1 ab-icon-gray" *ngIf="exp.typ == versionTyp.EXP_TYPE_BUILD"></i>
+							<i class="iconfont icon-code2 ab-icon-gray" *ngIf="exp.typ == versionTyp.EXP_TYPE_CODE"></i>
+						</p>
+						<p class="ab-text-muted ab-ellipsis" style="width: 80%;">{{exp.description }}</p>
+					</td>
+					<td *ngIf="expStatus.Stop != exp.status" class="ab-text-muted">{{ getLayerNameByLayerId(exp.layer_id) }}&nbsp;&nbsp;|&nbsp;&nbsp;{{exp.traffic}}%</td>
+					<td *ngIf="expStatus.Stop == exp.status" class="ab-text-muted">{{ getLayerNameByLayerId(exp.layer_id) }}</td>
+					<td>
+						<button class="ab-btn ab-btn-exsm exp-status-btn" [ngClass]="{'ab-btn-primary': expStatus.Default == exp.status, 'ab-btn-success': expStatus.Run == exp.status, 'ab-btn-darker': expStatus.Stop == exp.status  || expStatus.Publish == exp.status}">{{ expStatusDist[exp.status] | translate  }}</button>
+					</td>
+          <td class="ab-text-muted" *ngIf="expStatus.Default == exp.status">{{ translateMsg('explist.createdmsg',(exp.control.created_at * 1000 | date: 'yyyy-MM-dd' )) | async }}</td>
+          <td class="ab-text-muted" *ngIf="expStatus.Run == exp.status">{{ translateMsg('explist.runmsg1',(exp.control.start_date | toDay)) | async }}</td>
+          <td class="ab-text-muted" *ngIf="expStatus.Stop == exp.status">{{ translateMsg('explist.stopmsg1',(exp.control.start_date | toDay: (exp.control.end_date * 1000))) | async  }}</td>
+		  <!-- <td class="ab-text-muted" *ngIf="expStatus.Publish == exp.status">{{ translateMsg('explist.publishmsg',(exp.control.created_at | toDay: (exp.control.end_date * 1000))) | async }}</td> -->
+		  <td class="ab-text-muted" *ngIf="expStatus.Publish == exp.status">{{ getPublishVersionName(exp) }}</td>
+		  <td >
+			  <span *ngIf="expStatus.Run === exp.status || expStatus.Stop === exp.status">
+					<span class="v-f-span" *ngIf="ifShowThis(exp)"  >
+
+							<span class="v-stat-span exp-mr-10">{{ getkeyStat(exp) }}:</span>
+							<span class="v-dot-span"><app-color-dot num={{getDotColor(exp)}}></app-color-dot></span>
+							<span class="version-name-elli exp-mr-10" [popover]="vnamePopover" [popoverOnHover]="true">{{ getbestversion(exp) }}</span>
+							<popover-content #vnamePopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+							<p>{{ getbestversion(exp) }}</p>
+							</popover-content>
+					  </span>
+			  </span>
+		  </td> 
+		  <td class="ab-text-right">
+			  <button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="clone(exp)" *ngIf="exp.status != expStatus.Run && exp.status != expStatus.Publish">
+				  <i class="iconfont icon-clone ab-icon-gray"></i>
+			  </button>
+		  </td>
+				</tr>
+				<tr *ngIf="expResults.length == 0">
+          <td colspan="6">{{ 'explist.nullist' | translate }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<app-loading [loadingPartial]="true" *ngIf="!expResults"></app-loading>
+
+	</div>
+</div>

@@ -1,0 +1,104 @@
+
+
+<!-- <button [routerLink]="['/app_new']">new app</button>
+<div>
+  <li *ngFor="let app of myApps | sort: 'id'">
+    <span (click)="selectApp(app)">{{ app.name }}</span> -- {{ app.typ }} -- {{ app.app_key }} -- <button (click)="delConfirm(app)"> del</button>
+  </li>
+  <li *ngFor="let app of apps | sort: 'id'">
+    <span (click)="selectApp(app)">{{ app.name }}</span> -- {{ app.typ }} -- {{ app.app_key }} -- <button (click)="delConfirm(app)"> del</button>
+  </li>
+</div>
+
+<div *ngIf="!apps">
+ loading
+</div> -->
+<app-navbar></app-navbar>
+<div class="manage-charge">
+	<app-charge-status-bar [isChargeLang]="true"></app-charge-status-bar>
+</div>
+<div class="ab-panel manage-create-container abp-container-sm" *ngIf="myApps && myApps.length == 0 && apps && apps.length ==0">
+	<div class="ab-panel-body">
+		<p class="ab-text-primary ab-h1 manage-create-title">Welcome!</p>
+    <p class="ab-text-muted">{{ 'p' | translate }}</p>
+		<p class="manage-icons">
+			<i class="iconfont icon-h ab-icon-gray"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+			<i class="iconfont icon-apple ab-icon-gray"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+			<i class="iconfont icon-android ab-icon-gray"></i>
+		</p>
+    <button class="ab-btn ab-btn-primary ab-btn-radian abp-btn-fix-exlarge manage-create-btn" [routerLink]="['/app_new']">{{ 'createNewApp' | translate}}</button>
+		<br>
+		<button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="selectDemoApp()"><i class="iconfont icon-data ab-icon-left ab-icon-gray"></i>DEMO</button>&nbsp;&nbsp;
+    <a class="ab-btn ab-btn-default ab-btn-icon-gray" href="http://help.appadhoc.com/appExp/createApp.html" target="_blank"><i class="iconfont icon-book_big ab-icon-left ab-icon-gray"></i>
+      {{ 'usehelp' | translate }}</a>
+	</div>
+</div>
+
+<div class="ab-table abp-container" *ngIf="myApps && myApps.length > 0 || apps && apps.length > 0">
+		<div class="ab-table-head">
+			<div class="manage-container-header">
+        <span>{{ 'appList' | translate }}</span>
+				<span>
+					<button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="selectDemoApp()"><i class="iconfont icon-data ab-icon-left ab-icon-gray"></i>DEMO</button>&nbsp;&nbsp;
+          <button class="ab-btn ab-btn-primary" [routerLink]="['/app_new']"><i class="iconfont icon-add ab-icon-left"></i>{{ 'createNewApp' |  translate }} </button>
+				</span>
+			</div>
+		</div>
+		<div class="ab-table-body manage-table">
+			<table>
+		    <tbody>
+					<tr>
+		        <th>#</th>
+            <th>{{ 'appName' | translate }}</th>
+		        <th>APPKEY</th>
+						<th></th>
+			    </tr>
+					<!--<tr>-->
+						<!--<td>-->
+							<!--<i class="iconfont icon-h"></i>-->
+						<!--</td>-->
+						<!--<td class="manage-table-name ab-ellipsis">-->
+							<!--<input class="ab-input ab-input-sm" type="text" placeholder="编辑应用名称">-->
+						<!--</td>-->
+						<!--<td class="manage-table-key ab-ellipsis">ADHOC_0952798f-1401-4041-9d54-210b224fef27</td>-->
+						<!--<td>-->
+							<!--<button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="delConfirm(app)"><i class="iconfont icon-delete ab-icon-gray"></i></button>-->
+						<!--</td>-->
+					<!--</tr>-->
+					<tr *ngFor="let app of myApps | sort: 'created_at'" >
+						<td>
+							<i class="iconfont icon-h" *ngIf="app.typ == APP_TYPE_H5"></i>
+							<i class="iconfont icon-apple" *ngIf="app.typ == APP_TYPE_IOS"></i>
+							<i class="iconfont icon-android" *ngIf="app.typ == APP_TYPE_ANDROID"></i>
+							<i class="iconfont icon-xiaochenxu" *ngIf="app.typ == APP_TYPE_WX"></i>
+							<i class="iconfont icon-LPO" *ngIf="app.typ == APP_TYPE_LPO"></i>
+              <i class="iconfont icon-code2" *ngIf="app.typ == APP_TYPE_DEF"></i>
+						</td>
+		        <td class="manage-table-name ab-ellipsis" (click)="selectApp(app)">{{ app.name }}</td>
+		        <td class="manage-table-key ab-ellipsis">{{ app.app_key }}</td>
+						<td>
+							<button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="delConfirm($event,app)"><i class="iconfont icon-delete ab-icon-gray"></i></button>
+						</td>
+			    </tr>
+					<tr *ngFor="let app of apps | sort: 'created_at'" >
+						<td>
+							<i class="iconfont icon-h" *ngIf="app.typ == APP_TYPE_H5"></i>
+							<i class="iconfont icon-apple" *ngIf="app.typ == APP_TYPE_IOS"></i>
+							<i class="iconfont icon-android" *ngIf="app.typ == APP_TYPE_ANDROID"></i>
+							<i class="iconfont icon-xiaochenxu" *ngIf="app.typ == APP_TYPE_WX"></i>
+							<i class="iconfont icon-LPO" *ngIf="app.typ == APP_TYPE_LPO"></i>
+              <i class="iconfont icon-code2" *ngIf="app.typ == APP_TYPE_DEF"></i>
+						</td>
+		        <td class="manage-table-name ab-ellipsis" (click)="selectApp(app)">{{ app.name }}</td>
+		        <td class="manage-table-key ab-ellipsis">{{ app.app_key }}</td>
+						<td>
+							<button class="ab-btn ab-btn-default ab-btn-icon-gray" (click)="delConfirm($event,app)"><i class="iconfont icon-delete ab-icon-gray"></i></button>
+						</td>
+			    </tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<app-loading [loadingPartial]="false" *ngIf="isLoading"></app-loading>

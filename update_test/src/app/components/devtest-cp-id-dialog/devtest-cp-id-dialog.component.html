@@ -1,0 +1,8 @@
+<div class="ab-text-center copy-clientID-content">
+  <div>
+    <p>{{'devtest.cpbefore' | translate}}【{{thisVersion}}】{{'devtest.cpafter' | translate}}</p>
+    <p class="cp-main-context"><span class="cp-client-id">{{clientId}}</span>
+      <a class="iconfont icon-copy ab-icon-gray" [clip]="clientId" (onClip)="clip()"></a></p>
+    <button class="ab-btn ab-btn-primary" (click)="close()">&nbsp;&nbsp;{{ 'modal.ok' | translate }}&nbsp;&nbsp;</button>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+
+<div *ngIf="app.typ == APP_TYPE_IOS || app.typ == APP_TYPE_ANDROID">
+  
+    <div class="ab-panel-body">
+      <div class="sdk-content">
+        <p><b>{{ 'sdkcfg.p1' | translate }}</b></p>
+        <br>
+        <form [formGroup]="sdkForm" (ngSubmit)="saveTime()">
+          <p>{{ 'sdkcfg.p2' | translate }}<input class="ab-input ab-input-sm" type="number" formControlName="sdkTime" [(ngModel)]="sdkTime" min="1" max="259200" required> {{ 'sdkcfg.p3' | translate }}</p>
+          <br>
+          <p class="sdk-error ab-text-danger" [hidden]="sdkForm.get('sdkTime').valid || sdkForm.get('sdkTime').pristine" >{{ 'sdkcfg.p4' | translate }}</p>
+          <br><br>
+          <p><b>{{ 'sdkcfg.p5' | translate }}</b></p>
+          <br>
+          <p>{{ 'sdkcfg.p6' | translate }}<input class="ab-input ab-input-sm" type="text" placeholder="{{ 'sdkcfg.input' | translate }}" formControlName="sdkVersion" [(ngModel)]="sdkVersion"> {{ 'sdkcfg.p7' | translate }}</p>
+          <br>
+          <p class="sdk-error ab-text-danger" [hidden]="sdkForm.get('sdkVersion').valid || sdkForm.get('sdkVersion').pristine" >{{ 'sdkcfg.check' | translate }}</p>
+          <br><br>
+          <button class="ab-btn ab-btn-primary" type="submit" [disabled]="!sdkForm.valid">{{ 'sdkcfg.save' | translate }}</button>
+        </form>
+      </div>
+    </div>
+    <div class="sdk-body-second">
+      <popover-content #myPopover placement="top" [animation]="true" [closeOnClickOutside]="true">
+        <p>{{  'sdkcfg.h5p5' | translate }}</p>
+        <p>{{ 'sdkcfg.h5p6' | translate }}</p>
+        <p>{{ 'sdkcfg.h5p7' | translate }}</p>
+        <br/>
+        <p>{{ 'sdkcfg.h5p8' | translate }}<a href="http://help.appadhoc.com/appExp/createApp.html#sdk">{{ 'sdkcfg.h5p9' | translate }}</a>{{ 'sdkcfg.h5p10' | translate }}</p>
+      </popover-content>
+      <div class="sdk-content">
+        <p class="ab-h3">{{ 'sdkcfg.h5p1' | translate }}<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="myPopover"></i></p>
+        <br>
+        <p>
+          {{ 'sdkcfg.h5p2' | translate }}
+          <a class="ab-text-primary" href="http://help.appadhoc.com" target="_blank">{{ 'sdkcfg.h5p3' | translate }}</a>
+          {{ 'sdkcfg.h5p4' | translate }}
+        </p>
+        <br>
+        <div class="ab-input-group ab-input-group-right sdk-input-group">
+          <input class="ab-input" type="text" [(ngModel)]="app.app_key" disabled>
+          <button class="ab-btn ab-btn-gray" [clip]="app.app_key" (onClip)="clip($event)" name="button" type="button"><i class="iconfont icon-copy ab-icon-gray"></i></button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  <div *ngIf="app.typ == APP_TYPE_H5 || app.typ == APP_TYPE_WX">
+    <popover-content #surePopover placement="right" [animation]="true" [closeOnClickOutside]="true">
+        <p>{{  'sdkcfg.h5p5' | translate }}</p>
+        <p>{{ 'sdkcfg.h5p6' | translate }}</p>
+        <p>{{ 'sdkcfg.h5p7' | translate }}</p>
+        <br/>
+        <p>{{ 'sdkcfg.h5p8' | translate }}<a href="javascript:;">{{ 'sdkcfg.h5p9' | translate }}</a>{{ 'sdkcfg.h5p10' | translate }}</p>
+    </popover-content>
+   
+    <div class="ab-panel-body">
+      <div class="sdk-content">
+        <p class="ab-h3">{{ 'sdkcfg.h5p1' | translate }}<i class="iconfont icon-help ab-icon-left ab-icon-gray" [popover]="surePopover"></i></p>
+        <br>
+        <p>
+          {{ 'sdkcfg.h5p2' | translate }}
+          <a class="ab-text-primary" *ngIf="app.typ == APP_TYPE_WX"  href="http://help.appadhoc.com/sdk/wxSDK.html" target="_blank">{{ 'sdkcfg.h5p3' | translate }}</a>
+          <a class="ab-text-primary" *ngIf="app.typ == APP_TYPE_H5" href="http://help.appadhoc.com" target="_blank">{{ 'sdkcfg.h5p3' | translate }}</a>
+          ，{{ 'sdkcfg.h5p4' | translate }}
+        </p>
+        <br>
+        <div class="ab-input-group ab-input-group-right sdk-input-group">
+          <input class="ab-input" type="text" [(ngModel)]="app.app_key" disabled>
+          <button class="ab-btn ab-btn-gray" name="button" type="button" [clip]="app.app_key" (onClip)="clip($event)"><i class="iconfont icon-copy ab-icon-gray"></i></button>
+        </div>
+        <br><br>
+        <div *ngIf="app.typ == APP_TYPE_WX">
+          <p [innerHTML]="'descall.p3' | translate"></p>
+        </div>
+        <div  *ngIf="app.typ == APP_TYPE_H5">
+          <p [innerHTML]="'descall.p1' | translate"></p>
+          <br>
+          <div class="sdk-code-container">
+            <textarea class="sdk-textarea">
+              <!-- adhoc sdk -->
+              <script src='https://sdk.appadhoc.com/ab.plus.js'></script>
+              <script>
+              adhoc('init', {
+              appKey: '{{ app.app_key }}'
+              })
+              </script>
+              <!-- adhoc sdk end -->
+            </textarea>
+            <a class=sdk-code-copy [clip]="sdkCode" (onClip)="clip($event)"><i class="iconfont icon-copy ab-icon-gray"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

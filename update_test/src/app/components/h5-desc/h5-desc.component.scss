@@ -1,0 +1,39 @@
+.new-partone-sdk-title {
+  display: inline-block;
+  width: 480px;
+  margin: 12px 0;
+
+  text-align: left;
+}
+
+.new-partone-sdk-container {
+  position: relative;
+
+  display: inline-block;
+  width: 480px;
+}
+
+.new-partone-sdk-textarea {
+  position: relative;
+
+  display: inline-block;
+  width: 480px;
+  height: 200px;
+  padding: 12px;
+  margin-bottom: 30px;
+  border: 1px solid #e5e5e5;
+
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.new-partone-icon-copy {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  font-size: 18px;
+}

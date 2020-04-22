@@ -1,0 +1,17 @@
+<td class="filter-table-td-name">
+  {{ audience.name }}
+  <!-- <div class="filter-table-name">
+    <p *ngIf="!audience.isEdit">{{ audience.name }}</p>
+    <a class="filter-table-name-edit" *ngIf="!audience.isEdit" (click)="edit(audience)"><i class="iconfont icon-edit ab-icon-gray"></i></a>
+    <form [formGroup]="editAudienceForm" (ngSubmit)="submit(editAudienceForm)" *ngIf="audience.isEdit"> 
+      <input type="text" class="ab-input ab-input-sm table-edit-input" (focusout)="submit(editAudienceForm)" formControlName="name" required appFocus >
+    </form>
+  </div> -->
+</td>
+<td class="filter-table-des">
+  {{ audience.description }}
+</td>
+<td class="">{{ audience.conditions }}</td>
+<td></td>
+<td><button class="ab-btn ab-btn-defualt" (click)="delete()">删除</button></td>
+<!-- <td>{{ audience.exps }}</td> -->

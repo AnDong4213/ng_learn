@@ -1,0 +1,41 @@
+.ab-date-range {
+  position: relative;
+
+  display: inline-block;
+}
+
+.ab-date-range-inner {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+
+  width: 400px;
+  height: 235px;
+  margin-top: 10px;
+  border-radius: 4px;
+
+  background-color: white;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ab-date-range-select {
+  display: inline-block;
+  overflow: hidden;
+  width: 252px;
+  height: 100%;
+
+  vertical-align: top;
+}
+
+.ab-date-range-menu {
+  display: inline-block;
+  width: 140px;
+  padding: 20px 0;
+
+  text-align: center;
+
+  > button {
+    width: 86px;
+    margin-bottom: 10px;
+  }
+}
